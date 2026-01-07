@@ -23,7 +23,12 @@ docker compose --env-file .env.stable run --rm l2-serve
 
 ```shell
 mkdir -p build
-docker compose run --rm l2-export | tar -C build -xf -
+docker compose --env-file .env.stable run --rm l2-export | tar -C build -xf -
+```
+
+or using:
+```shell
+docker run --rm -v eclipse-sdv-projects-landscape2_l2_site:/site -v $PWD/eclipse-sdv-projects-landscape2:/output busybox:1.36 sh -c "cp -r /site/* /output/"
 ```
 
 ## Note on stable and latest

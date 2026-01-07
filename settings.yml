@@ -11,13 +11,21 @@ url: http://127.0.0.1:8000
 base_path: /eclipse-sdv-projects-landscape2
 
 colors:
-  color1: "rgba(0, 107, 204, 1)"
-  color2: "rgba(255, 0, 170, 1)"
-  color3: "rgba(96, 149, 214, 1)"
-  color4: "rgba(0, 42, 81, 0.7)"
-  color5: "rgba(1, 107, 204, 0.7)"
-  color6: "rgba(0, 42, 81, 0.7)"
-  color7: "rgba(180, 219, 255, 1)"
+  # Grid/Card/Menu color
+  color1: "rgba(240, 108, 1, 1)"
+
+  #Filter buttons color
+  color2: "rgba(240, 108, 1, 1)"
+
+  color3: "rgba(65, 88, 208, 1)"
+  color4: "rgba(155, 65, 106, 0.8)"
+
+  #subcategory color
+  color5: "rgba(89, 44, 81, 1)"
+  #subcategory color
+  color6: "rgba(176, 102, 148, 1)"
+
+  color7: "rgba(247, 246, 248, 1)"
 
 description: Eclipse SDV
 
@@ -39,7 +47,7 @@ footer:
     slack: "https://join.slack.com/t/sdvworkinggroup/shared_invite/zt-3c5ied1nk-Mk87s4kOX7ipcNo_VktlWg"
     twitter: "https://x.com/SDVeclipse/"
     youtube: "https://www.youtube.com/@EclipseFdn"
-  logo: "https://sdv.eclipse.org/images/logo/sdv-logo-color.svg"
+  logo: "./assets/sdv-logo-color-white.svg"
 
 grid_items_size: large
 
@@ -58,6 +66,6 @@ groups:
 header:
   links:
     github: "https://github.com/enterprises/eclipse-foundation/organizations"
-  logo: "https://sdv.eclipse.org/images/logo/sdv-logo-color.svg"
+  logo: "./assets/sdv-logo-color.svg"
 
 screenshot_width: 1500
