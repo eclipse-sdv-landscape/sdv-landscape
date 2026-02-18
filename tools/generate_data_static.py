@@ -23,6 +23,7 @@ present in the input are omitted.
 import argparse
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any, Dict, List
 from urllib.parse import urlparse
@@ -35,6 +36,15 @@ API_URL = (
     "https://projects.eclipse.org/api/projects?working_group=sdv&pagesize=90000"
 )
 GITHUB_API_URL = "https://api.github.com"
+_WARNED_KEYS: set[str] = set()
+
+
+def warn_once(key: str, message: str) -> None:
+    """Print warning message only once per key."""
+    if key in _WARNED_KEYS:
+        return
+    _WARNED_KEYS.add(key)
+    print(message, file=sys.stderr)
 
 
 def fetch_projects_from_api() -> List[Dict[str, Any]]:
@@ -107,6 +117,88 @@ def extract_github_slug(repo_url: str) -> str | None:
     return f"{parts[0]}/{repo}"
 
 
+def get_github_headers() -> Dict[str, str]:
+    """Build headers for GitHub API requests."""
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "eclipse-sdv-landscape-generator",
+    }
+    token = os.getenv("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    return headers
+
+
+def fetch_org_repositories(
+    owner: str,
+    ignored_repos: set[str],
+    org_repo_cache: Dict[str, List[str]],
+) -> List[str]:
+    """Fetch all public repository URLs for a GitHub org/user."""
+    if not owner:
+        return []
+    if owner in org_repo_cache:
+        return org_repo_cache[owner]
+
+    headers = get_github_headers()
+    repos: List[str] = []
+
+    def fetch_pages(base_url: str) -> List[str] | None:
+        page = 1
+        urls: List[str] = []
+        while True:
+            response = requests.get(
+                f"{base_url}?per_page=100&type=public&sort=pushed&direction=desc&page={page}",
+                headers=headers,
+                timeout=15,
+            )
+            if response.status_code == 404:
+                return None
+            if response.status_code == 403 and "rate limit" in response.text.lower():
+                warn_once(
+                    "github_rate_limit",
+                    "GitHub API rate limit reached. Set GITHUB_TOKEN (or use --github-token) to fetch all repositories and releases.",
+                )
+                return []
+            response.raise_for_status()
+            data = response.json()
+            if not data:
+                break
+            for repo in data:
+                name = repo.get("name")
+                full_name = repo.get("full_name")
+                html_url = repo.get("html_url")
+                if not html_url:
+                    continue
+                if name in ignored_repos or full_name in ignored_repos:
+                    continue
+                urls.append(html_url)
+            if len(data) < 100:
+                break
+            page += 1
+        return urls
+
+    try:
+        repos = fetch_pages(f"{GITHUB_API_URL}/orgs/{owner}/repos") or []
+        if not repos:
+            repos = fetch_pages(f"{GITHUB_API_URL}/users/{owner}/repos") or []
+    except requests.RequestException:
+        repos = []
+
+    org_repo_cache[owner] = repos
+    return repos
+
+
+def parse_latest_release_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Normalize GitHub release payload to output structure."""
+    return {
+        "tag_name": payload.get("tag_name"),
+        "name": payload.get("name"),
+        "url": payload.get("html_url"),
+        "published_at": payload.get("published_at"),
+    }
+
+
 def fetch_latest_release(
     repo_url: str,
     release_cache: Dict[str, Dict[str, Any] | None],
@@ -118,30 +210,48 @@ def fetch_latest_release(
     if slug in release_cache:
         return release_cache[slug]
 
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "eclipse-sdv-landscape-generator",
-    }
-    token = os.getenv("GITHUB_TOKEN")
-    if token:
-        headers["Authorization"] = f"Bearer {token}"
+    headers = get_github_headers()
 
     try:
         response = requests.get(
-            f"{GITHUB_API_URL}/repos/{slug}/releases/latest",
+            f"{GITHUB_API_URL}/repos/{slug}/releases?per_page=1",
             headers=headers,
             timeout=10,
         )
         if response.status_code == 404:
             release_cache[slug] = None
             return None
+        if response.status_code == 403 and "rate limit" in response.text.lower():
+            warn_once(
+                "github_rate_limit",
+                "GitHub API rate limit reached. Set GITHUB_TOKEN (or use --github-token) to fetch all repositories and releases.",
+            )
+            release_cache[slug] = None
+            return None
         response.raise_for_status()
-        payload = response.json()
+        releases = response.json()
+        if releases:
+            release_data = parse_latest_release_payload(releases[0])
+            release_cache[slug] = release_data
+            return release_data
+
+        # Fallback for repositories without formal releases: use latest tag.
+        response = requests.get(
+            f"{GITHUB_API_URL}/repos/{slug}/tags?per_page=1",
+            headers=headers,
+            timeout=10,
+        )
+        response.raise_for_status()
+        tags = response.json()
+        if not tags:
+            release_cache[slug] = None
+            return None
+        tag_name = tags[0].get("name")
         release_data = {
-            "tag_name": payload.get("tag_name"),
-            "name": payload.get("name"),
-            "url": payload.get("html_url"),
-            "published_at": payload.get("published_at"),
+            "tag_name": tag_name,
+            "name": tag_name,
+            "url": f"https://github.com/{slug}/releases/tag/{tag_name}" if tag_name else None,
+            "published_at": None,
         }
         release_cache[slug] = release_data
         return release_data
@@ -153,15 +263,42 @@ def fetch_latest_release(
 def collect_repositories(
     project: Dict[str, Any],
     release_cache: Dict[str, Dict[str, Any] | None],
+    org_repo_cache: Dict[str, List[str]],
 ) -> tuple[List[str], List[Dict[str, Any]]]:
     """Collect all repository URLs and their latest release metadata."""
-    repo_urls: List[str] = []
-    repositories: List[Dict[str, Any]] = []
+    explicit_repo_urls: List[str] = []
+    repo_urls_set: set[str] = set()
     for repo in project.get("github_repos") or []:
-        repo_url = repo.get("url")
+        repo_url = (repo or {}).get("url")
         if not repo_url:
             continue
-        repo_urls.append(repo_url)
+        normalized_url = repo_url.rstrip("/")
+        if normalized_url not in repo_urls_set:
+            explicit_repo_urls.append(normalized_url)
+            repo_urls_set.add(normalized_url)
+
+    github = project.get("github") if isinstance(project.get("github"), dict) else {}
+    owner = (github or {}).get("org")
+    ignored_repos = set((github or {}).get("ignored_repos") or [])
+    discovered_repo_urls: List[str] = []
+
+    if owner:
+        discovered_repo_urls = fetch_org_repositories(owner, ignored_repos, org_repo_cache)
+
+    for repo_url in discovered_repo_urls:
+        repo_urls_set.add(repo_url.rstrip("/"))
+
+    # Preserve explicitly mapped project repositories first.
+    repo_urls: List[str] = list(explicit_repo_urls)
+    for repo_url in discovered_repo_urls:
+        normalized_url = repo_url.rstrip("/")
+        if normalized_url not in repo_urls:
+            repo_urls.append(normalized_url)
+    for repo_url in sorted(repo_urls_set):
+        if repo_url not in repo_urls:
+            repo_urls.append(repo_url)
+    repositories: List[Dict[str, Any]] = []
+    for repo_url in repo_urls:
         repositories.append(
             {
                 "url": repo_url,
@@ -197,6 +334,7 @@ def build_landscape_from_static(
 
     output_categories: List[Dict[str, Any]] = []
     release_cache: Dict[str, Dict[str, Any] | None] = {}
+    org_repo_cache: Dict[str, List[str]] = {}
 
     def build_item(project: Dict[str, Any]) -> Dict[str, Any]:
         """Construct a landscape item record from project data."""
@@ -208,7 +346,9 @@ def build_landscape_from_static(
         state = project.get("state")
         if state:
             item["project"] = state
-        repo_urls, repositories = collect_repositories(project, release_cache)
+        repo_urls, repositories = collect_repositories(
+            project, release_cache, org_repo_cache
+        )
         if repo_urls:
             item["repo_url"] = repo_urls[0]
             item["repo_urls"] = repo_urls
@@ -278,6 +418,7 @@ def build_landscape_from_dynamic(
     """
     categories: Dict[str, Dict[str, Any]] = {}
     release_cache: Dict[str, Dict[str, Any] | None] = {}
+    org_repo_cache: Dict[str, List[str]] = {}
 
     # Ensure logo directory exists if specified
     if logo_dir is not None:
@@ -316,7 +457,9 @@ def build_landscape_from_dynamic(
             item["project"] = state
 
         # Add all GitHub repo URLs and their latest releases
-        repo_urls, repositories = collect_repositories(proj, release_cache)
+        repo_urls, repositories = collect_repositories(
+            proj, release_cache, org_repo_cache
+        )
         if repo_urls:
             item["repo_url"] = repo_urls[0]
             item["repo_urls"] = repo_urls
@@ -370,7 +513,17 @@ def main() -> None:
             " projects are grouped using their 'category' field."
         ),
     )
+    parser.add_argument(
+        "--github-token",
+        help=(
+            "Optional GitHub token used for repository/release lookups."
+            " Equivalent to setting GITHUB_TOKEN."
+        ),
+    )
     args = parser.parse_args()
+
+    if args.github_token:
+        os.environ["GITHUB_TOKEN"] = args.github_token
 
     # Load projects
     if args.input:
