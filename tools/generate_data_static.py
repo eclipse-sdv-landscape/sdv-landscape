@@ -22,9 +22,10 @@ present in the input are omitted.
 
 import argparse
 import json
-from collections import defaultdict
+import os
 from pathlib import Path
 from typing import Any, Dict, List
+from urllib.parse import urlparse
 
 import requests
 import yaml
@@ -33,6 +34,7 @@ import yaml
 API_URL = (
     "https://projects.eclipse.org/api/projects?working_group=sdv&pagesize=90000"
 )
+GITHUB_API_URL = "https://api.github.com"
 
 
 def fetch_projects_from_api() -> List[Dict[str, Any]]:
@@ -83,6 +85,92 @@ def download_logo(url: str, dest: Path) -> str:
         return "placeholder.svg"
 
 
+def extract_github_slug(repo_url: str) -> str | None:
+    """Extract owner/repo slug from a GitHub repository URL."""
+    if not repo_url:
+        return None
+    repo_url = repo_url.strip()
+    if repo_url.startswith("git@github.com:"):
+        path = repo_url.split(":", maxsplit=1)[1]
+    else:
+        parsed = urlparse(repo_url)
+        if parsed.netloc.lower() not in {"github.com", "www.github.com"}:
+            return None
+        path = parsed.path.lstrip("/")
+
+    parts = [part for part in path.split("/") if part]
+    if len(parts) < 2:
+        return None
+    repo = parts[1]
+    if repo.endswith(".git"):
+        repo = repo[:-4]
+    return f"{parts[0]}/{repo}"
+
+
+def fetch_latest_release(
+    repo_url: str,
+    release_cache: Dict[str, Dict[str, Any] | None],
+) -> Dict[str, Any] | None:
+    """Fetch latest release metadata for a GitHub repository URL."""
+    slug = extract_github_slug(repo_url)
+    if not slug:
+        return None
+    if slug in release_cache:
+        return release_cache[slug]
+
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "eclipse-sdv-landscape-generator",
+    }
+    token = os.getenv("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+
+    try:
+        response = requests.get(
+            f"{GITHUB_API_URL}/repos/{slug}/releases/latest",
+            headers=headers,
+            timeout=10,
+        )
+        if response.status_code == 404:
+            release_cache[slug] = None
+            return None
+        response.raise_for_status()
+        payload = response.json()
+        release_data = {
+            "tag_name": payload.get("tag_name"),
+            "name": payload.get("name"),
+            "url": payload.get("html_url"),
+            "published_at": payload.get("published_at"),
+        }
+        release_cache[slug] = release_data
+        return release_data
+    except requests.RequestException:
+        release_cache[slug] = None
+        return None
+
+
+def collect_repositories(
+    project: Dict[str, Any],
+    release_cache: Dict[str, Dict[str, Any] | None],
+) -> tuple[List[str], List[Dict[str, Any]]]:
+    """Collect all repository URLs and their latest release metadata."""
+    repo_urls: List[str] = []
+    repositories: List[Dict[str, Any]] = []
+    for repo in project.get("github_repos") or []:
+        repo_url = repo.get("url")
+        if not repo_url:
+            continue
+        repo_urls.append(repo_url)
+        repositories.append(
+            {
+                "url": repo_url,
+                "latest_release": fetch_latest_release(repo_url, release_cache),
+            }
+        )
+    return repo_urls, repositories
+
+
 def build_landscape_from_static(
     projects: List[Dict[str, Any]],
     static_categories: List[Dict[str, Any]],
@@ -108,6 +196,7 @@ def build_landscape_from_static(
         logo_dir.mkdir(parents=True, exist_ok=True)
 
     output_categories: List[Dict[str, Any]] = []
+    release_cache: Dict[str, Dict[str, Any] | None] = {}
 
     def build_item(project: Dict[str, Any]) -> Dict[str, Any]:
         """Construct a landscape item record from project data."""
@@ -119,11 +208,11 @@ def build_landscape_from_static(
         state = project.get("state")
         if state:
             item["project"] = state
-        repos = project.get("github_repos") or []
-        if repos:
-            repo_url = repos[0].get("url")
-            if repo_url:
-                item["repo_url"] = repo_url
+        repo_urls, repositories = collect_repositories(project, release_cache)
+        if repo_urls:
+            item["repo_url"] = repo_urls[0]
+            item["repo_urls"] = repo_urls
+            item["repositories"] = repositories
         logo_url = project.get("logo")
         if logo_dir is not None and logo_url:
             file_name = download_logo(logo_url, logo_dir)
@@ -188,6 +277,7 @@ def build_landscape_from_dynamic(
     Otherwise, the full URL or placeholder is used.
     """
     categories: Dict[str, Dict[str, Any]] = {}
+    release_cache: Dict[str, Dict[str, Any] | None] = {}
 
     # Ensure logo directory exists if specified
     if logo_dir is not None:
@@ -225,12 +315,12 @@ def build_landscape_from_dynamic(
         if state:
             item["project"] = state
 
-        # Add first GitHub repo URL if available
-        repos = proj.get("github_repos") or []
-        if repos:
-            repo_url = repos[0].get("url")
-            if repo_url:
-                item["repo_url"] = repo_url
+        # Add all GitHub repo URLs and their latest releases
+        repo_urls, repositories = collect_repositories(proj, release_cache)
+        if repo_urls:
+            item["repo_url"] = repo_urls[0]
+            item["repo_urls"] = repo_urls
+            item["repositories"] = repositories
 
         # Handle logo
         logo_url = proj.get("logo")
