@@ -1,0 +1,41 @@
+volumes:
+  l2_site: {}
+
+services:
+  l2-build:
+    image: ${LANDSCAPE2_IMAGE:?set via --env-file}
+    user: "0:0"
+    working_dir: /work
+    volumes:
+      - .:/work:ro
+      - l2_site:/out
+    entrypoint: ["landscape2"]
+    command:
+      - build
+      - --data-file
+      - /work/data.yml
+      - --settings-file
+      - /work/settings.yml
+      - --guide-file
+      - /work/guide.yml
+      - --logos-path
+      - /work/logos
+      - --output-dir
+      - /out
+
+  l2-serve:
+    image: ${LANDSCAPE2_IMAGE:?set via --env-file}
+    volumes:
+      - l2_site:/site:ro
+    ports: ["8000:8000"]
+    entrypoint: ["landscape2"]
+    command: ["serve", "--landscape-dir", "/site"]
+    init: true
+
+  # export tar to stdout; host extracts so host owns files
+  l2-export:
+    image: busybox:1.36
+    volumes:
+      - l2_site:/site:ro
+    entrypoint: ["tar"]
+    command: ["-C","/site","-cf","-","."]

@@ -1,0 +1,57 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  workflow_call:
+    inputs:
+      env_file:
+        description: "Which env file to use (.env.stable or .env.latest)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pick the env file:
+      # - Default to .env.stable for PR/push
+      # - If invoked via workflow_call and an env_file was provided, use it
+      - name: Select env file
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_call" && -n "${{ inputs.env_file }}" ]]; then
+            echo "ENV_FILE=${{ inputs.env_file }}" >> "$GITHUB_ENV"
+          else
+            echo "ENV_FILE=.env.stable" >> "$GITHUB_ENV"
+          fi
+          echo "Using env file: $ENV_FILE"
+
+      - name: Reset compose state
+        run: |
+          docker compose down --volumes --remove-orphans || true
+          rm -rf build && mkdir -p build
+
+      - name: Build (to named volume)
+        run: docker compose --env-file "$ENV_FILE" run --rm l2-build
+
+      - name: Export to ./build (host-owned files)
+        run: docker compose --env-file "$ENV_FILE" run --rm l2-export | tar -C build -xf -
+
+      - name: List build output
+        run: ls -la build | head -n 200
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: build
+          if-no-files-found: error

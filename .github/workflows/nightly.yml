@@ -1,0 +1,17 @@
+name: Nightly
+
+on:
+  workflow_dispatch:
+  
+  schedule:
+    - cron: "0 7 * * *"   # 07:00 UTC daily
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  nightly-build:
+    uses: ./.github/workflows/build.yml
+    with:
+      env_file: .env.latest

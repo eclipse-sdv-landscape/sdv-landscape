@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*.*.*"
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      env_file: .env.stable
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build
+
+      - name: Verify artifacts
+        run: ls -la build
+
+      - name: SPA fallback for GitHub Pages
+        run: cp build/index.html build/404.html
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
