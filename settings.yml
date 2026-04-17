@@ -6,9 +6,9 @@
 
 foundation: Eclipse SDV
 
-url: https://eclipse-sdv-landscape.github.io/
+url: https://eclipse-sdv-landscape.github.io
 
-base_path: sdv-landscape/
+base_path: /sdv-landscape
 
 colors:
   # Grid/Card/Menu color
