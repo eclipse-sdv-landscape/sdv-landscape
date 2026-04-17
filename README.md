@@ -15,7 +15,15 @@ docker compose --env-file .env.stable run --rm l2-build
 Prerequisites: ensure you've got Docker Compose installed
 
 ```shell
-docker compose --env-file .env.stable run --rm l2-serve
+docker compose --env-file .env.stable run --rm --service-ports l2-serve
+```
+
+Open: `http://127.0.0.1:8000/sdv-landscape/`
+
+If you still see missing logos/guide from older volume contents, recreate the volume and rebuild:
+```shell
+docker compose --env-file .env.stable down -v
+docker compose --env-file .env.stable run --rm l2-build
 ```
 
 ## Extracting built site
@@ -29,7 +37,7 @@ docker compose --env-file .env.stable run --rm l2-export | tar -C build -xf -
 or using:
 ```shell
 mkdir -p build
-docker run --rm -v eclipse-sdv-projects-landscape2_l2_site:/site:ro -v "$PWD/build:/output" busybox:1.36 sh -c "cp -a /site/. /output/"
+docker run --rm -v sdv-landscape_l2_site:/site:ro -v "$PWD/build:/output" busybox:1.36 sh -c "cp -a /site/. /output/"
 ```
 
 Then serve from `build/` and open the `base_path` URL:
@@ -38,12 +46,11 @@ cd build
 python3 -m http.server 8000
 ```
 
-Open: `http://127.0.0.1:8000/eclipse-sdv-projects-landscape2/`
+Open: `http://127.0.0.1:8000/sdv-landscape/`
 
 If you want to serve at `/` instead, set `base_path: /` in `settings.yml` and rebuild.
 
-Note: the actual extracted site is under `build/` (for example `build/eclipse-sdv-projects-landscape2/`).
-The top-level folder `./eclipse-sdv-projects-landscape2` can be an empty leftover from older copy commands and is not used.
+Note: with the current compose setup, the extracted site is expected at `build/sdv-landscape/`.
 
 ## Note on stable and latest
 

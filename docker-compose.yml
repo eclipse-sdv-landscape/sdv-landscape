@@ -21,7 +21,7 @@ services:
       - --logos-path
       - /work/logos
       - --output-dir
-      - /out
+      - /out/sdv-landscape
 
   l2-serve:
     image: ${LANDSCAPE2_IMAGE:?set via --env-file}
@@ -29,7 +29,7 @@ services:
       - l2_site:/site:ro
     ports: ["8000:8000"]
     entrypoint: ["landscape2"]
-    command: ["serve", "--landscape-dir", "/site"]
+    command: ["serve", "--addr", "0.0.0.0:8000", "--landscape-dir", "/site"]
     init: true
 
   # export tar to stdout; host extracts so host owns files
