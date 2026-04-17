@@ -9,19 +9,9 @@ services:
     volumes:
       - .:/work:ro
       - l2_site:/out
-    entrypoint: ["landscape2"]
+    entrypoint: ["/bin/sh", "-ec"]
     command:
-      - build
-      - --data-file
-      - /work/data.yml
-      - --settings-file
-      - /work/settings.yml
-      - --guide-file
-      - /work/guide.yml
-      - --logos-path
-      - /work/logos
-      - --output-dir
-      - /out/sdv-landscape
+      - "landscape2 build --data-file /work/data.yml --settings-file /work/settings.yml --guide-file /work/guide.yml --games-file /work/games.yml --logos-path /work/logos --output-dir /out/sdv-landscape && rm -rf /out/data && cp -a /out/sdv-landscape/data /out/data"
 
   l2-serve:
     image: ${LANDSCAPE2_IMAGE:?set via --env-file}
