@@ -6,9 +6,9 @@
 
 foundation: Eclipse SDV
 
-url: http://127.0.0.1:8000
+url: https://eclipse-sdv-landscape.github.io/
 
-base_path: /eclipse-sdv-projects-landscape2
+base_path: sdv-landscape/
 
 colors:
   # Grid/Card/Menu color
@@ -40,8 +40,8 @@ footer:
   links:
     facebook: "https://www.facebook.com/--"
     flickr: "https://www.flickr.com/people/108559379@N08/"
-    github: "https://github.com/enterprises/eclipse-foundation/organizations"
-    homepage: "https://sdv.eclipse.org/"
+    github: "https://github.com/eclipse-sdv-landscape/sdv-landscape"
+    homepage: "https://eclipsesdv.org/"
     instagram: "https://www.instagram.com/eclipsesdv/"
     linkedin: "https://www.linkedin.com/company/software-defined-vehicle/"
     slack: "https://join.slack.com/t/sdvworkinggroup/shared_invite/zt-3c5ied1nk-Mk87s4kOX7ipcNo_VktlWg"
@@ -65,7 +65,7 @@ groups:
 
 header:
   links:
-    github: "https://github.com/enterprises/eclipse-foundation/organizations"
+    github: "https://github.com/eclipse-sdv-landscape/sdv-landscape"
   logo: "./assets/sdv-logo-color.svg"
 
 screenshot_width: 1500
