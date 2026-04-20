@@ -32,6 +32,10 @@ jobs:
       - name: Verify artifacts
         run: ls -la build
 
+      - name: Fix hardcoded quiz data path for GitHub Pages subpath
+        run: |
+          sed -i 's|"/data/quiz.json"|"/sdv-landscape/data/quiz.json"|g' build/assets/Content-*.js || true
+
       - name: SPA fallback for GitHub Pages
         run: cp build/index.html build/404.html
 
