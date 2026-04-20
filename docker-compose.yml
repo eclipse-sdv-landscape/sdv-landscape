@@ -9,9 +9,21 @@ services:
     volumes:
       - .:/work:ro
       - l2_site:/out
-    entrypoint: ["/bin/sh", "-ec"]
+    entrypoint: ["landscape2"]
     command:
-      - "landscape2 build --data-file /work/data.yml --settings-file /work/settings.yml --guide-file /work/guide.yml --games-file /work/games.yml --logos-path /work/logos --output-dir /out/sdv-landscape && for f in /out/sdv-landscape/assets/Content-*.js; do [ -f \"$$f\" ] && sed -i 's/new se(location.origin)/new se(location.origin+window.baseDS.base_path)/g' \"$$f\"; done && rm -rf /out/data && cp -a /out/sdv-landscape/data /out/data"
+      - build
+      - --data-file
+      - /work/data.yml
+      - --settings-file
+      - /work/settings.yml
+      - --guide-file
+      - /work/guide.yml
+      - --games-file
+      - /work/games.yml
+      - --logos-path
+      - /work/logos
+      - --output-dir
+      - /out
 
   l2-serve:
     image: ${LANDSCAPE2_IMAGE:?set via --env-file}

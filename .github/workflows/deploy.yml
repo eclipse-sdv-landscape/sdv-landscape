@@ -30,31 +30,13 @@ jobs:
           path: build
 
       - name: Verify artifacts
-        run: |
-          ls -la build
-          ls -la build/sdv-landscape || true
-
-      - name: Detect site directory
-        shell: bash
-        run: |
-          SITE_DIR=""
-          if [[ -f "build/index.html" ]]; then
-            SITE_DIR="build"
-          elif [[ -f "build/sdv-landscape/index.html" ]]; then
-            SITE_DIR="build/sdv-landscape"
-          else
-            echo "No index.html found in expected locations."
-            find build -maxdepth 4 -type f | sed -n '1,200p'
-            exit 1
-          fi
-          echo "SITE_DIR=$SITE_DIR" >> "$GITHUB_ENV"
-          echo "Using SITE_DIR=$SITE_DIR"
+        run: ls -la build
 
       - name: SPA fallback for GitHub Pages
-        run: cp "$SITE_DIR/index.html" "$SITE_DIR/404.html"
+        run: cp build/index.html build/404.html
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./${{ env.SITE_DIR }}
+          publish_dir: ./build
