@@ -32,6 +32,12 @@ jobs:
       - name: Verify artifacts
         run: ls -la build
 
+      - name: Fix quiz data path for GitHub Pages subpath
+        run: |
+          for f in build/assets/Content-*.js; do
+            [ -f "$f" ] && sed -i 's/new se(location.origin)/new se(location.origin+window.baseDS.base_path)/g' "$f"
+          done
+
       - name: SPA fallback for GitHub Pages
         run: cp build/index.html build/404.html
 

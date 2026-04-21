@@ -1,20 +1,267 @@
-# Landscape2 games data
+# yaml-language-server: $schema=https://cncf.github.io/landscape2/config/schema/games.schema.json
+
+# Landscape games data
 #
-# This file contains the data that will be used in the landscape games.
-#
-# Reference documentation: https://github.com/cncf/landscape2/blob/main/docs/config/games.yml
+# This file contains the data used in the landscape quiz game.
 
 quiz:
   questions:
-    - title: "Which of the following items have feature X?"
+    - title: "Which project is the open source implementation of the digital.auto initiative?"
       options:
-        - item: Item 1
+        - item: Eclipse Autowrx
           correct: true
-        - item: Item 2
-        - item: Item 3
-    - title: "Please select the item with feature Y"
+        - item: Eclipse Velocitas
+        - item: Eclipse SDV Blueprints
+        - item: Eclipse Open Vehicle API
+
+    - title: "Which project provides an end-to-end development toolchain for containerized and non-containerized in-vehicle applications?"
       options:
-        - item: Item 1
-        - item: Item 2
-        - item: Item 3
+        - item: Eclipse Velocitas
           correct: true
+        - item: Eclipse OpenXilEnv
+        - item: Eclipse OpenBSW
+        - item: Eclipse ThreadX
+
+    - title: "Which project contains tools and a runtime to create a vehicle abstraction interface for signal- and event-driven functions?"
+      options:
+        - item: Eclipse Open Vehicle API
+          correct: true
+        - item: Eclipse OpenSOVD
+        - item: Eclipse CANought
+        - item: Eclipse SDV Developer Console
+
+    - title: "Which project is a lightweight SIL/HIL environment for running embedded software functions on a PC without a target platform and compiler?"
+      options:
+        - item: Eclipse OpenXilEnv
+          correct: true
+        - item: Eclipse openDuT
+        - item: Eclipse Ambient Light Services
+        - item: Eclipse ArchE
+
+    - title: "Which project automates the testing and validation process for automotive software and applications?"
+      options:
+        - item: Eclipse openDuT
+          correct: true
+        - item: Eclipse OpenSOVD
+        - item: Eclipse LMOS
+        - item: Eclipse Leda Incubator
+
+    - title: "Which project provides an adaptive framework and runtime for dynamically composable model-driven ROS software stacks?"
+      options:
+        - item: Eclipse Muto
+          category: Tooling Devops
+          subcategory: Deployment
+          correct: true
+        - item: Eclipse Pullpiri
+        - item: Eclipse Chariott
+        - item: Eclipse OpenBSW
+
+    - title: "Which project provides a vendor-neutral, open source, safety-certified OS for real-time applications?"
+      options:
+        - item: Eclipse ThreadX
+          correct: true
+        - item: Eclipse Safe Open Vehicle Core
+        - item: Eclipse Ankaios
+        - item: Eclipse iceoryx
+
+    - title: "Which project aims to provide shared building blocks for Software Defined Vehicles across the industry?"
+      options:
+        - item: Eclipse Kuksa
+          correct: true
+        - item: Eclipse Open Vehicle API
+        - item: Eclipse SDV Blueprints
+        - item: Eclipse SommR
+
+    - title: "Which project provides a metadata-driven middleware/abstraction layer to improve in-vehicle software developer productivity?"
+      options:
+        - item: Eclipse Chariott
+          correct: true
+        - item: Eclipse uProtocol
+        - item: Eclipse p3com
+        - item: Eclipse OpenXilEnv
+
+    - title: "Which project provides a transport-agnostic layered communication protocol that is deployment-, OS-, and device-agnostic?"
+      options:
+        - item: Eclipse uProtocol
+          correct: true
+        - item: Eclipse Zenoh
+        - item: Eclipse eCAL (enhanced Communication Abstraction Layer)
+        - item: Eclipse CANought
+
+    - title: "Which project is designed to minimize network overhead and support constrained or low-duty-cycle devices?"
+      options:
+        - item: Eclipse Zenoh
+          correct: true
+        - item: Eclipse LMOS
+        - item: Eclipse SDV Developer Console
+        - item: Eclipse OpenBSW
+
+    - title: "Which project provides an open source implementation of the Service-Oriented Vehicle Diagnostics standard defined in ISO 17978?"
+      options:
+        - item: Eclipse OpenSOVD
+          correct: true
+        - item: Eclipse Open Vehicle API
+        - item: Eclipse ArchE
+        - item: Eclipse Backend function Bindings (BfB)
+
+    - title: "Which project is an open-source orchestration platform optimized for in-vehicle environments and inspired by the K8S model?"
+      options:
+        - item: Eclipse Pullpiri
+          correct: true
+        - item: Eclipse Ankaios
+        - item: Eclipse Symphony
+        - item: Eclipse ThreadX
+
+    - title: "Which project manages multiple nodes and virtual machines through a single API to start, stop, configure, and update workloads?"
+      options:
+        - item: Eclipse Ankaios
+          correct: true
+        - item: Eclipse Pullpiri
+        - item: Eclipse OpenSOVD
+        - item: Eclipse ADAAA (Adaptive Cruise Control Demo Application for Adaptive AUTOSAR)
+
+    - title: "Which project is a Language Model Operating System platform for building and running AI systems?"
+      options:
+        - item: Eclipse LMOS
+          correct: true
+        - item: Eclipse SDV Blueprints
+        - item: Eclipse OpenXilEnv
+        - item: Eclipse Trustable Software Framework
+
+    - title: "Which project focuses on practical approaches to understanding and quantifying risks in software engineering?"
+      options:
+        - item: Eclipse Trustable Software Framework
+          correct: true
+        - item: Eclipse ArchE
+        - item: Eclipse OpenBSW
+        - item: Eclipse Ibeji
+
+    - title: "Which project is an embedded Hardware Security Module firmware written in Rust?"
+      options:
+        - item: Eclipse Heimlig
+          correct: true
+        - item: Eclipse OpenBSW
+        - item: Eclipse SommR
+        - item: Eclipse CANought
+
+    - title: "Which project provides scalable high-performance interprocess communication on one node or across different nodes?"
+      options:
+        - item: Eclipse eCAL (enhanced Communication Abstraction Layer)
+          correct: true
+        - item: Eclipse uProtocol
+        - item: Eclipse OpenSOVD
+        - item: Eclipse LMOS
+
+    - title: "Which project enables arbitrary communication interfaces through a modern high-level API while exploiting full hardware capabilities?"
+      options:
+        - item: Eclipse p3com
+          correct: true
+        - item: Eclipse Chariott
+        - item: Eclipse Open Vehicle API
+        - item: Eclipse Ambient Light Services
+
+    - title: "Which project offers an architecture modeling tool based on a holistic MBSE approach?"
+      options:
+        - item: Eclipse ArchE
+          correct: true
+        - item: Eclipse SDV Blueprints
+        - item: Eclipse OpenXilEnv
+        - item: Eclipse Leda
+
+    - title: "Which project hosts blueprints showing how to apply technologies from Eclipse SDV working group projects?"
+      options:
+        - item: Eclipse SDV Blueprints
+          correct: true
+        - item: Eclipse SDV Developer Console
+        - item: Eclipse Automotive API Framework
+        - item: Eclipse Automotive Integration for AutoSD
+
+    - title: "Which project integrates sources for software lifecycle management from development to release?"
+      options:
+        - item: Eclipse SDV Developer Console
+          correct: true
+        - item: Eclipse Trustable Software Framework
+        - item: Eclipse Open Vehicle API
+        - item: Eclipse OpenBSW
+
+    - title: "Which project provides an embedded basic software stack for microcontrollers written in C++?"
+      options:
+        - item: Eclipse OpenBSW
+          correct: true
+        - item: Eclipse ThreadX
+        - item: Eclipse Safe Open Vehicle Core
+        - item: Eclipse Heimlig
+
+    - title: "Which project aims to build an open source core stack for SDVs targeting embedded high-performance ECUs?"
+      options:
+        - item: Eclipse Safe Open Vehicle Core
+          correct: true
+        - item: Eclipse Leda
+        - item: Eclipse Open Vehicle API
+        - item: Eclipse Muto
+          category: Tooling Devops
+          subcategory: Deployment
+
+    - title: "Which project emphasizes decoupling application logic from the basic software stack so suppliers and OEM teams can contribute building blocks?"
+      options:
+        - item: Eclipse Automotive API Framework
+          correct: true
+        - item: Eclipse Automotive Integration for AutoSD
+        - item: Eclipse OpenBSW
+        - item: Eclipse Backend function Bindings (BfB)
+
+    - title: "Which project provides a place for experimental components from the SDV ecosystem?"
+      options:
+        - item: Eclipse Leda Incubator
+          correct: true
+        - item: Eclipse Leda
+        - item: Eclipse SDV Blueprints
+        - item: Eclipse LMOS
+
+    - title: "Which project tackles the challenge of combining diverse SDV components into a coherent and useful whole?"
+      options:
+        - item: Eclipse Leda
+          correct: true
+        - item: Eclipse Leda Incubator
+        - item: Eclipse OpenBSW
+        - item: Eclipse OpenSOVD
+
+    - title: "Which project visualizes adaptive ambient lighting concepts for different driving scenarios?"
+      options:
+        - item: Eclipse Ambient Light Services
+          correct: true
+        - item: Eclipse ADAAA (Adaptive Cruise Control Demo Application for Adaptive AUTOSAR)
+        - item: Eclipse OpenXilEnv
+        - item: Eclipse Open Vehicle API
+
+    - title: "Which project is an example application for Adaptive AUTOSAR focused on adaptive cruise control?"
+      options:
+        - item: Eclipse ADAAA (Adaptive Cruise Control Demo Application for Adaptive AUTOSAR)
+          correct: true
+        - item: Eclipse Ambient Light Services
+        - item: Eclipse Automotive Integration for AutoSD
+        - item: Eclipse Autowrx
+
+    - title: "Which project adds automotive-focused capabilities to enhance the Eclipse Kanto ecosystem?"
+      options:
+        - item: Eclipse CANought
+          correct: true
+        - item: Eclipse uProtocol
+        - item: Eclipse OpenSOVD
+        - item: Eclipse Chariott
+
+    - title: "Which project targets fast transfer of large data volumes between processes on POSIX-based systems?"
+      options:
+        - item: Eclipse iceoryx
+          correct: true
+        - item: Eclipse Zenoh
+        - item: Eclipse p3com
+        - item: Eclipse SDV Blueprints
+
+    - title: "Which digital twin project addresses modernization challenges in in-vehicle software development and lifecycle management?"
+      options:
+        - item: Eclipse Ibeji
+          correct: true
+        - item: Eclipse LMOS
+        - item: Eclipse OpenXilEnv
+        - item: Eclipse Open Vehicle API
