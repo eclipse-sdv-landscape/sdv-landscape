@@ -351,8 +351,7 @@ def build_landscape_from_static(
         )
         if repo_urls:
             item["repo_url"] = f"https://github.com/{project.get('github', {}).get('org')}" if project.get("github", {}).get("org") else repo_urls[0]
-            item["repo_urls"] = repo_urls
-            item["repositories"] = repositories
+            item["additional_repos"] = [{"repo_url": url} for url in repo_urls]
         logo_url = project.get("logo")
         if logo_dir is not None and logo_url:
             file_name = download_logo(logo_url, logo_dir)
@@ -462,8 +461,7 @@ def build_landscape_from_dynamic(
         )
         if repo_urls:
             item["repo_url"] = repo_urls[0]
-            item["repo_urls"] = repo_urls
-            item["repositories"] = repositories
+            item["additional_repos"] = [{"repo_url": url} for url in repo_urls]
 
         # Handle logo
         logo_url = proj.get("logo")

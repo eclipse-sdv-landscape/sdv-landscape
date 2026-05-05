@@ -120,12 +120,15 @@ def build_landscape_data(
         if state:
             item["project"] = state
 
-        # Add first GitHub repo URL if available
+        # Add first GitHub repo URL if available; list all as additional_repos
         repos = proj.get("github_repos") or []
         if repos:
             repo_url = repos[0].get("url")
             if repo_url:
                 item["repo_url"] = repo_url
+            all_urls = [r.get("url") for r in repos if r.get("url")]
+            if all_urls:
+                item["additional_repos"] = [{"repo_url": url} for url in all_urls]
 
         # Handle logo
         logo_url = proj.get("logo")
