@@ -350,7 +350,7 @@ def build_landscape_from_static(
             project, release_cache, org_repo_cache
         )
         if repo_urls:
-            item["repo_url"] = repo_urls[0]
+            item["repo_url"] = f"https://github.com/{project.get('github', {}).get('org')}" if project.get("github", {}).get("org") else repo_urls[0]
             item["repo_urls"] = repo_urls
             item["repositories"] = repositories
         logo_url = project.get("logo")
