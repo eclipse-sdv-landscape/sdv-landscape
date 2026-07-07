@@ -7,9 +7,10 @@ categories:
       - name: Development
         items:
           - Eclipse Autowrx
-          - Eclipse SDV Developer Console
-          - Eclipse Velocitas
           - Eclipse Open Vehicle API
+          - Eclipse SDV Developer Console
+          - Eclipse SDV Hephaestus
+          - Eclipse Velocitas
       - name: Testing & Validation
         items:
           - Eclipse OpenXilEnv
@@ -31,6 +32,7 @@ categories:
           - Eclipse Automotive API Framework
           - Eclipse Automotive Integration for AutoSD
           - Eclipse SDV Blueprints
+          - Eclipse SDV Landscape
   - name: RTOS
     subcategories:
       - name: RTOS

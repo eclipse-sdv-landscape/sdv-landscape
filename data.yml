@@ -11,12 +11,12 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-arche
       repo_urls:
-      - https://github.com/eclipse-arche/arche
       - https://github.com/eclipse-arche/.eclipsefdn
+      - https://github.com/eclipse-arche/arche
       repositories:
-      - url: https://github.com/eclipse-arche/arche
-        latest_release: null
       - url: https://github.com/eclipse-arche/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-arche/arche
         latest_release: null
       logo: arche_splash.png
   - name: Development
@@ -52,10 +52,10 @@ categories:
       repositories:
       - url: https://github.com/eclipse-autowrx/autowrx
         latest_release:
-          tag_name: v3.5.1
-          name: Release v3.5.1
-          url: https://github.com/eclipse-autowrx/autowrx/releases/tag/v3.5.1
-          published_at: '2026-04-10T10:02:50Z'
+          tag_name: v2026.06.30
+          name: Release v2026.06.30
+          url: https://github.com/eclipse-autowrx/autowrx/releases/tag/v2026.06.30
+          published_at: '2026-06-30T08:12:41Z'
       - url: https://github.com/eclipse-autowrx/epam-service-connector
         latest_release: null
       - url: https://github.com/eclipse-autowrx/sdv-blueprints
@@ -111,12 +111,54 @@ categories:
       - url: https://github.com/eclipse-autowrx/.github
         latest_release: null
       logo: incubating.png
+    - name: Eclipse Open Vehicle API
+      description: 'The Eclipse Open Vehicle API contains tools and a runtime to create
+        a vehicle abstraction interface for signal- and event-driven functions. 
+
+
+        Component-based
+
+        Transfer existing signal-based ECUs to HPC...'
+      homepage_url: https://projects.eclipse.org/projects/automotive.openvehicle-api
+      project: Incubating
+      repo_url: https://github.com/eclipse-openvehicle-api
+      repo_urls:
+      - https://github.com/eclipse-openvehicle-api/openvehicle-api
+      - https://github.com/eclipse-openvehicle-api/openvehicle-website
+      - https://github.com/eclipse-openvehicle-api/.eclipsefdn
+      repositories:
+      - url: https://github.com/eclipse-openvehicle-api/openvehicle-api
+        latest_release: null
+      - url: https://github.com/eclipse-openvehicle-api/openvehicle-website
+        latest_release: null
+      - url: https://github.com/eclipse-openvehicle-api/.eclipsefdn
+        latest_release: null
+      logo: Open_Vehicle_API_v1_white_cropped.jpg
     - name: Eclipse SDV Developer Console
       description: Eclipse SDV Developer Console (DCO) integrates necessary sources
         for software lifecycle management and there by optimizes the complete process
         from development to release of software. The core of DCO...
       homepage_url: https://projects.eclipse.org/projects/automotive.dco
       project: Incubating
+      logo: incubating.png
+    - name: Eclipse SDV Hephaestus
+      description: Eclipse SDV Hephaestus ensures low efforts for contributors to
+        participate in a Eclipse SDV project, the implementation is based on open
+        source tools. The starting point for this project is the...
+      homepage_url: https://projects.eclipse.org/projects/automotive.hephaestus
+      project: Incubating
+      repo_url: https://github.com/eclipse-hephaestus
+      repo_urls:
+      - https://github.com/eclipse-hephaestus/hephaestus
+      - https://github.com/eclipse-hephaestus/.eclipsefdn
+      - https://github.com/eclipse-hephaestus/.github
+      repositories:
+      - url: https://github.com/eclipse-hephaestus/hephaestus
+        latest_release: null
+      - url: https://github.com/eclipse-hephaestus/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-hephaestus/.github
+        latest_release: null
       logo: incubating.png
     - name: Eclipse Velocitas
       description: 'Eclipse Velocitas™ provides an end-to-end, scalable, modular and
@@ -301,29 +343,6 @@ categories:
       - url: https://github.com/eclipse-velocitas/devenv-github-integration
         latest_release: null
       logo: logo_02_rgb_0.png
-    - name: Eclipse Open Vehicle API
-      description: 'The Eclipse Open Vehicle API contains tools and a runtime to create
-        a vehicle abstraction interface for signal- and event-driven functions. 
-
-
-        Component-based
-
-        Transfer existing signal-based ECUs to HPC...'
-      homepage_url: https://projects.eclipse.org/projects/automotive.openvehicle-api
-      project: Incubating
-      repo_url: https://github.com/eclipse-openvehicle-api
-      repo_urls:
-      - https://github.com/eclipse-openvehicle-api/openvehicle-api
-      - https://github.com/eclipse-openvehicle-api/openvehicle-website
-      - https://github.com/eclipse-openvehicle-api/.eclipsefdn
-      repositories:
-      - url: https://github.com/eclipse-openvehicle-api/openvehicle-api
-        latest_release: null
-      - url: https://github.com/eclipse-openvehicle-api/openvehicle-website
-        latest_release: null
-      - url: https://github.com/eclipse-openvehicle-api/.eclipsefdn
-        latest_release: null
-      logo: Open_Vehicle_API_v1_white_cropped.jpg
   - name: Testing & Validation
     items:
     - name: Eclipse OpenXilEnv
@@ -373,10 +392,10 @@ categories:
       repositories:
       - url: https://github.com/eclipse-opendut/opendut
         latest_release:
-          tag_name: v0.10.1-alpha
-          name: v0.10.1-alpha
-          url: https://github.com/eclipse-opendut/opendut/releases/tag/v0.10.1-alpha
-          published_at: '2026-04-20T13:55:32Z'
+          tag_name: v0.10.2
+          name: v0.10.2
+          url: https://github.com/eclipse-opendut/opendut/releases/tag/v0.10.2
+          published_at: '2026-06-12T13:57:24Z'
       - url: https://github.com/eclipse-opendut/netbird-build
         latest_release:
           tag_name: v0.68.2-543b4b5004d52fdf3cfdda205fedf87bfd3206e6
@@ -414,10 +433,10 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-muto
       repo_urls:
+      - https://github.com/eclipse-muto/core
+      - https://github.com/eclipse-muto/muto
       - https://github.com/eclipse-muto/composer
       - https://github.com/eclipse-muto/agent
-      - https://github.com/eclipse-muto/muto
-      - https://github.com/eclipse-muto/core
       - https://github.com/eclipse-muto/messages
       - https://github.com/eclipse-muto/.github
       - https://github.com/eclipse-muto/.eclipsefdn
@@ -432,9 +451,7 @@ categories:
       - https://github.com/eclipse-muto/liveui-vue
       - https://github.com/eclipse-muto/liveui-samples
       repositories:
-      - url: https://github.com/eclipse-muto/composer
-        latest_release: null
-      - url: https://github.com/eclipse-muto/agent
+      - url: https://github.com/eclipse-muto/core
         latest_release: null
       - url: https://github.com/eclipse-muto/muto
         latest_release: &id001
@@ -442,7 +459,9 @@ categories:
           name: v0.42_build_2
           url: https://github.com/eclipse-muto/muto/releases/tag/v0.42_build_2
           published_at: '2026-03-11T08:31:27Z'
-      - url: https://github.com/eclipse-muto/core
+      - url: https://github.com/eclipse-muto/composer
+        latest_release: null
+      - url: https://github.com/eclipse-muto/agent
         latest_release: null
       - url: https://github.com/eclipse-muto/messages
         latest_release: null
@@ -493,17 +512,31 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-leda
       repo_urls:
+      - https://github.com/eclipse-leda/leda-contrib-vscode-extensions
+      - https://github.com/eclipse-leda/leda-example-applications
+      - https://github.com/eclipse-leda/leda-distro
       - https://github.com/eclipse-leda/meta-leda
       - https://github.com/eclipse-leda/leda
-      - https://github.com/eclipse-leda/leda-distro
       - https://github.com/eclipse-leda/leda-utils
       - https://github.com/eclipse-leda/.github
       - https://github.com/eclipse-leda/.eclipsefdn
-      - https://github.com/eclipse-leda/leda-example-applications
-      - https://github.com/eclipse-leda/leda-contrib-vscode-extensions
       - https://github.com/eclipse-leda/eclipse-leda.github.io
       - https://github.com/eclipse-leda/leda-contrib-container-update-agent
       repositories:
+      - url: https://github.com/eclipse-leda/leda-contrib-vscode-extensions
+        latest_release: null
+      - url: https://github.com/eclipse-leda/leda-example-applications
+        latest_release:
+          tag_name: v0.0.2
+          name: Pre-Build v0.0.2
+          url: https://github.com/eclipse-leda/leda-example-applications/releases/tag/v0.0.2
+          published_at: '2023-06-23T06:20:55Z'
+      - url: https://github.com/eclipse-leda/leda-distro
+        latest_release:
+          tag_name: v0.1.0-M3
+          name: Milestone v0.1.0-M3
+          url: https://github.com/eclipse-leda/leda-distro/releases/tag/v0.1.0-M3
+          published_at: '2023-11-20T13:56:48Z'
       - url: https://github.com/eclipse-leda/meta-leda
         latest_release:
           tag_name: 0.1.0-M3
@@ -512,12 +545,6 @@ categories:
           published_at: '2023-11-14T13:28:30Z'
       - url: https://github.com/eclipse-leda/leda
         latest_release: null
-      - url: https://github.com/eclipse-leda/leda-distro
-        latest_release:
-          tag_name: v0.1.0-M3
-          name: Milestone v0.1.0-M3
-          url: https://github.com/eclipse-leda/leda-distro/releases/tag/v0.1.0-M3
-          published_at: '2023-11-20T13:56:48Z'
       - url: https://github.com/eclipse-leda/leda-utils
         latest_release:
           tag_name: v0.0.4
@@ -527,14 +554,6 @@ categories:
       - url: https://github.com/eclipse-leda/.github
         latest_release: null
       - url: https://github.com/eclipse-leda/.eclipsefdn
-        latest_release: null
-      - url: https://github.com/eclipse-leda/leda-example-applications
-        latest_release:
-          tag_name: v0.0.2
-          name: Pre-Build v0.0.2
-          url: https://github.com/eclipse-leda/leda-example-applications/releases/tag/v0.0.2
-          published_at: '2023-06-23T06:20:55Z'
-      - url: https://github.com/eclipse-leda/leda-contrib-vscode-extensions
         latest_release: null
       - url: https://github.com/eclipse-leda/eclipse-leda.github.io
         latest_release: null
@@ -615,67 +634,68 @@ categories:
       repo_url: https://github.com/eclipse-score
       repo_urls:
       - https://github.com/eclipse-score/communication
-      - https://github.com/eclipse-score/baselibs
-      - https://github.com/eclipse-score/.github
-      - https://github.com/eclipse-score/itf
-      - https://github.com/eclipse-score/eclipse-score-website-preview
-      - https://github.com/eclipse-score/score
       - https://github.com/eclipse-score/lifecycle
+      - https://github.com/eclipse-score/bazel_cpp_toolchains
+      - https://github.com/eclipse-score/process_description
       - https://github.com/eclipse-score/reference_integration
+      - https://github.com/eclipse-score/docs-as-code
+      - https://github.com/eclipse-score/score
+      - https://github.com/eclipse-score/module_template
       - https://github.com/eclipse-score/tooling
+      - https://github.com/eclipse-score/logging
+      - https://github.com/eclipse-score/inc_security_crypto
+      - https://github.com/eclipse-score/time
+      - https://github.com/eclipse-score/inc_someip_gateway
+      - https://github.com/eclipse-score/baselibs
       - https://github.com/eclipse-score/persistency
-      - https://github.com/eclipse-score/.eclipsefdn
       - https://github.com/eclipse-score/bazel_registry_ui
       - https://github.com/eclipse-score/bazel_registry
-      - https://github.com/eclipse-score/logging
-      - https://github.com/eclipse-score/toolchains_gcc_packages
-      - https://github.com/eclipse-score/process_description
-      - https://github.com/eclipse-score/docs-as-code
-      - https://github.com/eclipse-score/inc_someip_gateway
-      - https://github.com/eclipse-score/nlohmann_json
-      - https://github.com/eclipse-score/module_template
-      - https://github.com/eclipse-score/devcontainer
-      - https://github.com/eclipse-score/inc_security_crypto
-      - https://github.com/eclipse-score/inc_time
-      - https://github.com/eclipse-score/inc_daal
       - https://github.com/eclipse-score/kyron
-      - https://github.com/eclipse-score/orchestrator
-      - https://github.com/eclipse-score/testing_tools
-      - https://github.com/eclipse-score/bazel_cpp_toolchains
-      - https://github.com/eclipse-score/baselibs_rust
-      - https://github.com/eclipse-score/scrample
-      - https://github.com/eclipse-score/toolchains_rust
-      - https://github.com/eclipse-score/ferrocene_toolchain_builder
-      - https://github.com/eclipse-score/rules_rust
-      - https://github.com/eclipse-score/more-disk-space
-      - https://github.com/eclipse-score/cicd-workflows
-      - https://github.com/eclipse-score/cicd-actions
-      - https://github.com/eclipse-score/feo
-      - https://github.com/eclipse-score/inc_os_autosd
-      - https://github.com/eclipse-score/infrastructure
-      - https://github.com/eclipse-score/rules_imagefs
-      - https://github.com/eclipse-score/os_images
       - https://github.com/eclipse-score/inc_diagnostics
+      - https://github.com/eclipse-score/nlohmann_json
       - https://github.com/eclipse-score/score-crates
-      - https://github.com/eclipse-score/tools
-      - https://github.com/eclipse-score/qnx_unit_tests
-      - https://github.com/eclipse-score/eclipse-score-website-published
-      - https://github.com/eclipse-score/eclipse-score-website
-      - https://github.com/eclipse-score/sbom-tool
+      - https://github.com/eclipse-score/infrastructure
+      - https://github.com/eclipse-score/devcontainer
+      - https://github.com/eclipse-score/cicd-actions
+      - https://github.com/eclipse-score/score_cpp_policies
+      - https://github.com/eclipse-score/scrample
+      - https://github.com/eclipse-score/cicd-workflows
+      - https://github.com/eclipse-score/.eclipsefdn
       - https://github.com/eclipse-score/config_management
-      - https://github.com/eclipse-score/apt-install
-      - https://github.com/eclipse-score/bazel-tools-python
-      - https://github.com/eclipse-score/bazel-tools-cc
-      - https://github.com/eclipse-score/bazel_platforms
+      - https://github.com/eclipse-score/inc_daal
+      - https://github.com/eclipse-score/.github
       - https://github.com/eclipse-score/score_rust_policies
+      - https://github.com/eclipse-score/rules_imagefs
+      - https://github.com/eclipse-score/itf
+      - https://github.com/eclipse-score/toolchains_gcc_packages
+      - https://github.com/eclipse-score/eclipse-score-website-published
+      - https://github.com/eclipse-score/eclipse-score-website-preview
+      - https://github.com/eclipse-score/eclipse-score-website
+      - https://github.com/eclipse-score/qnx_unit_tests
+      - https://github.com/eclipse-score/rules_rust
+      - https://github.com/eclipse-score/dev_playground
+      - https://github.com/eclipse-score/testing_tools
+      - https://github.com/eclipse-score/feo
+      - https://github.com/eclipse-score/more-disk-space
+      - https://github.com/eclipse-score/inc_os_autosd
+      - https://github.com/eclipse-score/baselibs_rust
+      - https://github.com/eclipse-score/mcp-servers
+      - https://github.com/eclipse-score/toolchains_rust
+      - https://github.com/eclipse-score/apt-install
+      - https://github.com/eclipse-score/bazel-tools-cc
+      - https://github.com/eclipse-score/bazel-tools-python
+      - https://github.com/eclipse-score/os_images
+      - https://github.com/eclipse-score/orchestrator
+      - https://github.com/eclipse-score/ferrocene_toolchain_builder
+      - https://github.com/eclipse-score/tools
+      - https://github.com/eclipse-score/sbom-tool
+      - https://github.com/eclipse-score/bazel_platforms
       - https://github.com/eclipse-score/toolchains_gcc
       - https://github.com/eclipse-score/toolchains_qnx
-      - https://github.com/eclipse-score/dev_playground
       - https://github.com/eclipse-score/test_module_a
       - https://github.com/eclipse-score/test_module_b
       - https://github.com/eclipse-score/operating_system
       - https://github.com/eclipse-score/dash-license-scan
-      - https://github.com/eclipse-score/score_cpp_policies
       - https://github.com/eclipse-score/inc_score_codegen
       - https://github.com/eclipse-score/inc_mw_com
       - https://github.com/eclipse-score/eclipse-score.github.io
@@ -697,54 +717,78 @@ categories:
           name: v0.2.1
           url: https://github.com/eclipse-score/communication/releases/tag/v0.2.1
           published_at: '2026-04-29T04:52:51Z'
-      - url: https://github.com/eclipse-score/baselibs
-        latest_release:
-          tag_name: v0.2.7
-          name: v0.2.7
-          url: https://github.com/eclipse-score/baselibs/releases/tag/v0.2.7
-          published_at: '2026-04-29T13:23:57Z'
-      - url: https://github.com/eclipse-score/.github
-        latest_release: null
-      - url: https://github.com/eclipse-score/itf
-        latest_release:
-          tag_name: 0.3.0
-          name: 0.3.0
-          url: https://github.com/eclipse-score/itf/releases/tag/0.3.0
-          published_at: '2026-04-22T08:50:37Z'
-      - url: https://github.com/eclipse-score/eclipse-score-website-preview
-        latest_release: null
-      - url: https://github.com/eclipse-score/score
-        latest_release:
-          tag_name: v0.5.5
-          name: v0.5.5
-          url: https://github.com/eclipse-score/score/releases/tag/v0.5.5
-          published_at: '2026-04-26T12:32:45Z'
       - url: https://github.com/eclipse-score/lifecycle
         latest_release:
           tag_name: v0.2.0
           name: v0.2.0
           url: https://github.com/eclipse-score/lifecycle/releases/tag/v0.2.0
           published_at: '2026-04-29T08:27:42Z'
+      - url: https://github.com/eclipse-score/bazel_cpp_toolchains
+        latest_release:
+          tag_name: v0.5.4
+          name: v0.5.4
+          url: https://github.com/eclipse-score/bazel_cpp_toolchains/releases/tag/v0.5.4
+          published_at: '2026-06-15T09:23:18Z'
+      - url: https://github.com/eclipse-score/process_description
+        latest_release:
+          tag_name: v2.0.1
+          name: v2.0.1
+          url: https://github.com/eclipse-score/process_description/releases/tag/v2.0.1
+          published_at: '2026-07-02T14:25:23Z'
       - url: https://github.com/eclipse-score/reference_integration
         latest_release:
+          tag_name: v0.7.0
+          name: v0.7.0
+          url: https://github.com/eclipse-score/reference_integration/releases/tag/v0.7.0
+          published_at: '2026-05-11T16:24:14Z'
+      - url: https://github.com/eclipse-score/docs-as-code
+        latest_release:
+          tag_name: v4.6.0
+          name: v4.6.0
+          url: https://github.com/eclipse-score/docs-as-code/releases/tag/v4.6.0
+          published_at: '2026-06-29T08:24:35Z'
+      - url: https://github.com/eclipse-score/score
+        latest_release:
           tag_name: v0.6.0
-          name: v0.6.0 (RETRACTED – do not use)
-          url: https://github.com/eclipse-score/reference_integration/releases/tag/v0.6.0
-          published_at: '2026-02-23T11:06:08Z'
+          name: v0.6.0
+          url: https://github.com/eclipse-score/score/releases/tag/v0.6.0
+          published_at: '2026-06-26T11:50:59Z'
+      - url: https://github.com/eclipse-score/module_template
+        latest_release: null
       - url: https://github.com/eclipse-score/tooling
         latest_release:
           tag_name: v1.2.0
           name: v1.2.0
           url: https://github.com/eclipse-score/tooling/releases/tag/v1.2.0
           published_at: '2026-04-02T14:17:01Z'
+      - url: https://github.com/eclipse-score/logging
+        latest_release:
+          tag_name: v0.2.1
+          name: v0.2.1
+          url: https://github.com/eclipse-score/logging/releases/tag/v0.2.1
+          published_at: '2026-05-04T11:38:01Z'
+      - url: https://github.com/eclipse-score/inc_security_crypto
+        latest_release: null
+      - url: https://github.com/eclipse-score/time
+        latest_release:
+          tag_name: v0.0.1
+          name: v0.0.1
+          url: https://github.com/eclipse-score/time/releases/tag/v0.0.1
+          published_at: '2026-06-30T09:07:31Z'
+      - url: https://github.com/eclipse-score/inc_someip_gateway
+        latest_release: null
+      - url: https://github.com/eclipse-score/baselibs
+        latest_release:
+          tag_name: v0.2.9
+          name: v0.2.9
+          url: https://github.com/eclipse-score/baselibs/releases/tag/v0.2.9
+          published_at: '2026-06-30T17:20:33Z'
       - url: https://github.com/eclipse-score/persistency
         latest_release:
-          tag_name: v0.3.1
-          name: v0.3.1
-          url: https://github.com/eclipse-score/persistency/releases/tag/v0.3.1
-          published_at: '2026-04-30T13:06:45Z'
-      - url: https://github.com/eclipse-score/.eclipsefdn
-        latest_release: null
+          tag_name: v0.3.2
+          name: v0.3.2
+          url: https://github.com/eclipse-score/persistency/releases/tag/v0.3.2
+          published_at: '2026-05-06T16:57:20Z'
       - url: https://github.com/eclipse-score/bazel_registry_ui
         latest_release: null
       - url: https://github.com/eclipse-score/bazel_registry
@@ -753,31 +797,13 @@ categories:
           name: v0.5.0-beta
           url: https://github.com/eclipse-score/bazel_registry/releases/tag/v0.5.0-beta
           published_at: '2025-12-22T12:39:41Z'
-      - url: https://github.com/eclipse-score/logging
+      - url: https://github.com/eclipse-score/kyron
         latest_release:
-          tag_name: v0.2.1
-          name: v0.2.1
-          url: https://github.com/eclipse-score/logging/releases/tag/v0.2.1
-          published_at: '2026-05-04T11:38:01Z'
-      - url: https://github.com/eclipse-score/toolchains_gcc_packages
-        latest_release:
-          tag_name: v0.0.4
-          name: v0.0.4
-          url: https://github.com/eclipse-score/toolchains_gcc_packages/releases/tag/v0.0.4
-          published_at: '2026-01-21T14:32:03Z'
-      - url: https://github.com/eclipse-score/process_description
-        latest_release:
-          tag_name: v1.5.4
-          name: v1.5.4
-          url: https://github.com/eclipse-score/process_description/releases/tag/v1.5.4
-          published_at: '2026-04-23T09:00:43Z'
-      - url: https://github.com/eclipse-score/docs-as-code
-        latest_release:
-          tag_name: v4.0.3
-          name: v4.0.3
-          url: https://github.com/eclipse-score/docs-as-code/releases/tag/v4.0.3
-          published_at: '2026-04-23T10:33:17Z'
-      - url: https://github.com/eclipse-score/inc_someip_gateway
+          tag_name: v0.1.3
+          name: v0.1.3
+          url: https://github.com/eclipse-score/kyron/releases/tag/v0.1.3
+          published_at: '2026-07-07T09:17:59Z'
+      - url: https://github.com/eclipse-score/inc_diagnostics
         latest_release: null
       - url: https://github.com/eclipse-score/nlohmann_json
         latest_release:
@@ -785,164 +811,180 @@ categories:
           name: v3.12.0-tsf.1
           url: https://github.com/eclipse-score/nlohmann_json/releases/tag/v3.12.0-tsf.1
           published_at: '2026-04-29T09:16:21Z'
-      - url: https://github.com/eclipse-score/module_template
+      - url: https://github.com/eclipse-score/score-crates
+        latest_release:
+          tag_name: v0.0.10
+          name: v0.0.10
+          url: https://github.com/eclipse-score/score-crates/releases/tag/v0.0.10
+          published_at: '2026-05-20T12:06:22Z'
+      - url: https://github.com/eclipse-score/infrastructure
         latest_release: null
       - url: https://github.com/eclipse-score/devcontainer
         latest_release:
-          tag_name: v1.5.0
-          name: v1.5.0
-          url: https://github.com/eclipse-score/devcontainer/releases/tag/v1.5.0
-          published_at: '2026-05-04T00:28:04Z'
-      - url: https://github.com/eclipse-score/inc_security_crypto
-        latest_release: null
-      - url: https://github.com/eclipse-score/inc_time
-        latest_release: null
-      - url: https://github.com/eclipse-score/inc_daal
-        latest_release: null
-      - url: https://github.com/eclipse-score/kyron
+          tag_name: v1.8.0
+          name: v1.8.0
+          url: https://github.com/eclipse-score/devcontainer/releases/tag/v1.8.0
+          published_at: '2026-07-06T00:31:20Z'
+      - url: https://github.com/eclipse-score/cicd-actions
         latest_release:
-          tag_name: v0.1.2
-          name: v0.1.2
-          url: https://github.com/eclipse-score/kyron/releases/tag/v0.1.2
-          published_at: '2026-04-30T08:59:56Z'
-      - url: https://github.com/eclipse-score/orchestrator
+          tag_name: inter-repo-access/v0.0.0
+          name: inter-repo-access/v0.0.0
+          url: https://github.com/eclipse-score/cicd-actions/releases/tag/inter-repo-access/v0.0.0
+          published_at: '2026-06-24T09:53:49Z'
+      - url: https://github.com/eclipse-score/score_cpp_policies
         latest_release:
-          tag_name: v0.1.1
-          name: v0.1.1
-          url: https://github.com/eclipse-score/orchestrator/releases/tag/v0.1.1
-          published_at: '2026-04-30T09:23:42Z'
-      - url: https://github.com/eclipse-score/testing_tools
-        latest_release:
-          tag_name: v0.4.1
-          name: v0.4.1
-          url: https://github.com/eclipse-score/testing_tools/releases/tag/v0.4.1
-          published_at: '2026-04-29T19:20:34Z'
-      - url: https://github.com/eclipse-score/bazel_cpp_toolchains
-        latest_release:
-          tag_name: v0.5.1
-          name: v0.5.1
-          url: https://github.com/eclipse-score/bazel_cpp_toolchains/releases/tag/v0.5.1
-          published_at: '2026-04-15T13:45:16Z'
-      - url: https://github.com/eclipse-score/baselibs_rust
-        latest_release:
-          tag_name: v0.1.2
-          name: v0.1.2
-          url: https://github.com/eclipse-score/baselibs_rust/releases/tag/v0.1.2
-          published_at: '2026-04-27T11:27:00Z'
+          tag_name: 0.0.1
+          name: v0.0.1
+          url: https://github.com/eclipse-score/score_cpp_policies/releases/tag/0.0.1
+          published_at: '2026-05-22T08:50:53Z'
       - url: https://github.com/eclipse-score/scrample
         latest_release:
           tag_name: v0.1.1
           name: v0.1.1
           url: https://github.com/eclipse-score/scrample/releases/tag/v0.1.1
           published_at: '2026-01-26T13:25:47Z'
-      - url: https://github.com/eclipse-score/toolchains_rust
-        latest_release:
-          tag_name: v0.9.1
-          name: v0.9.1
-          url: https://github.com/eclipse-score/toolchains_rust/releases/tag/v0.9.1
-          published_at: '2026-04-27T14:40:53Z'
-      - url: https://github.com/eclipse-score/ferrocene_toolchain_builder
-        latest_release:
-          tag_name: 1.2.0
-          name: Ferrocene Toolchain Release
-          url: https://github.com/eclipse-score/ferrocene_toolchain_builder/releases/tag/1.2.0
-          published_at: '2026-03-16T15:48:25Z'
-      - url: https://github.com/eclipse-score/rules_rust
-        latest_release:
-          tag_name: 0.68.2-score
-          name: 0.68.2-score
-          url: https://github.com/eclipse-score/rules_rust/releases/tag/0.68.2-score
-          published_at: '2026-04-27T07:33:19Z'
-      - url: https://github.com/eclipse-score/more-disk-space
-        latest_release:
-          tag_name: v1
-          name: v1
-          url: https://github.com/eclipse-score/more-disk-space/releases/tag/v1
-          published_at: null
       - url: https://github.com/eclipse-score/cicd-workflows
         latest_release:
-          tag_name: v0.0.1
-          name: v0.0.1
-          url: https://github.com/eclipse-score/cicd-workflows/releases/tag/v0.0.1
-          published_at: null
-      - url: https://github.com/eclipse-score/cicd-actions
-        latest_release: null
-      - url: https://github.com/eclipse-score/feo
-        latest_release:
-          tag_name: v1.0.5
-          name: v1.0.5
-          url: https://github.com/eclipse-score/feo/releases/tag/v1.0.5
-          published_at: '2026-02-19T13:44:59Z'
-      - url: https://github.com/eclipse-score/inc_os_autosd
-        latest_release:
-          tag_name: continuous
-          name: Continuous Build
-          url: https://github.com/eclipse-score/inc_os_autosd/releases/tag/continuous
-          published_at: '2026-03-24T15:58:16Z'
-      - url: https://github.com/eclipse-score/infrastructure
-        latest_release: null
-      - url: https://github.com/eclipse-score/rules_imagefs
-        latest_release:
-          tag_name: v0.0.3
-          name: v0.0.3
-          url: https://github.com/eclipse-score/rules_imagefs/releases/tag/v0.0.3
-          published_at: '2026-04-02T12:58:50Z'
-      - url: https://github.com/eclipse-score/os_images
-        latest_release: null
-      - url: https://github.com/eclipse-score/inc_diagnostics
-        latest_release: null
-      - url: https://github.com/eclipse-score/score-crates
-        latest_release:
-          tag_name: v0.0.9
-          name: v0.0.9
-          url: https://github.com/eclipse-score/score-crates/releases/tag/v0.0.9
-          published_at: '2026-03-25T11:15:33Z'
-      - url: https://github.com/eclipse-score/tools
-        latest_release: null
-      - url: https://github.com/eclipse-score/qnx_unit_tests
-        latest_release:
-          tag_name: 0.1.0
-          name: 0.1.0
-          url: https://github.com/eclipse-score/qnx_unit_tests/releases/tag/0.1.0
-          published_at: '2026-04-09T12:37:33Z'
-      - url: https://github.com/eclipse-score/eclipse-score-website-published
-        latest_release: null
-      - url: https://github.com/eclipse-score/eclipse-score-website
-        latest_release: null
-      - url: https://github.com/eclipse-score/sbom-tool
+          tag_name: v0.0.2
+          name: v0.0.2
+          url: https://github.com/eclipse-score/cicd-workflows/releases/tag/v0.0.2
+          published_at: '2026-06-09T09:04:15Z'
+      - url: https://github.com/eclipse-score/.eclipsefdn
         latest_release: null
       - url: https://github.com/eclipse-score/config_management
         latest_release: null
-      - url: https://github.com/eclipse-score/apt-install
-        latest_release:
-          tag_name: v1.0.0
-          name: v1.0.0
-          url: https://github.com/eclipse-score/apt-install/releases/tag/v1.0.0
-          published_at: null
-      - url: https://github.com/eclipse-score/bazel-tools-python
-        latest_release:
-          tag_name: v0.1.3
-          name: v0.1.3
-          url: https://github.com/eclipse-score/bazel-tools-python/releases/tag/v0.1.3
-          published_at: '2025-11-25T13:52:14Z'
-      - url: https://github.com/eclipse-score/bazel-tools-cc
-        latest_release:
-          tag_name: v0.1.0
-          name: v0.1.0
-          url: https://github.com/eclipse-score/bazel-tools-cc/releases/tag/v0.1.0
-          published_at: '2025-12-15T06:13:22Z'
-      - url: https://github.com/eclipse-score/bazel_platforms
-        latest_release:
-          tag_name: v0.1.2
-          name: v0.1.2
-          url: https://github.com/eclipse-score/bazel_platforms/releases/tag/v0.1.2
-          published_at: '2026-03-26T10:49:58Z'
+      - url: https://github.com/eclipse-score/inc_daal
+        latest_release: null
+      - url: https://github.com/eclipse-score/.github
+        latest_release: null
       - url: https://github.com/eclipse-score/score_rust_policies
         latest_release:
           tag_name: 0.0.5
           name: 0.0.5
           url: https://github.com/eclipse-score/score_rust_policies/releases/tag/0.0.5
           published_at: '2026-02-05T12:08:56Z'
+      - url: https://github.com/eclipse-score/rules_imagefs
+        latest_release:
+          tag_name: v0.0.3
+          name: v0.0.3
+          url: https://github.com/eclipse-score/rules_imagefs/releases/tag/v0.0.3
+          published_at: '2026-04-02T12:58:50Z'
+      - url: https://github.com/eclipse-score/itf
+        latest_release:
+          tag_name: v0.4.0
+          name: v0.4.0
+          url: https://github.com/eclipse-score/itf/releases/tag/v0.4.0
+          published_at: '2026-05-13T09:59:34Z'
+      - url: https://github.com/eclipse-score/toolchains_gcc_packages
+        latest_release:
+          tag_name: v0.0.4
+          name: v0.0.4
+          url: https://github.com/eclipse-score/toolchains_gcc_packages/releases/tag/v0.0.4
+          published_at: '2026-01-21T14:32:03Z'
+      - url: https://github.com/eclipse-score/eclipse-score-website-published
+        latest_release: null
+      - url: https://github.com/eclipse-score/eclipse-score-website-preview
+        latest_release: null
+      - url: https://github.com/eclipse-score/eclipse-score-website
+        latest_release: null
+      - url: https://github.com/eclipse-score/qnx_unit_tests
+        latest_release:
+          tag_name: 0.2.0
+          name: 0.2.0
+          url: https://github.com/eclipse-score/qnx_unit_tests/releases/tag/0.2.0
+          published_at: '2026-06-21T03:43:22Z'
+      - url: https://github.com/eclipse-score/rules_rust
+        latest_release:
+          tag_name: 0.68.2-score
+          name: 0.68.2-score
+          url: https://github.com/eclipse-score/rules_rust/releases/tag/0.68.2-score
+          published_at: '2026-04-27T07:33:19Z'
+      - url: https://github.com/eclipse-score/dev_playground
+        latest_release:
+          tag_name: v0.0.1
+          name: v0.0.1
+          url: https://github.com/eclipse-score/dev_playground/releases/tag/v0.0.1
+          published_at: '2026-06-16T10:04:55Z'
+      - url: https://github.com/eclipse-score/testing_tools
+        latest_release:
+          tag_name: v0.4.1
+          name: v0.4.1
+          url: https://github.com/eclipse-score/testing_tools/releases/tag/v0.4.1
+          published_at: '2026-04-29T19:20:34Z'
+      - url: https://github.com/eclipse-score/feo
+        latest_release:
+          tag_name: v1.0.5
+          name: v1.0.5
+          url: https://github.com/eclipse-score/feo/releases/tag/v1.0.5
+          published_at: '2026-02-19T13:44:59Z'
+      - url: https://github.com/eclipse-score/more-disk-space
+        latest_release:
+          tag_name: v1.1.0
+          name: v1.1.0
+          url: https://github.com/eclipse-score/more-disk-space/releases/tag/v1.1.0
+          published_at: '2026-06-10T13:12:23Z'
+      - url: https://github.com/eclipse-score/inc_os_autosd
+        latest_release:
+          tag_name: continuous
+          name: Continuous Build
+          url: https://github.com/eclipse-score/inc_os_autosd/releases/tag/continuous
+          published_at: '2026-05-26T10:13:42Z'
+      - url: https://github.com/eclipse-score/baselibs_rust
+        latest_release:
+          tag_name: v0.1.2
+          name: v0.1.2
+          url: https://github.com/eclipse-score/baselibs_rust/releases/tag/v0.1.2
+          published_at: '2026-04-27T11:27:00Z'
+      - url: https://github.com/eclipse-score/mcp-servers
+        latest_release: null
+      - url: https://github.com/eclipse-score/toolchains_rust
+        latest_release:
+          tag_name: v0.9.1
+          name: v0.9.1
+          url: https://github.com/eclipse-score/toolchains_rust/releases/tag/v0.9.1
+          published_at: '2026-04-27T14:40:53Z'
+      - url: https://github.com/eclipse-score/apt-install
+        latest_release:
+          tag_name: v1.0.0
+          name: v1.0.0
+          url: https://github.com/eclipse-score/apt-install/releases/tag/v1.0.0
+          published_at: null
+      - url: https://github.com/eclipse-score/bazel-tools-cc
+        latest_release:
+          tag_name: v0.1.0
+          name: v0.1.0
+          url: https://github.com/eclipse-score/bazel-tools-cc/releases/tag/v0.1.0
+          published_at: '2025-12-15T06:13:22Z'
+      - url: https://github.com/eclipse-score/bazel-tools-python
+        latest_release:
+          tag_name: v0.1.3
+          name: v0.1.3
+          url: https://github.com/eclipse-score/bazel-tools-python/releases/tag/v0.1.3
+          published_at: '2025-11-25T13:52:14Z'
+      - url: https://github.com/eclipse-score/os_images
+        latest_release: null
+      - url: https://github.com/eclipse-score/orchestrator
+        latest_release:
+          tag_name: v0.1.1
+          name: v0.1.1
+          url: https://github.com/eclipse-score/orchestrator/releases/tag/v0.1.1
+          published_at: '2026-04-30T09:23:42Z'
+      - url: https://github.com/eclipse-score/ferrocene_toolchain_builder
+        latest_release:
+          tag_name: 1.2.0
+          name: Ferrocene Toolchain Release
+          url: https://github.com/eclipse-score/ferrocene_toolchain_builder/releases/tag/1.2.0
+          published_at: '2026-03-16T15:48:25Z'
+      - url: https://github.com/eclipse-score/tools
+        latest_release: null
+      - url: https://github.com/eclipse-score/sbom-tool
+        latest_release: null
+      - url: https://github.com/eclipse-score/bazel_platforms
+        latest_release:
+          tag_name: v0.1.2
+          name: v0.1.2
+          url: https://github.com/eclipse-score/bazel_platforms/releases/tag/v0.1.2
+          published_at: '2026-03-26T10:49:58Z'
       - url: https://github.com/eclipse-score/toolchains_gcc
         latest_release:
           tag_name: v0.0.7
@@ -955,8 +997,6 @@ categories:
           name: v0.0.7
           url: https://github.com/eclipse-score/toolchains_qnx/releases/tag/v0.0.7
           published_at: '2026-02-09T14:15:07Z'
-      - url: https://github.com/eclipse-score/dev_playground
-        latest_release: null
       - url: https://github.com/eclipse-score/test_module_a
         latest_release: null
       - url: https://github.com/eclipse-score/test_module_b
@@ -969,8 +1009,6 @@ categories:
           name: v0.0.1a1 - First Release Attempt
           url: https://github.com/eclipse-score/dash-license-scan/releases/tag/v0.0.1a1
           published_at: '2025-12-19T07:02:56Z'
-      - url: https://github.com/eclipse-score/score_cpp_policies
-        latest_release: null
       - url: https://github.com/eclipse-score/inc_score_codegen
         latest_release: null
       - url: https://github.com/eclipse-score/inc_mw_com
@@ -1008,23 +1046,23 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-autoapiframework
       repo_urls:
-      - https://github.com/eclipse-autoapiframework/application-framework
       - https://github.com/eclipse-autoapiframework/autoapiframework
-      - https://github.com/eclipse-autoapiframework/.github
+      - https://github.com/eclipse-autoapiframework/application-framework
       - https://github.com/eclipse-autoapiframework/vss-gui-tool
+      - https://github.com/eclipse-autoapiframework/.github
       - https://github.com/eclipse-autoapiframework/.eclipsefdn
       repositories:
+      - url: https://github.com/eclipse-autoapiframework/autoapiframework
+        latest_release: null
       - url: https://github.com/eclipse-autoapiframework/application-framework
         latest_release:
           tag_name: v0.7.0
           name: v0.7.0
           url: https://github.com/eclipse-autoapiframework/application-framework/releases/tag/v0.7.0
           published_at: '2026-04-07T05:52:17Z'
-      - url: https://github.com/eclipse-autoapiframework/autoapiframework
+      - url: https://github.com/eclipse-autoapiframework/vss-gui-tool
         latest_release: null
       - url: https://github.com/eclipse-autoapiframework/.github
-        latest_release: null
-      - url: https://github.com/eclipse-autoapiframework/vss-gui-tool
         latest_release: null
       - url: https://github.com/eclipse-autoapiframework/.eclipsefdn
         latest_release: null
@@ -1041,6 +1079,7 @@ categories:
       repo_urls:
       - https://github.com/eclipse-autosd/eclipse-autosd
       - https://github.com/eclipse-autosd/.eclipsefdn
+      - https://github.com/eclipse-autosd/setup-aib
       repositories:
       - url: https://github.com/eclipse-autosd/eclipse-autosd
         latest_release:
@@ -1049,6 +1088,8 @@ categories:
           url: https://github.com/eclipse-autosd/eclipse-autosd/releases/tag/dev
           published_at: '2026-04-28T08:58:12Z'
       - url: https://github.com/eclipse-autosd/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-autosd/setup-aib
         latest_release: null
       logo: incubating.png
     - name: Eclipse SDV Blueprints
@@ -1059,26 +1100,32 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-sdv-blueprints
       repo_urls:
-      - https://github.com/eclipse-sdv-blueprints/blueprints-website
+      - https://github.com/eclipse-sdv-blueprints/.github
       - https://github.com/eclipse-sdv-blueprints/e2e-vehicle-signals
-      - https://github.com/eclipse-sdv-blueprints/insurance
+      - https://github.com/eclipse-sdv-blueprints/blueprints-website
+      - https://github.com/eclipse-sdv-blueprints/fleet-management
       - https://github.com/eclipse-sdv-blueprints/commercial-sdv-stack
+      - https://github.com/eclipse-sdv-blueprints/companion-application
+      - https://github.com/eclipse-sdv-blueprints/insurance
       - https://github.com/eclipse-sdv-blueprints/.eclipsefdn
       - https://github.com/eclipse-sdv-blueprints/ros-racer
       - https://github.com/eclipse-sdv-blueprints/service-to-signal
-      - https://github.com/eclipse-sdv-blueprints/fleet-management
       - https://github.com/eclipse-sdv-blueprints/blueprints
-      - https://github.com/eclipse-sdv-blueprints/companion-application
       - https://github.com/eclipse-sdv-blueprints/software-orchestration
-      - https://github.com/eclipse-sdv-blueprints/.github
       repositories:
-      - url: https://github.com/eclipse-sdv-blueprints/blueprints-website
+      - url: https://github.com/eclipse-sdv-blueprints/.github
         latest_release: null
       - url: https://github.com/eclipse-sdv-blueprints/e2e-vehicle-signals
         latest_release: null
-      - url: https://github.com/eclipse-sdv-blueprints/insurance
+      - url: https://github.com/eclipse-sdv-blueprints/blueprints-website
+        latest_release: null
+      - url: https://github.com/eclipse-sdv-blueprints/fleet-management
         latest_release: null
       - url: https://github.com/eclipse-sdv-blueprints/commercial-sdv-stack
+        latest_release: null
+      - url: https://github.com/eclipse-sdv-blueprints/companion-application
+        latest_release: null
+      - url: https://github.com/eclipse-sdv-blueprints/insurance
         latest_release: null
       - url: https://github.com/eclipse-sdv-blueprints/.eclipsefdn
         latest_release: null
@@ -1086,17 +1133,36 @@ categories:
         latest_release: null
       - url: https://github.com/eclipse-sdv-blueprints/service-to-signal
         latest_release: null
-      - url: https://github.com/eclipse-sdv-blueprints/fleet-management
-        latest_release: null
       - url: https://github.com/eclipse-sdv-blueprints/blueprints
-        latest_release: null
-      - url: https://github.com/eclipse-sdv-blueprints/companion-application
         latest_release: null
       - url: https://github.com/eclipse-sdv-blueprints/software-orchestration
         latest_release: null
-      - url: https://github.com/eclipse-sdv-blueprints/.github
-        latest_release: null
       logo: blueprints.png
+    - name: Eclipse SDV Landscape
+      description: The Eclipse SDV Landscape project provides a comprehensive, visual,
+        and continuously maintained overview of all Software-Defined Vehicle (SDV)–related
+        projects hosted under the Eclipse Foundation. The...
+      homepage_url: https://projects.eclipse.org/projects/automotive.sdv-landscape
+      project: Incubating
+      repo_url: https://github.com/eclipse-sdv-landscape
+      repo_urls:
+      - https://github.com/eclipse-sdv-landscape/.eclipsefdn
+      - https://github.com/eclipse-sdv-landscape/sdv-landscape
+      - https://github.com/eclipse-sdv-landscape/sdv-dictionary
+      - https://github.com/eclipse-sdv-landscape/the-automotive-collection
+      - https://github.com/eclipse-sdv-landscape/website
+      repositories:
+      - url: https://github.com/eclipse-sdv-landscape/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-sdv-landscape/sdv-landscape
+        latest_release: null
+      - url: https://github.com/eclipse-sdv-landscape/sdv-dictionary
+        latest_release: null
+      - url: https://github.com/eclipse-sdv-landscape/the-automotive-collection
+        latest_release: null
+      - url: https://github.com/eclipse-sdv-landscape/website
+        latest_release: null
+      logo: Eclipse-SDV-Landscape-logo.png
 - name: RTOS
   subcategories:
   - name: RTOS
@@ -1113,18 +1179,19 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-threadx
       repo_urls:
-      - https://github.com/eclipse-threadx/.eclipsefdn
-      - https://github.com/eclipse-threadx/threadx
-      - https://github.com/eclipse-threadx/usbx
       - https://github.com/eclipse-threadx/rtos-docs-asciidoc
+      - https://github.com/eclipse-threadx/levelx
+      - https://github.com/eclipse-threadx/filex
+      - https://github.com/eclipse-threadx/guix
+      - https://github.com/eclipse-threadx/usbx
+      - https://github.com/eclipse-threadx/netxduo
+      - https://github.com/eclipse-threadx/threadx
       - https://github.com/eclipse-threadx/samplex
+      - https://github.com/eclipse-threadx/.eclipsefdn
+      - https://github.com/eclipse-threadx/discussions
       - https://github.com/eclipse-threadx/getting-started
       - https://github.com/eclipse-threadx/threadx-learn-samples
       - https://github.com/eclipse-threadx/samples
-      - https://github.com/eclipse-threadx/guix
-      - https://github.com/eclipse-threadx/levelx
-      - https://github.com/eclipse-threadx/filex
-      - https://github.com/eclipse-threadx/netxduo
       - https://github.com/eclipse-threadx/iot-devkit
       - https://github.com/eclipse-threadx/rtos-docs
       - https://github.com/eclipse-threadx/rtos-docs-html
@@ -1133,23 +1200,57 @@ categories:
       - https://github.com/eclipse-threadx/.github
       - https://github.com/eclipse-threadx/cmsis-packs
       repositories:
-      - url: https://github.com/eclipse-threadx/.eclipsefdn
-        latest_release: null
-      - url: https://github.com/eclipse-threadx/threadx
+      - url: https://github.com/eclipse-threadx/rtos-docs-asciidoc
         latest_release:
-          tag_name: v6.5.0.202601_rel
-          name: Eclipse ThreadX v6.5.0.202601
-          url: https://github.com/eclipse-threadx/threadx/releases/tag/v6.5.0.202601_rel
-          published_at: '2026-03-06T23:26:19Z'
+          tag_name: v6.5.1_rel
+          name: Eclipse ThreadX Documentation v6.5.1
+          url: https://github.com/eclipse-threadx/rtos-docs-asciidoc/releases/tag/v6.5.1_rel
+          published_at: '2026-06-30T20:54:33Z'
+      - url: https://github.com/eclipse-threadx/levelx
+        latest_release:
+          tag_name: v6.5.1.202602_rel
+          name: Eclipse ThreadX LevelX v6.5.1.202602
+          url: https://github.com/eclipse-threadx/levelx/releases/tag/v6.5.1.202602_rel
+          published_at: '2026-06-08T08:17:36Z'
+      - url: https://github.com/eclipse-threadx/filex
+        latest_release:
+          tag_name: v6.5.1.202602_rel
+          name: Eclipse ThreadX FileX v6.5.1.202602
+          url: https://github.com/eclipse-threadx/filex/releases/tag/v6.5.1.202602_rel
+          published_at: '2026-06-08T08:11:42Z'
+      - url: https://github.com/eclipse-threadx/guix
+        latest_release:
+          tag_name: v6.5.1.202602_rel
+          name: Eclipse ThreadX GUIX v6.5.1.202602
+          url: https://github.com/eclipse-threadx/guix/releases/tag/v6.5.1.202602_rel
+          published_at: '2026-06-08T08:20:52Z'
       - url: https://github.com/eclipse-threadx/usbx
         latest_release:
-          tag_name: v6.5.0.202601_rel
-          name: Eclipse ThreadX USBX v.6.5.0.202601
-          url: https://github.com/eclipse-threadx/usbx/releases/tag/v6.5.0.202601_rel
-          published_at: '2026-03-06T23:26:31Z'
-      - url: https://github.com/eclipse-threadx/rtos-docs-asciidoc
-        latest_release: null
+          tag_name: v6.5.1.202602_rel
+          name: Eclipse ThreadX USBX v6.5.1.202602
+          url: https://github.com/eclipse-threadx/usbx/releases/tag/v6.5.1.202602_rel
+          published_at: '2026-06-08T08:07:41Z'
+      - url: https://github.com/eclipse-threadx/netxduo
+        latest_release:
+          tag_name: v6.5.1.202602_rel
+          name: Eclipse ThreadX NetX Duo v6.5.1.202602
+          url: https://github.com/eclipse-threadx/netxduo/releases/tag/v6.5.1.202602_rel
+          published_at: '2026-06-08T08:04:37Z'
+      - url: https://github.com/eclipse-threadx/threadx
+        latest_release:
+          tag_name: v6.5.1.202602a_rel
+          name: Eclipse ThreadX v6.5.1.202602a
+          url: https://github.com/eclipse-threadx/threadx/releases/tag/v6.5.1.202602a_rel
+          published_at: '2026-06-08T15:15:02Z'
       - url: https://github.com/eclipse-threadx/samplex
+        latest_release:
+          tag_name: v6.5.1.202602a_rel
+          name: Eclipse ThreadX SampleX v.6.5.1.202602a
+          url: https://github.com/eclipse-threadx/samplex/releases/tag/v6.5.1.202602a_rel
+          published_at: '2026-06-12T16:40:40Z'
+      - url: https://github.com/eclipse-threadx/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-threadx/discussions
         latest_release: null
       - url: https://github.com/eclipse-threadx/getting-started
         latest_release:
@@ -1169,30 +1270,6 @@ categories:
           name: Azure RTOS 6.4 TSN Project
           url: https://github.com/eclipse-threadx/samples/releases/tag/v6.4_tsn
           published_at: '2024-01-23T01:46:27Z'
-      - url: https://github.com/eclipse-threadx/guix
-        latest_release:
-          tag_name: v6.5.0.202601_rel
-          name: Eclipse ThreadX GUIX v6.5.0.202601
-          url: https://github.com/eclipse-threadx/guix/releases/tag/v6.5.0.202601_rel
-          published_at: '2026-03-06T23:26:46Z'
-      - url: https://github.com/eclipse-threadx/levelx
-        latest_release:
-          tag_name: v6.5.0.202601_rel
-          name: Eclipse ThreadX LevelX v6.5.0.202601
-          url: https://github.com/eclipse-threadx/levelx/releases/tag/v6.5.0.202601_rel
-          published_at: '2026-03-06T23:26:41Z'
-      - url: https://github.com/eclipse-threadx/filex
-        latest_release:
-          tag_name: v6.5.0.202601_rel
-          name: Eclipse ThreadX FileX v6.5.0.202601
-          url: https://github.com/eclipse-threadx/filex/releases/tag/v6.5.0.202601_rel
-          published_at: '2026-03-06T23:26:35Z'
-      - url: https://github.com/eclipse-threadx/netxduo
-        latest_release:
-          tag_name: v6.5.0.202601_rel
-          name: Eclipse ThreadX NetX Duo 6.5.0.202601
-          url: https://github.com/eclipse-threadx/netxduo/releases/tag/v6.5.0.202601_rel
-          published_at: '2026-03-06T23:26:24Z'
       - url: https://github.com/eclipse-threadx/iot-devkit
         latest_release:
           tag_name: v1.0.1
@@ -1235,10 +1312,10 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-muto
       repo_urls:
+      - https://github.com/eclipse-muto/core
+      - https://github.com/eclipse-muto/muto
       - https://github.com/eclipse-muto/composer
       - https://github.com/eclipse-muto/agent
-      - https://github.com/eclipse-muto/muto
-      - https://github.com/eclipse-muto/core
       - https://github.com/eclipse-muto/messages
       - https://github.com/eclipse-muto/.github
       - https://github.com/eclipse-muto/.eclipsefdn
@@ -1253,13 +1330,13 @@ categories:
       - https://github.com/eclipse-muto/liveui-vue
       - https://github.com/eclipse-muto/liveui-samples
       repositories:
-      - url: https://github.com/eclipse-muto/composer
-        latest_release: null
-      - url: https://github.com/eclipse-muto/agent
+      - url: https://github.com/eclipse-muto/core
         latest_release: null
       - url: https://github.com/eclipse-muto/muto
         latest_release: *id001
-      - url: https://github.com/eclipse-muto/core
+      - url: https://github.com/eclipse-muto/composer
+        latest_release: null
+      - url: https://github.com/eclipse-muto/agent
         latest_release: null
       - url: https://github.com/eclipse-muto/messages
         latest_release: null
@@ -1288,21 +1365,6 @@ categories:
       - url: https://github.com/eclipse-muto/liveui-samples
         latest_release: null
       logo: Muto%20Winner%20Transparent.png
-    - name: Eclipse ADAAA (Adaptive Cruise Control Demo Application for Adaptive AUTOSAR)
-      description: 'ADAAA is example application for Adaptive AUTOSAR with the following
-        goals:
-
-        * Provide a tutorial with simple examples code base for getting involved with
-        AUTOSAR methodology and each functional...'
-      homepage_url: https://projects.eclipse.org/projects/automotive.adaaa
-      project: Archived
-      repo_url: https://github.com/eclipse/adaaa
-      repo_urls:
-      - https://github.com/eclipse/adaaa
-      repositories:
-      - url: https://github.com/eclipse/adaaa
-        latest_release: null
-      logo: archived.png
 - name: Service Fabric and Communication
   subcategories:
   - name: Middleware & Frameworks
@@ -1342,10 +1404,10 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-ecal
       repo_urls:
-      - https://github.com/eclipse-ecal/ecal-test-suite
       - https://github.com/eclipse-ecal/ecal
-      - https://github.com/eclipse-ecal/rustecal
+      - https://github.com/eclipse-ecal/ecal-test-suite
       - https://github.com/eclipse-ecal/fineftp-server
+      - https://github.com/eclipse-ecal/rustecal
       - https://github.com/eclipse-ecal/tcp_pubsub
       - https://github.com/eclipse-ecal/ecal-foxglove-bridge
       - https://github.com/eclipse-ecal/ecaludp
@@ -1366,26 +1428,26 @@ categories:
       - https://github.com/eclipse-ecal/ecal-mqtt-bridge
       - https://github.com/eclipse-ecal/ecal-utils
       repositories:
-      - url: https://github.com/eclipse-ecal/ecal-test-suite
-        latest_release: null
       - url: https://github.com/eclipse-ecal/ecal
         latest_release:
           tag_name: v6.1.1
           name: v6.1.1
           url: https://github.com/eclipse-ecal/ecal/releases/tag/v6.1.1
           published_at: '2026-04-02T06:57:20Z'
-      - url: https://github.com/eclipse-ecal/rustecal
-        latest_release:
-          tag_name: v0.1.9
-          name: v0.1.9
-          url: https://github.com/eclipse-ecal/rustecal/releases/tag/v0.1.9
-          published_at: null
+      - url: https://github.com/eclipse-ecal/ecal-test-suite
+        latest_release: null
       - url: https://github.com/eclipse-ecal/fineftp-server
         latest_release:
           tag_name: v1.6.0
           name: ' fineFTP v1.6.0'
           url: https://github.com/eclipse-ecal/fineftp-server/releases/tag/v1.6.0
           published_at: '2026-03-26T15:10:17Z'
+      - url: https://github.com/eclipse-ecal/rustecal
+        latest_release:
+          tag_name: v0.1.9
+          name: v0.1.9
+          url: https://github.com/eclipse-ecal/rustecal/releases/tag/v0.1.9
+          published_at: null
       - url: https://github.com/eclipse-ecal/tcp_pubsub
         latest_release:
           tag_name: v2.0.1
@@ -1469,17 +1531,17 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-kuksa
       repo_urls:
-      - https://github.com/eclipse-kuksa/kuksa-incubation
+      - https://github.com/eclipse-kuksa/kuksa-python-sdk
       - https://github.com/eclipse-kuksa/kuksa-databroker
+      - https://github.com/eclipse-kuksa/kuksa-incubation
       - https://github.com/eclipse-kuksa/kuksa-common
+      - https://github.com/eclipse-kuksa/.github
+      - https://github.com/eclipse-kuksa/kuksa-actions
       - https://github.com/eclipse-kuksa/kuksa-rust-sdk
       - https://github.com/eclipse-kuksa/kuksa-perf
-      - https://github.com/eclipse-kuksa/kuksa-actions
-      - https://github.com/eclipse-kuksa/.github
       - https://github.com/eclipse-kuksa/.eclipsefdn
       - https://github.com/eclipse-kuksa/kuksa-viss
       - https://github.com/eclipse-kuksa/kuksa-can-provider
-      - https://github.com/eclipse-kuksa/kuksa-python-sdk
       - https://github.com/eclipse-kuksa/kuksa-mock-provider
       - https://github.com/eclipse-kuksa/kuksa-java-sdk
       - https://github.com/eclipse-kuksa/kuksa-android-sdk
@@ -1498,23 +1560,37 @@ categories:
       - https://github.com/eclipse-kuksa/kuksa.ide
       - https://github.com/eclipse-kuksa/kuksa.invehicle
       repositories:
+      - url: https://github.com/eclipse-kuksa/kuksa-python-sdk
+        latest_release:
+          tag_name: 0.5.0
+          name: KUKSA Python SDK 0.5.0
+          url: https://github.com/eclipse-kuksa/kuksa-python-sdk/releases/tag/0.5.0
+          published_at: '2025-08-28T06:54:58Z'
+      - url: https://github.com/eclipse-kuksa/kuksa-databroker
+        latest_release:
+          tag_name: 0.7.0
+          name: KUKSA Databroker 0.7.0
+          url: https://github.com/eclipse-kuksa/kuksa-databroker/releases/tag/0.7.0
+          published_at: '2026-07-03T09:39:03Z'
       - url: https://github.com/eclipse-kuksa/kuksa-incubation
         latest_release:
           tag_name: 0.4.0
           name: Kuksa Incubation 0.4.0
           url: https://github.com/eclipse-kuksa/kuksa-incubation/releases/tag/0.4.0
           published_at: '2024-03-08T10:17:00Z'
-      - url: https://github.com/eclipse-kuksa/kuksa-databroker
-        latest_release:
-          tag_name: 0.6.1
-          name: KUKSA Databroker 0.6.1
-          url: https://github.com/eclipse-kuksa/kuksa-databroker/releases/tag/0.6.1
-          published_at: '2026-04-01T09:56:50Z'
       - url: https://github.com/eclipse-kuksa/kuksa-common
         latest_release:
           tag_name: v1.0
           name: v1.0
           url: https://github.com/eclipse-kuksa/kuksa-common/releases/tag/v1.0
+          published_at: null
+      - url: https://github.com/eclipse-kuksa/.github
+        latest_release: null
+      - url: https://github.com/eclipse-kuksa/kuksa-actions
+        latest_release:
+          tag_name: '5.1'
+          name: '5.1'
+          url: https://github.com/eclipse-kuksa/kuksa-actions/releases/tag/5.1
           published_at: null
       - url: https://github.com/eclipse-kuksa/kuksa-rust-sdk
         latest_release:
@@ -1528,14 +1604,6 @@ categories:
           name: Eclipse Kuksa databroker-perf 0.3.2
           url: https://github.com/eclipse-kuksa/kuksa-perf/releases/tag/0.3.2
           published_at: '2024-12-12T10:08:40Z'
-      - url: https://github.com/eclipse-kuksa/kuksa-actions
-        latest_release:
-          tag_name: '5.0'
-          name: '5.0'
-          url: https://github.com/eclipse-kuksa/kuksa-actions/releases/tag/5.0
-          published_at: null
-      - url: https://github.com/eclipse-kuksa/.github
-        latest_release: null
       - url: https://github.com/eclipse-kuksa/.eclipsefdn
         latest_release: null
       - url: https://github.com/eclipse-kuksa/kuksa-viss
@@ -1546,12 +1614,6 @@ categories:
           name: KUKSA CAN Provider 0.4.3 Release
           url: https://github.com/eclipse-kuksa/kuksa-can-provider/releases/tag/0.4.3
           published_at: '2024-05-06T09:07:38Z'
-      - url: https://github.com/eclipse-kuksa/kuksa-python-sdk
-        latest_release:
-          tag_name: 0.5.1-a2
-          name: KUKSA Python SDK 0.5.1-a2
-          url: https://github.com/eclipse-kuksa/kuksa-python-sdk/releases/tag/untagged-1b22173b301e02afdf0c
-          published_at: null
       - url: https://github.com/eclipse-kuksa/kuksa-mock-provider
         latest_release:
           tag_name: 0.4.1
@@ -1693,8 +1755,6 @@ categories:
       repo_url: https://github.com/eclipse-zenoh
       repo_urls:
       - https://github.com/eclipse-zenoh/zenoh
-      - https://github.com/eclipse-zenoh/zenoh-demos
-      - https://github.com/eclipse-zenoh/zenoh-java
       - https://github.com/eclipse-zenoh/zenoh-python
       - https://github.com/eclipse-zenoh/zenoh-cpp
       - https://github.com/eclipse-zenoh/zenoh-ts
@@ -1710,11 +1770,13 @@ categories:
       - https://github.com/eclipse-zenoh/zenoh-kotlin
       - https://github.com/eclipse-zenoh/zenoh-backend-influxdb
       - https://github.com/eclipse-zenoh/zenoh-backend-s3
-      - https://github.com/eclipse-zenoh/zenoh-nostd
-      - https://github.com/eclipse-zenoh/roadmap
+      - https://github.com/eclipse-zenoh/zenoh-java
       - https://github.com/eclipse-zenoh/ci
-      - https://github.com/eclipse-zenoh/homebrew-zenoh
+      - https://github.com/eclipse-zenoh/zenoh-nostd
       - https://github.com/eclipse-zenoh/zenoh-go
+      - https://github.com/eclipse-zenoh/zenoh-demos
+      - https://github.com/eclipse-zenoh/roadmap
+      - https://github.com/eclipse-zenoh/homebrew-zenoh
       - https://github.com/eclipse-zenoh/.eclipsefdn
       - https://github.com/eclipse-zenoh/zenoh-plugin-ros1
       - https://github.com/eclipse-zenoh/zenoh-csharp
@@ -1728,18 +1790,6 @@ categories:
           name: 1.9.0
           url: https://github.com/eclipse-zenoh/zenoh/releases/tag/1.9.0
           published_at: '2026-04-10T11:57:54Z'
-      - url: https://github.com/eclipse-zenoh/zenoh-demos
-        latest_release:
-          tag_name: zenoh-flow-v0.3.0
-          name: zenoh-flow-v0.3.0
-          url: https://github.com/eclipse-zenoh/zenoh-demos/releases/tag/zenoh-flow-v0.3.0
-          published_at: null
-      - url: https://github.com/eclipse-zenoh/zenoh-java
-        latest_release:
-          tag_name: 1.9.0
-          name: 1.9.0
-          url: https://github.com/eclipse-zenoh/zenoh-java/releases/tag/1.9.0
-          published_at: '2026-04-10T13:31:21Z'
       - url: https://github.com/eclipse-zenoh/zenoh-python
         latest_release:
           tag_name: 1.9.0
@@ -1830,20 +1880,36 @@ categories:
           name: 1.9.0
           url: https://github.com/eclipse-zenoh/zenoh-backend-s3/releases/tag/1.9.0
           published_at: '2026-04-10T13:24:20Z'
-      - url: https://github.com/eclipse-zenoh/zenoh-nostd
-        latest_release: null
-      - url: https://github.com/eclipse-zenoh/roadmap
-        latest_release: null
+      - url: https://github.com/eclipse-zenoh/zenoh-java
+        latest_release:
+          tag_name: 1.9.0
+          name: 1.9.0
+          url: https://github.com/eclipse-zenoh/zenoh-java/releases/tag/1.9.0
+          published_at: '2026-04-10T13:31:21Z'
       - url: https://github.com/eclipse-zenoh/ci
         latest_release: null
-      - url: https://github.com/eclipse-zenoh/homebrew-zenoh
-        latest_release: null
+      - url: https://github.com/eclipse-zenoh/zenoh-nostd
+        latest_release:
+          tag_name: 0.2.0
+          name: 0.2.0
+          url: https://github.com/eclipse-zenoh/zenoh-nostd/releases/tag/0.2.0
+          published_at: null
       - url: https://github.com/eclipse-zenoh/zenoh-go
         latest_release:
           tag_name: v1.9.0
           name: v1.9.0
           url: https://github.com/eclipse-zenoh/zenoh-go/releases/tag/v1.9.0
           published_at: '2026-04-13T09:18:08Z'
+      - url: https://github.com/eclipse-zenoh/zenoh-demos
+        latest_release:
+          tag_name: zenoh-flow-v0.3.0
+          name: zenoh-flow-v0.3.0
+          url: https://github.com/eclipse-zenoh/zenoh-demos/releases/tag/zenoh-flow-v0.3.0
+          published_at: null
+      - url: https://github.com/eclipse-zenoh/roadmap
+        latest_release: null
+      - url: https://github.com/eclipse-zenoh/homebrew-zenoh
+        latest_release: null
       - url: https://github.com/eclipse-zenoh/.eclipsefdn
         latest_release: null
       - url: https://github.com/eclipse-zenoh/zenoh-plugin-ros1
@@ -1928,10 +1994,10 @@ categories:
       repo_url: https://github.com/eclipse-iceoryx
       repo_urls:
       - https://github.com/eclipse-iceoryx/iceoryx2
-      - https://github.com/eclipse-iceoryx/meta-iceoryx2
-      - https://github.com/eclipse-iceoryx/iceoryx
-      - https://github.com/eclipse-iceoryx/iceoryx2-csharp
       - https://github.com/eclipse-iceoryx/iceoryx-web
+      - https://github.com/eclipse-iceoryx/iceoryx
+      - https://github.com/eclipse-iceoryx/meta-iceoryx2
+      - https://github.com/eclipse-iceoryx/iceoryx2-csharp
       - https://github.com/eclipse-iceoryx/.eclipsefdn
       - https://github.com/eclipse-iceoryx/iceoryx-gateway-dds
       - https://github.com/eclipse-iceoryx/.github
@@ -1941,25 +2007,25 @@ categories:
       repositories:
       - url: https://github.com/eclipse-iceoryx/iceoryx2
         latest_release:
-          tag_name: v0.8.1
-          name: v0.8.1
-          url: https://github.com/eclipse-iceoryx/iceoryx2/releases/tag/v0.8.1
-          published_at: '2026-01-15T14:07:45Z'
-      - url: https://github.com/eclipse-iceoryx/meta-iceoryx2
-        latest_release:
-          tag_name: v0.8.1
-          name: v0.8.1
-          url: https://github.com/eclipse-iceoryx/meta-iceoryx2/releases/tag/v0.8.1
-          published_at: null
+          tag_name: v0.9.2
+          name: v0.9.2
+          url: https://github.com/eclipse-iceoryx/iceoryx2/releases/tag/v0.9.2
+          published_at: '2026-06-18T18:05:15Z'
+      - url: https://github.com/eclipse-iceoryx/iceoryx-web
+        latest_release: null
       - url: https://github.com/eclipse-iceoryx/iceoryx
         latest_release:
-          tag_name: v2.0.6
-          name: v2.0.6
-          url: https://github.com/eclipse-iceoryx/iceoryx/releases/tag/v2.0.6
-          published_at: '2024-04-26T13:41:57Z'
+          tag_name: v2.0.8
+          name: v2.0.8
+          url: https://github.com/eclipse-iceoryx/iceoryx/releases/tag/v2.0.8
+          published_at: '2026-05-19T22:46:08Z'
+      - url: https://github.com/eclipse-iceoryx/meta-iceoryx2
+        latest_release:
+          tag_name: v0.9.2
+          name: v0.9.2
+          url: https://github.com/eclipse-iceoryx/meta-iceoryx2/releases/tag/v0.9.2
+          published_at: null
       - url: https://github.com/eclipse-iceoryx/iceoryx2-csharp
-        latest_release: null
-      - url: https://github.com/eclipse-iceoryx/iceoryx-web
         latest_release: null
       - url: https://github.com/eclipse-iceoryx/.eclipsefdn
         latest_release: null
@@ -1988,48 +2054,48 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-uprotocol
       repo_urls:
-      - https://github.com/eclipse-uprotocol/ci-cd
-      - https://github.com/eclipse-uprotocol/up-transport-zenoh-rust
-      - https://github.com/eclipse-uprotocol/up-rust
       - https://github.com/eclipse-uprotocol/up-transport-mqtt5-rust
-      - https://github.com/eclipse-uprotocol/.eclipsefdn
-      - https://github.com/eclipse-uprotocol/up-streamer-rust
+      - https://github.com/eclipse-uprotocol/up-rust
+      - https://github.com/eclipse-uprotocol/ci-cd
       - https://github.com/eclipse-uprotocol/up-spec
       - https://github.com/eclipse-uprotocol/up-rust-py
-      - https://github.com/eclipse-uprotocol/up-transport-vsomeip-rust
-      - https://github.com/eclipse-uprotocol/up-subscription-rust
-      - https://github.com/eclipse-uprotocol/up-zenoh-example-cpp
-      - https://github.com/eclipse-uprotocol/up-cpp
       - https://github.com/eclipse-uprotocol/symphony-target-example-rust
-      - https://github.com/eclipse-uprotocol/up-transport-iceoryx2-rust
+      - https://github.com/eclipse-uprotocol/up-subscription-rust
       - https://github.com/eclipse-uprotocol/up-java
+      - https://github.com/eclipse-uprotocol/up-streamer-rust
       - https://github.com/eclipse-uprotocol/up-transport-mqtt5-java
-      - https://github.com/eclipse-uprotocol/up-transport-zenoh-cpp
+      - https://github.com/eclipse-uprotocol/up-cpp
+      - https://github.com/eclipse-uprotocol/up-transport-zenoh-rust
       - https://github.com/eclipse-uprotocol/up-python
-      - https://github.com/eclipse-uprotocol/up-conan-recipes
-      - https://github.com/eclipse-uprotocol/eclipse-uprotocol.github.io
-      - https://github.com/eclipse-uprotocol/.github
-      - https://github.com/eclipse-uprotocol/up-transport-zenoh-python
+      - https://github.com/eclipse-uprotocol/up-transport-zenoh-cpp
+      - https://github.com/eclipse-uprotocol/up-transport-vsomeip-rust
       - https://github.com/eclipse-uprotocol/up-transport-android-java
       - https://github.com/eclipse-uprotocol/up-tck
-      - https://github.com/eclipse-uprotocol/up-tools
+      - https://github.com/eclipse-uprotocol/up-zenoh-example-rust
       - https://github.com/eclipse-uprotocol/up-transport-vsomeip-python
-      - https://github.com/eclipse-uprotocol/up-transport-socket
+      - https://github.com/eclipse-uprotocol/up-conan-recipes
+      - https://github.com/eclipse-uprotocol/up-zenoh-example-cpp
+      - https://github.com/eclipse-uprotocol/up-transport-zenoh-python
+      - https://github.com/eclipse-uprotocol/up-transport-vsomeip-cpp
+      - https://github.com/eclipse-uprotocol/up-android-core
+      - https://github.com/eclipse-uprotocol/up-simulator-proxy
+      - https://github.com/eclipse-uprotocol/up-android-example
+      - https://github.com/eclipse-uprotocol/eclipse-uprotocol.github.io
+      - https://github.com/eclipse-uprotocol/up-android-discovery
+      - https://github.com/eclipse-uprotocol/up-transport-iceoryx2-rust
       - https://github.com/eclipse-uprotocol/up-simulator
+      - https://github.com/eclipse-uprotocol/.eclipsefdn
+      - https://github.com/eclipse-uprotocol/.github
+      - https://github.com/eclipse-uprotocol/up-tools
+      - https://github.com/eclipse-uprotocol/up-transport-socket
       - https://github.com/eclipse-uprotocol/up-kotlin
       - https://github.com/eclipse-uprotocol/up-transport-mqtt5-python
       - https://github.com/eclipse-uprotocol/up-recorder-cpp
       - https://github.com/eclipse-uprotocol/up-player-cpp
       - https://github.com/eclipse-uprotocol/up-akka
-      - https://github.com/eclipse-uprotocol/up-zenoh-example-rust
-      - https://github.com/eclipse-uprotocol/up-transport-vsomeip-cpp
       - https://github.com/eclipse-uprotocol/up-discovery-cpp
       - https://github.com/eclipse-uprotocol/up-vsomeip-helloworld
-      - https://github.com/eclipse-uprotocol/up-simulator-proxy
       - https://github.com/eclipse-uprotocol/up-android-helloworld
-      - https://github.com/eclipse-uprotocol/up-android-example
-      - https://github.com/eclipse-uprotocol/up-android-discovery
-      - https://github.com/eclipse-uprotocol/up-android-core
       - https://github.com/eclipse-uprotocol/up-core-api
       - https://github.com/eclipse-uprotocol/up-transport-android-rust
       - https://github.com/eclipse-uprotocol/up-transport-springboot-java
@@ -2038,34 +2104,20 @@ categories:
       - https://github.com/eclipse-uprotocol/up-transport-azure-java
       - https://github.com/eclipse-uprotocol/up-experiments
       repositories:
-      - url: https://github.com/eclipse-uprotocol/ci-cd
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-transport-zenoh-rust
-        latest_release:
-          tag_name: v0.9.0
-          name: v0.9.0
-          url: https://github.com/eclipse-uprotocol/up-transport-zenoh-rust/releases/tag/v0.9.0
-          published_at: '2025-11-13T06:43:22Z'
-      - url: https://github.com/eclipse-uprotocol/up-rust
-        latest_release:
-          tag_name: v0.9.0
-          name: v0.9.0
-          url: https://github.com/eclipse-uprotocol/up-rust/releases/tag/v0.9.0
-          published_at: '2025-11-12T13:58:02Z'
       - url: https://github.com/eclipse-uprotocol/up-transport-mqtt5-rust
         latest_release:
           tag_name: v0.4.0
           name: v0.4.0
           url: https://github.com/eclipse-uprotocol/up-transport-mqtt5-rust/releases/tag/v0.4.0
           published_at: '2025-11-13T06:40:24Z'
-      - url: https://github.com/eclipse-uprotocol/.eclipsefdn
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-streamer-rust
+      - url: https://github.com/eclipse-uprotocol/up-rust
         latest_release:
-          tag_name: v0.1.0
-          name: v0.1.0
-          url: https://github.com/eclipse-uprotocol/up-streamer-rust/releases/tag/v0.1.0
-          published_at: '2024-08-26T13:41:04Z'
+          tag_name: v0.9.0
+          name: v0.9.0
+          url: https://github.com/eclipse-uprotocol/up-rust/releases/tag/v0.9.0
+          published_at: '2025-11-12T13:58:02Z'
+      - url: https://github.com/eclipse-uprotocol/ci-cd
+        latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-spec
         latest_release:
           tag_name: v1.6.0-alpha.7
@@ -2074,62 +2126,58 @@ categories:
           published_at: '2025-10-23T13:36:29Z'
       - url: https://github.com/eclipse-uprotocol/up-rust-py
         latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-rust
-        latest_release:
-          tag_name: v0.4.1
-          name: v0.4.1
-          url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-rust/releases/tag/v0.4.1
-          published_at: '2025-01-27T04:19:14Z'
+      - url: https://github.com/eclipse-uprotocol/symphony-target-example-rust
+        latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-subscription-rust
         latest_release:
           tag_name: v0.1.0
           name: ''
           url: https://github.com/eclipse-uprotocol/up-subscription-rust/releases/tag/v0.1.0
           published_at: '2024-07-30T14:38:11Z'
-      - url: https://github.com/eclipse-uprotocol/up-zenoh-example-cpp
-        latest_release:
-          tag_name: v0.1.0-dev
-          name: v0.1.0-dev
-          url: https://github.com/eclipse-uprotocol/up-zenoh-example-cpp/releases/tag/v0.1.0-dev
-          published_at: '2024-04-22T15:45:08Z'
-      - url: https://github.com/eclipse-uprotocol/up-cpp
-        latest_release:
-          tag_name: v1.0.1
-          name: v1.0.1
-          url: https://github.com/eclipse-uprotocol/up-cpp/releases/tag/v1.0.1
-          published_at: '2024-08-16T00:58:31Z'
-      - url: https://github.com/eclipse-uprotocol/symphony-target-example-rust
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-transport-iceoryx2-rust
-        latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-java
         latest_release:
           tag_name: v3.0.0
           name: v3.0.0
           url: https://github.com/eclipse-uprotocol/up-java/releases/tag/v3.0.0
           published_at: '2025-10-24T16:56:29Z'
+      - url: https://github.com/eclipse-uprotocol/up-streamer-rust
+        latest_release:
+          tag_name: v0.1.0
+          name: v0.1.0
+          url: https://github.com/eclipse-uprotocol/up-streamer-rust/releases/tag/v0.1.0
+          published_at: '2024-08-26T13:41:04Z'
       - url: https://github.com/eclipse-uprotocol/up-transport-mqtt5-java
         latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-transport-zenoh-cpp
+      - url: https://github.com/eclipse-uprotocol/up-cpp
         latest_release:
-          tag_name: v1.0.0-rc3
-          name: v1.0.0-rc3
-          url: https://github.com/eclipse-uprotocol/up-transport-zenoh-cpp/releases/tag/v1.0.0-rc3
-          published_at: '2024-08-16T21:28:44Z'
+          tag_name: v1.0.1
+          name: v1.0.1
+          url: https://github.com/eclipse-uprotocol/up-cpp/releases/tag/v1.0.1
+          published_at: '2024-08-16T00:58:31Z'
+      - url: https://github.com/eclipse-uprotocol/up-transport-zenoh-rust
+        latest_release:
+          tag_name: v0.9.0
+          name: v0.9.0
+          url: https://github.com/eclipse-uprotocol/up-transport-zenoh-rust/releases/tag/v0.9.0
+          published_at: '2025-11-13T06:43:22Z'
       - url: https://github.com/eclipse-uprotocol/up-python
         latest_release:
           tag_name: v0.2.0-dev
           name: v0.2.0-dev (up-spec v1.6.0-alpha.2)
           url: https://github.com/eclipse-uprotocol/up-python/releases/tag/v0.2.0-dev
           published_at: '2024-07-24T23:50:04Z'
-      - url: https://github.com/eclipse-uprotocol/up-conan-recipes
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/eclipse-uprotocol.github.io
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/.github
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-transport-zenoh-python
-        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-transport-zenoh-cpp
+        latest_release:
+          tag_name: v1.0.0-rc3
+          name: v1.0.0-rc3
+          url: https://github.com/eclipse-uprotocol/up-transport-zenoh-cpp/releases/tag/v1.0.0-rc3
+          published_at: '2024-08-16T21:28:44Z'
+      - url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-rust
+        latest_release:
+          tag_name: v0.4.1
+          name: v0.4.1
+          url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-rust/releases/tag/v0.4.1
+          published_at: '2025-01-27T04:19:14Z'
       - url: https://github.com/eclipse-uprotocol/up-transport-android-java
         latest_release:
           tag_name: v0.2
@@ -2138,11 +2186,37 @@ categories:
           published_at: '2024-10-02T01:02:30Z'
       - url: https://github.com/eclipse-uprotocol/up-tck
         latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-tools
+      - url: https://github.com/eclipse-uprotocol/up-zenoh-example-rust
         latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-python
         latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-transport-socket
+      - url: https://github.com/eclipse-uprotocol/up-conan-recipes
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-zenoh-example-cpp
+        latest_release:
+          tag_name: v0.1.0-dev
+          name: v0.1.0-dev
+          url: https://github.com/eclipse-uprotocol/up-zenoh-example-cpp/releases/tag/v0.1.0-dev
+          published_at: '2024-04-22T15:45:08Z'
+      - url: https://github.com/eclipse-uprotocol/up-transport-zenoh-python
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-cpp
+        latest_release:
+          tag_name: up-v1.5.7-0.1.1
+          name: up-v1.5.7-0.1.1
+          url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-cpp/releases/tag/up-v1.5.7-0.1.1
+          published_at: null
+      - url: https://github.com/eclipse-uprotocol/up-android-core
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-simulator-proxy
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-android-example
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/eclipse-uprotocol.github.io
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-android-discovery
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-transport-iceoryx2-rust
         latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-simulator
         latest_release:
@@ -2150,6 +2224,14 @@ categories:
           name: v0.1.0-dev (up-spec 1.5.7)
           url: https://github.com/eclipse-uprotocol/up-simulator/releases/tag/v0.1.0-dev
           published_at: '2024-07-29T15:49:39Z'
+      - url: https://github.com/eclipse-uprotocol/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/.github
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-tools
+        latest_release: null
+      - url: https://github.com/eclipse-uprotocol/up-transport-socket
+        latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-kotlin
         latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-transport-mqtt5-python
@@ -2160,27 +2242,11 @@ categories:
         latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-akka
         latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-zenoh-example-rust
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-cpp
-        latest_release:
-          tag_name: up-v1.5.7-0.1.1
-          name: up-v1.5.7-0.1.1
-          url: https://github.com/eclipse-uprotocol/up-transport-vsomeip-cpp/releases/tag/up-v1.5.7-0.1.1
-          published_at: null
       - url: https://github.com/eclipse-uprotocol/up-discovery-cpp
         latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-vsomeip-helloworld
         latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-simulator-proxy
-        latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-android-helloworld
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-android-example
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-android-discovery
-        latest_release: null
-      - url: https://github.com/eclipse-uprotocol/up-android-core
         latest_release: null
       - url: https://github.com/eclipse-uprotocol/up-core-api
         latest_release:
@@ -2209,41 +2275,40 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-opensovd
       repo_urls:
+      - https://github.com/eclipse-opensovd/classic-diagnostic-adapter
+      - https://github.com/eclipse-opensovd/odx-converter
       - https://github.com/eclipse-opensovd/opensovd-core
       - https://github.com/eclipse-opensovd/cicd-workflows
-      - https://github.com/eclipse-opensovd/classic-diagnostic-adapter
-      - https://github.com/eclipse-opensovd/.eclipsefdn
-      - https://github.com/eclipse-opensovd/odx-converter
-      - https://github.com/eclipse-opensovd/demo
-      - https://github.com/eclipse-opensovd/uds2sovd-proxy
+      - https://github.com/eclipse-opensovd/mdd-ui
       - https://github.com/eclipse-opensovd/opensovd
-      - https://github.com/eclipse-opensovd/cpp-bindings
       - https://github.com/eclipse-opensovd/dlt-tracing-lib
-      - https://github.com/eclipse-opensovd/fault-lib
+      - https://github.com/eclipse-opensovd/uds2sovd-proxy
       - https://github.com/eclipse-opensovd/.github
+      - https://github.com/eclipse-opensovd/.eclipsefdn
+      - https://github.com/eclipse-opensovd/demo
+      - https://github.com/eclipse-opensovd/cpp-bindings
+      - https://github.com/eclipse-opensovd/fault-lib
       - https://github.com/eclipse-opensovd/website
       repositories:
-      - url: https://github.com/eclipse-opensovd/opensovd-core
-        latest_release:
-          tag_name: latest
-          name: latest
-          url: https://github.com/eclipse-opensovd/opensovd-core/releases/tag/latest
-          published_at: '2026-05-05T11:55:10Z'
-      - url: https://github.com/eclipse-opensovd/cicd-workflows
-        latest_release: null
       - url: https://github.com/eclipse-opensovd/classic-diagnostic-adapter
-        latest_release: null
-      - url: https://github.com/eclipse-opensovd/.eclipsefdn
         latest_release: null
       - url: https://github.com/eclipse-opensovd/odx-converter
         latest_release: null
-      - url: https://github.com/eclipse-opensovd/demo
+      - url: https://github.com/eclipse-opensovd/opensovd-core
+        latest_release:
+          tag_name: nightly
+          name: nightly
+          url: https://github.com/eclipse-opensovd/opensovd-core/releases/tag/nightly
+          published_at: '2026-07-03T03:05:45Z'
+      - url: https://github.com/eclipse-opensovd/cicd-workflows
         latest_release: null
-      - url: https://github.com/eclipse-opensovd/uds2sovd-proxy
-        latest_release: null
+      - url: https://github.com/eclipse-opensovd/mdd-ui
+        latest_release:
+          tag_name: v1.0.0
+          name: MDD UI v1.0.0
+          url: https://github.com/eclipse-opensovd/mdd-ui/releases/tag/v1.0.0
+          published_at: '2026-06-15T08:51:32Z'
       - url: https://github.com/eclipse-opensovd/opensovd
-        latest_release: null
-      - url: https://github.com/eclipse-opensovd/cpp-bindings
         latest_release: null
       - url: https://github.com/eclipse-opensovd/dlt-tracing-lib
         latest_release:
@@ -2251,9 +2316,17 @@ categories:
           name: v0.1.2
           url: https://github.com/eclipse-opensovd/dlt-tracing-lib/releases/tag/v0.1.2
           published_at: '2026-01-12T08:31:43Z'
-      - url: https://github.com/eclipse-opensovd/fault-lib
+      - url: https://github.com/eclipse-opensovd/uds2sovd-proxy
         latest_release: null
       - url: https://github.com/eclipse-opensovd/.github
+        latest_release: null
+      - url: https://github.com/eclipse-opensovd/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-opensovd/demo
+        latest_release: null
+      - url: https://github.com/eclipse-opensovd/cpp-bindings
+        latest_release: null
+      - url: https://github.com/eclipse-opensovd/fault-lib
         latest_release: null
       - url: https://github.com/eclipse-opensovd/website
         latest_release: null
@@ -2316,10 +2389,10 @@ categories:
       repositories:
       - url: https://github.com/eclipse-pullpiri/pullpiri
         latest_release:
-          tag_name: v0.5.0-1
-          name: v0.5.0-1
-          url: https://github.com/eclipse-pullpiri/pullpiri/releases/tag/v0.5.0-1
-          published_at: '2026-03-18T02:29:57Z'
+          tag_name: v0.7.1-fix.01
+          name: v0.7.1-fix.01
+          url: https://github.com/eclipse-pullpiri/pullpiri/releases/tag/v0.7.1-fix.01
+          published_at: '2026-07-03T10:01:07Z'
       - url: https://github.com/eclipse-pullpiri/pullpiri-dashboard
         latest_release:
           tag_name: v26.04.03
@@ -2336,22 +2409,24 @@ categories:
         a single unique API in order to start, stop, configure, and update containers
         and workloads. It provides a central place to manage...
       homepage_url: https://projects.eclipse.org/projects/automotive.ankaios
-      project: Incubating
+      project: Regular
       repo_url: https://github.com/eclipse-ankaios
       repo_urls:
       - https://github.com/eclipse-ankaios/ankaios
+      - https://github.com/eclipse-ankaios/meta-ankaios
       - https://github.com/eclipse-ankaios/ank-sdk-python
       - https://github.com/eclipse-ankaios/ank-sdk-rust
-      - https://github.com/eclipse-ankaios/.github
-      - https://github.com/eclipse-ankaios/meta-ankaios
       - https://github.com/eclipse-ankaios/.eclipsefdn
+      - https://github.com/eclipse-ankaios/.github
       repositories:
       - url: https://github.com/eclipse-ankaios/ankaios
         latest_release:
-          tag_name: v1.0.0
-          name: v1.0.0
-          url: https://github.com/eclipse-ankaios/ankaios/releases/tag/v1.0.0
-          published_at: '2026-02-16T14:16:20Z'
+          tag_name: v1.0.1
+          name: v1.0.1
+          url: https://github.com/eclipse-ankaios/ankaios/releases/tag/v1.0.1
+          published_at: '2026-05-19T11:24:29Z'
+      - url: https://github.com/eclipse-ankaios/meta-ankaios
+        latest_release: null
       - url: https://github.com/eclipse-ankaios/ank-sdk-python
         latest_release:
           tag_name: v1.0.1
@@ -2364,11 +2439,9 @@ categories:
           name: v1.0.1
           url: https://github.com/eclipse-ankaios/ank-sdk-rust/releases/tag/v1.0.1
           published_at: '2026-03-13T09:43:30Z'
-      - url: https://github.com/eclipse-ankaios/.github
-        latest_release: null
-      - url: https://github.com/eclipse-ankaios/meta-ankaios
-        latest_release: null
       - url: https://github.com/eclipse-ankaios/.eclipsefdn
+        latest_release: null
+      - url: https://github.com/eclipse-ankaios/.github
         latest_release: null
       logo: Ankaios__logo_for_light_bgrd_clipped.png
     - name: Eclipse Symphony
@@ -2380,24 +2453,24 @@ categories:
       repo_url: https://github.com/eclipse-symphony
       repo_urls:
       - https://github.com/eclipse-symphony/symphony
+      - https://github.com/eclipse-symphony/docs
       - https://github.com/eclipse-symphony/.eclipsefdn
       - https://github.com/eclipse-symphony/.github
       - https://github.com/eclipse-symphony/symphony-website
-      - https://github.com/eclipse-symphony/docs
       repositories:
       - url: https://github.com/eclipse-symphony/symphony
         latest_release:
-          tag_name: 0.48.47
-          name: Release 0.48.47
-          url: https://github.com/eclipse-symphony/symphony/releases/tag/0.48.47
-          published_at: '2026-05-05T03:52:26Z'
+          tag_name: 0.49.3
+          name: Release 0.49.3
+          url: https://github.com/eclipse-symphony/symphony/releases/tag/0.49.3
+          published_at: '2026-06-06T02:11:40Z'
+      - url: https://github.com/eclipse-symphony/docs
+        latest_release: null
       - url: https://github.com/eclipse-symphony/.eclipsefdn
         latest_release: null
       - url: https://github.com/eclipse-symphony/.github
         latest_release: null
       - url: https://github.com/eclipse-symphony/symphony-website
-        latest_release: null
-      - url: https://github.com/eclipse-symphony/docs
         latest_release: null
       logo: symphony%20icon_smalltext.png
     - name: Eclipse BlueChi™
@@ -2408,8 +2481,8 @@ categories:
       project: Regular
       repo_url: https://github.com/eclipse-bluechi
       repo_urls:
-      - https://github.com/eclipse-bluechi/bluechi-ppa
       - https://github.com/eclipse-bluechi/bluechi
+      - https://github.com/eclipse-bluechi/bluechi-ppa
       - https://github.com/eclipse-bluechi/bluechi-on-yocto
       - https://github.com/eclipse-bluechi/.eclipsefdn
       - https://github.com/eclipse-bluechi/.github
@@ -2418,14 +2491,14 @@ categories:
       - https://github.com/eclipse-bluechi/bluechi-ansible-collection
       - https://github.com/eclipse-bluechi/hashmap.c
       repositories:
-      - url: https://github.com/eclipse-bluechi/bluechi-ppa
-        latest_release: null
       - url: https://github.com/eclipse-bluechi/bluechi
         latest_release:
           tag_name: v1.2.2
           name: v1.2.2
           url: https://github.com/eclipse-bluechi/bluechi/releases/tag/v1.2.2
           published_at: '2026-02-03T12:56:13Z'
+      - url: https://github.com/eclipse-bluechi/bluechi-ppa
+        latest_release: null
       - url: https://github.com/eclipse-bluechi/bluechi-on-yocto
         latest_release: null
       - url: https://github.com/eclipse-bluechi/.eclipsefdn
@@ -2461,13 +2534,13 @@ categories:
       project: Incubating
       repo_url: https://github.com/eclipse-lmos
       repo_urls:
+      - https://github.com/eclipse-lmos/lmos-router
       - https://github.com/eclipse-lmos/lmos-runtime
       - https://github.com/eclipse-lmos/lmos-operator
-      - https://github.com/eclipse-lmos/lmos-router
       - https://github.com/eclipse-lmos/arc
+      - https://github.com/eclipse-lmos/.github
       - https://github.com/eclipse-lmos/adl
       - https://github.com/eclipse-lmos/website
-      - https://github.com/eclipse-lmos/.github
       - https://github.com/eclipse-lmos/.eclipsefdn
       - https://github.com/eclipse-lmos/arc-view
       - https://github.com/eclipse-lmos/lmos-sample-agents
@@ -2477,6 +2550,12 @@ categories:
       - https://github.com/eclipse-lmos/lmos-kotlin-sdk-template
       - https://github.com/eclipse-lmos/lmos-cli
       repositories:
+      - url: https://github.com/eclipse-lmos/lmos-router
+        latest_release:
+          tag_name: 0.29.0
+          name: 0.29.0
+          url: https://github.com/eclipse-lmos/lmos-router/releases/tag/0.29.0
+          published_at: '2026-06-26T10:17:37Z'
       - url: https://github.com/eclipse-lmos/lmos-runtime
         latest_release:
           tag_name: 0.31.0
@@ -2485,32 +2564,26 @@ categories:
           published_at: '2026-04-27T08:02:47Z'
       - url: https://github.com/eclipse-lmos/lmos-operator
         latest_release:
-          tag_name: 0.10.0
-          name: 0.10.0
-          url: https://github.com/eclipse-lmos/lmos-operator/releases/tag/0.10.0
-          published_at: '2026-04-29T13:46:13Z'
-      - url: https://github.com/eclipse-lmos/lmos-router
-        latest_release:
-          tag_name: 0.28.0
-          name: 0.28.0
-          url: https://github.com/eclipse-lmos/lmos-router/releases/tag/0.28.0
-          published_at: '2026-04-27T07:28:01Z'
+          tag_name: 0.11.0
+          name: 0.11.0
+          url: https://github.com/eclipse-lmos/lmos-operator/releases/tag/0.11.0
+          published_at: '2026-06-26T10:16:35Z'
       - url: https://github.com/eclipse-lmos/arc
         latest_release:
-          tag_name: 0.225.0
-          name: 0.225.0
-          url: https://github.com/eclipse-lmos/arc/releases/tag/0.225.0
-          published_at: '2026-04-28T16:46:59Z'
-      - url: https://github.com/eclipse-lmos/adl
-        latest_release: null
-      - url: https://github.com/eclipse-lmos/website
-        latest_release: null
+          tag_name: 0.232.0
+          name: 0.232.0
+          url: https://github.com/eclipse-lmos/arc/releases/tag/0.232.0
+          published_at: '2026-06-30T11:04:29Z'
       - url: https://github.com/eclipse-lmos/.github
         latest_release:
           tag_name: 0.0.1-M1
           name: 0.0.1-M1
           url: https://github.com/eclipse-lmos/.github/releases/tag/0.0.1-M1
           published_at: null
+      - url: https://github.com/eclipse-lmos/adl
+        latest_release: null
+      - url: https://github.com/eclipse-lmos/website
+        latest_release: null
       - url: https://github.com/eclipse-lmos/.eclipsefdn
         latest_release: null
       - url: https://github.com/eclipse-lmos/arc-view
@@ -2536,23 +2609,6 @@ categories:
   subcategories:
   - name: Misc
     items:
-    - name: Eclipse Backend function Bindings (BfB)
-      description: 'The Eclipse BfB project provides a protocol and technology agnostic
-        interface specification in the ecosystem of mobility and automotive applications.
-
-        The Eclipse BfB specification is maintained in a...'
-      homepage_url: https://projects.eclipse.org/projects/automotive.bfb
-      project: Archived
-      logo: archived.png
-    - name: Eclipse MoEc
-      description: 'Eclipse MoEc provides an open software development kit (SDK) for
-        infrastructure-based planning, motion, parking and charging solutions within
-        the Software Defined Vehicle (SDV) ecosystem.
-
-        The MoEc SDK...'
-      homepage_url: https://projects.eclipse.org/projects/automotive.moec
-      project: Archived
-      logo: archived.png
     - name: 'Eclipse SDV-LVL '
       description: Just as the SAE Levels of Autonomy helped to level-set discussion
         on autonomous driving, the Eclipse SDV-LVL defines a common terminology/taxonomy
@@ -2572,27 +2628,3 @@ categories:
       - url: https://github.com/eclipse-sdv-lvl/.github
         latest_release: null
       logo: incubating.png
-    - name: Eclipse SommR
-      description: 'Eclipse SommR provides an automotive grade implementation of the
-        SomeIP specification for embedded Linux systems together with the required
-        tools to support developers.
-
-        Eclipse SommR fosters...'
-      homepage_url: https://projects.eclipse.org/projects/automotive.sommr
-      project: Archived
-      repo_url: https://github.com/eclipse-sommr
-      repo_urls:
-      - https://github.com/eclipse-sommr/.github
-      - https://github.com/eclipse-sommr/.eclipsefdn
-      - https://github.com/eclipse-sommr/sommr-website
-      - https://github.com/eclipse-sommr/sommr
-      repositories:
-      - url: https://github.com/eclipse-sommr/.github
-        latest_release: null
-      - url: https://github.com/eclipse-sommr/.eclipsefdn
-        latest_release: null
-      - url: https://github.com/eclipse-sommr/sommr-website
-        latest_release: null
-      - url: https://github.com/eclipse-sommr/sommr
-        latest_release: null
-      logo: archived.png
