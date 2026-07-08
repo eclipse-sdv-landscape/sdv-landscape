@@ -469,9 +469,8 @@ def build_landscape_from_static(
         )
         if repo_urls:
             item["repo_url"] = f"https://github.com/{project.get('github', {}).get('org')}" if project.get("github", {}).get("org") else repo_urls[0]
-            #item["repo_urls"] = repo_urls
-            #item["repositories"] = repositories
             item["additional_repos"] = [{"repo_url": url} for url in repo_urls]
+            item["repositories"] = repositories
         item["logo"] = resolve_logo(project, logo_dir)
         return item
 
@@ -585,9 +584,8 @@ def build_landscape_from_dynamic(
         )
         if repo_urls:
             item["repo_url"] = repo_urls[0]
-            #item["repo_urls"] = repo_urls
-            #item["repositories"] = repositories
             item["additional_repos"] = [{"repo_url": url} for url in repo_urls]
+            item["repositories"] = repositories
 
         # Handle logo
         item["logo"] = resolve_logo(proj, logo_dir)
