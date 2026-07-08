@@ -11,10 +11,12 @@ categories:
       - question and answer
       - project discovery
       - use case mapping
+      - interactive prompt
     content: |
       Use this chapter as a question-driven entry point into the SDV Landscape.
-      Start with the question that best matches your problem, then jump to the
-      linked landscape section to compare the most relevant Eclipse SDV projects.
+      Prefer an interactive prompt? Open [Games](./games) for a short
+      multiple-choice solution finder, then use the linked sections below to
+      compare adjacent Eclipse SDV projects in more detail.
     subcategories:
       - subcategory: I need a development toolchain for vehicle applications
         keywords:
