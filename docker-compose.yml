@@ -14,8 +14,10 @@ services:
       - >
         landscape2 build --data-file /work/data.yml --settings-file /work/settings.yml
         --guide-file /work/guide.yml --games-file /work/games.yml --logos-path /work/logos
-        --output-dir /out && mkdir -p /out/ask && cp /work/assets/ask-sdv-landscape.html
-        /out/ask/index.html
+        --output-dir /out &&
+        mkdir -p /out/ask &&
+        cp /work/assets/ask-sdv-landscape.html /out/ask/index.html &&
+        cp /work/assets/sdv-logo-color.svg /work/assets/deep-chat.bundle.js /out/ask/
 
   l2-serve:
     image: ${LANDSCAPE2_IMAGE:?set via --env-file}

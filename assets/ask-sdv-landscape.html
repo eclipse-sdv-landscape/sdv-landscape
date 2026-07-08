@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ask the Eclipse SDV Landscape</title>
+    <script type="module" src="./deep-chat.bundle.js"></script>
     <style>
       :root {
         color-scheme: light;
@@ -40,7 +41,7 @@
       }
 
       .assistant {
-        width: min(960px, 100%);
+        width: min(1100px, 100%);
         background: rgba(255, 255, 255, 0.96);
         border: 1px solid rgba(229, 231, 235, 0.9);
         border-radius: 24px;
@@ -89,13 +90,9 @@
         background: rgba(255, 255, 255, 0.24);
       }
 
-      .hero a {
-        color: #fff;
-      }
-
       .layout {
         display: grid;
-        grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+        grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
       }
 
       .chat {
@@ -103,89 +100,18 @@
         background: var(--surface-alt);
       }
 
-      .messages {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        min-height: 420px;
-      }
-
-      .bubble {
-        max-width: 90%;
-        padding: 14px 16px;
-        border-radius: 18px;
-        line-height: 1.5;
+      .chat-frame {
+        min-height: 560px;
         border: 1px solid var(--border);
-        background: var(--surface);
-      }
-
-      .bubble.user {
-        align-self: flex-end;
-        background: var(--brand);
-        border-color: var(--brand);
-        color: #fff;
-      }
-
-      .bubble.assistant {
-        align-self: flex-start;
-      }
-
-      .bubble p {
-        margin: 0 0 10px;
-      }
-
-      .bubble p:last-child,
-      .bubble ul:last-child {
-        margin-bottom: 0;
-      }
-
-      .bubble ul {
-        margin: 10px 0 0 18px;
-        padding: 0;
-      }
-
-      .bubble li + li {
-        margin-top: 6px;
-      }
-
-      .bubble a {
-        color: var(--brand-dark);
-        font-weight: 600;
-      }
-
-      .composer {
-        margin-top: 18px;
-        display: flex;
-        gap: 12px;
-      }
-
-      .composer input {
-        flex: 1;
-        min-width: 0;
-        padding: 14px 16px;
-        border-radius: 14px;
-        border: 1px solid #d1d5db;
-        font: inherit;
-      }
-
-      button {
-        border: 0;
-        border-radius: 14px;
-        padding: 14px 18px;
-        font: inherit;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .primary {
-        background: var(--brand);
-        color: #fff;
-      }
-
-      .secondary {
+        border-radius: 20px;
+        overflow: hidden;
         background: #fff;
-        color: var(--brand-dark);
-        border: 1px solid var(--border);
+      }
+
+      deep-chat {
+        display: block;
+        min-height: 560px;
+        height: 100%;
       }
 
       .sidebar {
@@ -232,9 +158,28 @@
         margin-bottom: 12px;
       }
 
+      button {
+        border: 0;
+        border-radius: 14px;
+        padding: 14px 18px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .secondary {
+        background: #fff;
+        color: var(--brand-dark);
+        border: 1px solid var(--border);
+      }
+
       .caption {
         font-size: 0.92rem;
         color: var(--muted);
+      }
+
+      .chat-caption {
+        margin: 12px 4px 0;
       }
 
       @media (max-width: 880px) {
@@ -249,14 +194,6 @@
         .sidebar {
           border-left: 0;
           border-top: 1px solid var(--border);
-        }
-
-        .composer {
-          flex-direction: column;
-        }
-
-        .bubble {
-          max-width: 100%;
         }
       }
     </style>
@@ -273,26 +210,21 @@
           <h1>Ask the Eclipse SDV Landscape</h1>
           <p>
             Ask a free-form question and get a curated starting point into the Eclipse SDV
-            Landscape. This assistant runs entirely in the browser and links you back to the
-            relevant landscape guide sections and projects.
+            Landscape. This in-frame assistant now uses Deep Chat so the experience can evolve
+            from the same connect flow used by Deep Chat server examples.
           </p>
           <a class="hero-home-link" id="home-link" href="/">Back to main page</a>
         </section>
 
         <div class="layout">
           <section class="chat">
-            <div class="messages" id="messages" aria-live="polite"></div>
-
-            <form class="composer" id="question-form">
-              <input
-                id="question-input"
-                name="question"
-                type="text"
-                placeholder="Ask about toolchains, SIL/HIL, middleware, orchestration, AI, or blueprints"
-                autocomplete="off"
-              />
-              <button class="primary" type="submit">Ask</button>
-            </form>
+            <div class="chat-frame">
+              <deep-chat id="landscape-chat"></deep-chat>
+            </div>
+            <p class="caption chat-caption">
+              The current recommendations stay browser-side, but the UI is ready to move to a
+              dedicated Deep Chat backend later without changing the page layout.
+            </p>
           </section>
 
           <aside class="sidebar">
@@ -431,111 +363,144 @@
         }
       ];
 
-      const messages = document.getElementById("messages");
       const homeLink = document.getElementById("home-link");
-      const questionForm = document.getElementById("question-form");
-      const questionInput = document.getElementById("question-input");
+      const chatElement = document.getElementById("landscape-chat");
       const feedbackInput = document.getElementById("feedback-input");
       const feedbackButton = document.getElementById("feedback-button");
       const quickPrompts = document.getElementById("quick-prompts");
 
       homeLink.href = route("/");
 
-      const escapeText = (value) => value.replace(/\s+/g, " ").trim();
-
-      const addBubble = (role, content) => {
-        const bubble = document.createElement("div");
-        bubble.className = `bubble ${role}`;
-        if (typeof content === "string") {
-          const paragraph = document.createElement("p");
-          paragraph.textContent = content;
-          bubble.appendChild(paragraph);
-        } else {
-          bubble.appendChild(content);
-        }
-        messages.appendChild(bubble);
-        messages.scrollTop = messages.scrollHeight;
-      };
-
-      const renderAssistantResponse = (question, intent) => {
-        const wrapper = document.createElement("div");
-
-        const summary = document.createElement("p");
-        summary.textContent = intent
-          ? intent.intro
-          : "I could not confidently match that yet, but the guide still gives the best curated entry points.";
-        wrapper.appendChild(summary);
-
-        const list = document.createElement("ul");
-        (intent ? intent.matches : [
-          "Open the guide and start with the chapter that is closest to your task.",
-          "Try rephrasing your question with terms like toolchain, SIL/HIL, middleware, orchestration, blueprint, or AI.",
-          "Use the feedback box to suggest a new prompt or recommendation."
-        ]).forEach((match) => {
-          const item = document.createElement("li");
-          item.textContent = match;
-          list.appendChild(item);
-        });
-        wrapper.appendChild(list);
-
-        const linkList = document.createElement("ul");
-        const links = intent ? intent.links : [
-          { label: "Open the guide", href: route("/guide") },
-          { label: "Browse the landscape", href: route("/") }
-        ];
-
-        links.forEach((link) => {
-          const item = document.createElement("li");
-          const anchor = document.createElement("a");
-          anchor.href = link.href;
-          anchor.textContent = link.label;
-          item.appendChild(anchor);
-          linkList.appendChild(item);
-        });
-        wrapper.appendChild(linkList);
-
-        addBubble("assistant", wrapper);
-      };
+      const normalizeText = (value = "") => value.replace(/\s+/g, " ").trim();
 
       const detectIntent = (question) => {
         const normalized = question.toLowerCase();
         const scored = intents
           .map((intent) => ({
             intent,
-            score: intent.keywords.reduce((total, keyword) => total + (normalized.includes(keyword) ? keyword.length : 0), 0)
+            score: intent.keywords.reduce(
+              (total, keyword) => total + (normalized.includes(keyword) ? keyword.length : 0),
+              0
+            )
           }))
           .sort((a, b) => b.score - a.score);
 
         return scored[0].score > 0 ? scored[0].intent : null;
       };
 
-      const ask = (question) => {
-        const cleanQuestion = escapeText(question);
-        if (!cleanQuestion) {
+      const fallbackLinks = [
+        { label: "Open the guide", href: route("/guide") },
+        { label: "Browse the landscape", href: route("/") }
+      ];
+
+      const toResponseText = (intent) => {
+        const matches = intent
+          ? intent.matches
+          : [
+              "Open the guide and start with the chapter that is closest to your task.",
+              "Try rephrasing your question with terms like toolchain, SIL/HIL, middleware, orchestration, blueprint, or AI.",
+              "Use the feedback box to suggest a new prompt or recommendation."
+            ];
+
+        const links = intent ? intent.links : fallbackLinks;
+
+        return [
+          intent
+            ? intent.intro
+            : "I could not confidently match that yet, but the guide still gives the best curated entry points.",
+          "",
+          ...matches.map((match) => `- ${match}`),
+          "",
+          ...links.map((link) => `- [${link.label}](${link.href})`)
+        ].join("\n");
+      };
+
+      const latestUserQuestion = (body) => {
+        const messages = Array.isArray(body && body.messages) ? body.messages : [];
+        const latest = [...messages].reverse().find((message) => message && message.role === "user");
+        return normalizeText((latest && latest.text) || "");
+      };
+
+      const submitPrompt = (prompt) => {
+        const cleanPrompt = normalizeText(prompt);
+        if (!cleanPrompt) {
           return;
         }
-        addBubble("user", cleanQuestion);
-        renderAssistantResponse(cleanQuestion, detectIntent(cleanQuestion));
+        chatElement.submitUserMessage({ text: cleanPrompt });
       };
+
+      customElements.whenDefined("deep-chat").then(() => {
+        chatElement.introMessage = {
+          text: "Tell me what you are trying to solve in the Eclipse SDV landscape, and I will point you to the best matching category and project starters."
+        };
+        chatElement.browserStorage = { key: "sdv-landscape-ask" };
+        chatElement.requestBodyLimits = { maxMessages: 1 };
+        chatElement.textInput = {
+          placeholder: {
+            text: "Ask about toolchains, SIL/HIL, middleware, orchestration, AI, or blueprints"
+          }
+        };
+        chatElement.messageStyles = {
+          default: {
+            shared: {
+              bubble: {
+                border: "1px solid #e5e7eb",
+                borderRadius: "18px",
+                boxShadow: "none",
+                padding: "14px 16px"
+              }
+            },
+            user: {
+              bubble: {
+                backgroundColor: "#f06c01",
+                border: "1px solid #f06c01",
+                color: "#ffffff"
+              }
+            },
+            ai: {
+              bubble: {
+                backgroundColor: "#ffffff",
+                color: "#1f2937"
+              }
+            }
+          },
+          intro: {
+            bubble: {
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5e7eb",
+              borderRadius: "18px",
+              color: "#1f2937",
+              padding: "14px 16px"
+            }
+          }
+        };
+        chatElement.connect = {
+          stream: { simulation: 10 },
+          handler: async (body, signals) => {
+            try {
+              const question = latestUserQuestion(body);
+              const intent = detectIntent(question);
+              await signals.onResponse({ text: toResponseText(intent) });
+            } catch (error) {
+              await signals.onResponse({
+                error: "Something went wrong while generating the landscape recommendation."
+              });
+            }
+          }
+        };
+      });
 
       prompts.forEach(({ label, prompt }) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "chip";
         button.textContent = label;
-        button.addEventListener("click", () => ask(prompt));
+        button.addEventListener("click", () => submitPrompt(prompt));
         quickPrompts.appendChild(button);
       });
 
-      questionForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        ask(questionInput.value);
-        questionInput.value = "";
-        questionInput.focus();
-      });
-
       feedbackButton.addEventListener("click", () => {
-        const body = escapeText(feedbackInput.value);
+        const body = normalizeText(feedbackInput.value);
         const url = new URL("https://github.com/eclipse-sdv-landscape/sdv-landscape/issues/new");
         url.searchParams.set("title", "Feedback for Ask the Eclipse SDV Landscape assistant");
         url.searchParams.set(
@@ -551,11 +516,6 @@
         );
         window.open(url.toString(), "_blank", "noopener");
       });
-
-      addBubble(
-        "assistant",
-        "Tell me what you are trying to solve in the Eclipse SDV landscape, and I will point you to the best matching category and project starters."
-      );
     </script>
   </body>
 </html>
