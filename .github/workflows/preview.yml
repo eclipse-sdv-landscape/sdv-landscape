@@ -41,6 +41,15 @@ jobs:
       - name: Export to ./build (host-owned files)
         run: docker compose --env-file .env.stable run --rm l2-export | tar -C build -xf -
 
+      - name: Fix quiz data path for GitHub Pages subpath
+        run: |
+          for f in build/assets/Content-*.js; do
+            [ -f "$f" ] && sed -i 's/new se(location.origin)/new se(location.origin+window.baseDS.base_path)/g' "$f"
+          done
+
+      - name: SPA fallback for GitHub Pages
+        run: cp build/index.html build/404.html
+
       - name: Deploy preview to GitHub Pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
