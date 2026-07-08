@@ -1428,8 +1428,6 @@ categories:
       - repo_url: https://github.com/eclipse-ecal/ecal-mqtt-bridge
       - repo_url: https://github.com/eclipse-ecal/ecal-utils
       repositories:
-      - url: https://github.com/eclipse-ecal/ecal-test-suite
-        latest_release: null
       - url: https://github.com/eclipse-ecal/ecal
         latest_release:
           tag_name: v6.1.1
