@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ask the SDV Landscape</title>
+    <title>Ask the Eclipse SDV Landscape</title>
     <style>
       :root {
         color-scheme: light;
@@ -54,6 +54,13 @@
         color: #fff;
       }
 
+      .hero-logo {
+        display: block;
+        width: clamp(180px, 30vw, 280px);
+        height: auto;
+        margin: 0 0 14px;
+      }
+
       .hero h1 {
         margin: 0 0 8px;
         font-size: clamp(1.75rem, 3vw, 2.4rem);
@@ -63,6 +70,23 @@
         margin: 0;
         max-width: 56rem;
         line-height: 1.55;
+      }
+
+      .hero-home-link {
+        display: inline-block;
+        margin-top: 14px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .hero-home-link:hover,
+      .hero-home-link:focus-visible {
+        background: rgba(255, 255, 255, 0.24);
       }
 
       .hero a {
@@ -241,12 +265,18 @@
     <div class="shell">
       <main class="assistant">
         <section class="hero">
-          <h1>Ask the SDV Landscape</h1>
+          <img
+            class="hero-logo"
+            src="./sdv-logo-color.svg"
+            alt="Eclipse SDV Landscape logo"
+          />
+          <h1>Ask the Eclipse SDV Landscape</h1>
           <p>
             Ask a free-form question and get a curated starting point into the Eclipse SDV
             Landscape. This assistant runs entirely in the browser and links you back to the
             relevant landscape guide sections and projects.
           </p>
+          <a class="hero-home-link" id="home-link" href="/">Back to main page</a>
         </section>
 
         <div class="layout">
@@ -402,11 +432,14 @@
       ];
 
       const messages = document.getElementById("messages");
+      const homeLink = document.getElementById("home-link");
       const questionForm = document.getElementById("question-form");
       const questionInput = document.getElementById("question-input");
       const feedbackInput = document.getElementById("feedback-input");
       const feedbackButton = document.getElementById("feedback-button");
       const quickPrompts = document.getElementById("quick-prompts");
+
+      homeLink.href = route("/");
 
       const escapeText = (value) => value.replace(/\s+/g, " ").trim();
 
@@ -504,7 +537,7 @@
       feedbackButton.addEventListener("click", () => {
         const body = escapeText(feedbackInput.value);
         const url = new URL("https://github.com/eclipse-sdv-landscape/sdv-landscape/issues/new");
-        url.searchParams.set("title", "Feedback for Ask the SDV Landscape assistant");
+        url.searchParams.set("title", "Feedback for Ask the Eclipse SDV Landscape assistant");
         url.searchParams.set(
           "body",
           [
@@ -512,7 +545,7 @@
             body || "Please describe what the assistant should answer better.",
             "",
             "## Context",
-            "- Page: Ask the SDV Landscape assistant",
+            "- Page: Ask the Eclipse SDV Landscape assistant",
             "- Browser-generated feedback from the static site"
           ].join("\n")
         );
@@ -521,7 +554,7 @@
 
       addBubble(
         "assistant",
-        "Tell me what you are trying to solve in the SDV landscape, and I will point you to the best matching category and project starters."
+        "Tell me what you are trying to solve in the Eclipse SDV landscape, and I will point you to the best matching category and project starters."
       );
     </script>
   </body>
