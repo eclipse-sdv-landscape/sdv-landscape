@@ -1,7 +1,7 @@
 name: PR Preview
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, reopened, synchronize, closed]
 
 permissions:
@@ -41,14 +41,18 @@ jobs:
       - name: Export to ./build (host-owned files)
         run: docker compose --env-file .env.stable run --rm l2-export | tar -C build -xf -
 
-      - name: Fix quiz data path for GitHub Pages subpath
+      - name: Fix relative paths for subpath deployment
         run: |
-          for f in build/assets/Content-*.js; do
-            [ -f "$f" ] && sed -i 's/new se(location.origin)/new se(location.origin+window.baseDS.base_path)/g' "$f"
-          done
+          # Add <base> tag to index.html for relative path resolution
+          sed -i "s|</head>|<base href=\"${PREVIEW_BASE_PATH}/\" /></head>|" build/index.html
+          
+          # Also add to 404.html
+          cp build/index.html build/404.html
 
       - name: SPA fallback for GitHub Pages
-        run: cp build/index.html build/404.html
+        run: |
+          # Ensure 404.html exists for GitHub Pages SPA routing
+          [ -f build/404.html ] || cp build/index.html build/404.html
 
       - name: Deploy preview to GitHub Pages branch
         uses: peaceiris/actions-gh-pages@v4
