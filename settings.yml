@@ -67,5 +67,7 @@ header:
   links:
     github: "https://github.com/eclipse-sdv-landscape/sdv-landscape"
   logo: "./assets/sdv-logo-color.svg"
+  motd: |
+    Need a starting point? Open the Guide for a question-driven SDV solution finder.
 
 screenshot_width: 1500
