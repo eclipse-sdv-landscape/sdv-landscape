@@ -68,6 +68,6 @@ header:
     github: "https://github.com/eclipse-sdv-landscape/sdv-landscape"
   logo: "./assets/sdv-logo-color.svg"
   motd: |
-    Need a starting point? Try the <a href="./games">interactive solution finder</a> in Games, or open the Guide for the full SDV Q&A map.
+    Need a starting point? Ask the [SDV Landscape assistant](./ask/index.html) for a chat-style recommendation, or open the Guide for the full SDV Q&A map.
 
 screenshot_width: 1500

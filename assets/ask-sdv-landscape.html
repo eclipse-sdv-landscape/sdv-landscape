@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask the SDV Landscape</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --brand: #f06c01;
+        --brand-dark: #592c51;
+        --brand-soft: #fff3e8;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --surface: #ffffff;
+        --surface-alt: #f7f8fb;
+        --border: #e5e7eb;
+        --shadow: 0 24px 60px rgba(31, 41, 55, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(240, 108, 1, 0.14), transparent 30%),
+          linear-gradient(180deg, #f7f8fb 0%, #f3f4f6 100%);
+        color: var(--text);
+      }
+
+      .shell {
+        min-height: 100vh;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .assistant {
+        width: min(960px, 100%);
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(229, 231, 235, 0.9);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero {
+        padding: 24px 24px 16px;
+        background: linear-gradient(135deg, rgba(89, 44, 81, 0.98), rgba(240, 108, 1, 0.95));
+        color: #fff;
+      }
+
+      .hero h1 {
+        margin: 0 0 8px;
+        font-size: clamp(1.75rem, 3vw, 2.4rem);
+      }
+
+      .hero p {
+        margin: 0;
+        max-width: 56rem;
+        line-height: 1.55;
+      }
+
+      .hero a {
+        color: #fff;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+      }
+
+      .chat {
+        padding: 20px 24px 24px;
+        background: var(--surface-alt);
+      }
+
+      .messages {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        min-height: 420px;
+      }
+
+      .bubble {
+        max-width: 90%;
+        padding: 14px 16px;
+        border-radius: 18px;
+        line-height: 1.5;
+        border: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .bubble.user {
+        align-self: flex-end;
+        background: var(--brand);
+        border-color: var(--brand);
+        color: #fff;
+      }
+
+      .bubble.assistant {
+        align-self: flex-start;
+      }
+
+      .bubble p {
+        margin: 0 0 10px;
+      }
+
+      .bubble p:last-child,
+      .bubble ul:last-child {
+        margin-bottom: 0;
+      }
+
+      .bubble ul {
+        margin: 10px 0 0 18px;
+        padding: 0;
+      }
+
+      .bubble li + li {
+        margin-top: 6px;
+      }
+
+      .bubble a {
+        color: var(--brand-dark);
+        font-weight: 600;
+      }
+
+      .composer {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+      }
+
+      .composer input {
+        flex: 1;
+        min-width: 0;
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid #d1d5db;
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        border-radius: 14px;
+        padding: 14px 18px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .primary {
+        background: var(--brand);
+        color: #fff;
+      }
+
+      .secondary {
+        background: #fff;
+        color: var(--brand-dark);
+        border: 1px solid var(--border);
+      }
+
+      .sidebar {
+        padding: 24px;
+        border-left: 1px solid var(--border);
+        background: #fff;
+      }
+
+      .sidebar h2,
+      .sidebar h3 {
+        margin: 0 0 12px;
+      }
+
+      .sidebar p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .chip {
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: var(--brand-soft);
+        color: var(--brand-dark);
+        border: 1px solid rgba(240, 108, 1, 0.22);
+        text-align: left;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 140px;
+        resize: vertical;
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid #d1d5db;
+        font: inherit;
+        margin-bottom: 12px;
+      }
+
+      .caption {
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 880px) {
+        .shell {
+          padding: 12px;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          border-left: 0;
+          border-top: 1px solid var(--border);
+        }
+
+        .composer {
+          flex-direction: column;
+        }
+
+        .bubble {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <main class="assistant">
+        <section class="hero">
+          <h1>Ask the SDV Landscape</h1>
+          <p>
+            Ask a free-form question and get a curated starting point into the Eclipse SDV
+            Landscape. This assistant runs entirely in the browser and links you back to the
+            relevant landscape guide sections and projects.
+          </p>
+        </section>
+
+        <div class="layout">
+          <section class="chat">
+            <div class="messages" id="messages" aria-live="polite"></div>
+
+            <form class="composer" id="question-form">
+              <input
+                id="question-input"
+                name="question"
+                type="text"
+                placeholder="Ask about toolchains, SIL/HIL, middleware, orchestration, AI, or blueprints"
+                autocomplete="off"
+              />
+              <button class="primary" type="submit">Ask</button>
+            </form>
+          </section>
+
+          <aside class="sidebar">
+            <h2>Quick prompts</h2>
+            <div class="chips" id="quick-prompts"></div>
+
+            <h3>Submit feedback</h3>
+            <p>
+              Share gaps, unclear recommendations, or questions that should become first-class
+              prompts.
+            </p>
+            <textarea
+              id="feedback-input"
+              placeholder="What should this assistant answer better?"
+            ></textarea>
+            <button class="secondary" id="feedback-button" type="button">
+              Open feedback issue
+            </button>
+            <p class="caption">
+              Feedback opens a prefilled GitHub issue in a new tab so no extra backend is required.
+            </p>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const basePath = window.location.pathname.includes("/sdv-landscape/")
+        ? "/sdv-landscape"
+        : "";
+
+      const route = (path) => `${basePath}${path}`;
+
+      const prompts = [
+        {
+          label: "Which project helps with app development toolchains?",
+          prompt: "I need an end-to-end development toolchain for vehicle applications."
+        },
+        {
+          label: "What should I use for SIL/HIL?",
+          prompt: "I need SIL or HIL simulation and automated validation."
+        },
+        {
+          label: "How do I handle in-vehicle data?",
+          prompt: "I need in-vehicle data access and service-to-service communication."
+        },
+        {
+          label: "What handles orchestration and updates?",
+          prompt: "I need orchestration, deployment, or OTA software updates in the vehicle."
+        },
+        {
+          label: "Which full-stack SDV projects should I explore?",
+          prompt: "I need a full SDV stack, blueprint, or reference platform."
+        },
+        {
+          label: "What is the AI project in Eclipse SDV?",
+          prompt: "I want to explore AI capabilities for SDV."
+        }
+      ];
+
+      const intents = [
+        {
+          keywords: ["toolchain", "sdk", "development", "developer", "application", "app", "workflow", "cli", "vehicle api"],
+          intro: "Start in Tooling Devops / Development.",
+          matches: [
+            "Eclipse Velocitas for an end-to-end in-vehicle application toolchain.",
+            "Eclipse Open Vehicle API for signal- and event-driven vehicle abstraction work.",
+            "Eclipse SDV Developer Console for lifecycle workflows from development to release."
+          ],
+          links: [
+            { label: "Open the development guide section", href: route("/guide#tooling-devops--development") },
+            { label: "Browse the landscape", href: route("/") }
+          ]
+        },
+        {
+          keywords: ["sil", "hil", "simulation", "validate", "validation", "testing", "test", "automation", "pc"],
+          intro: "Start in Tooling Devops / Testing & Validation.",
+          matches: [
+            "Eclipse OpenXilEnv for lightweight SIL/HIL execution on a PC.",
+            "Eclipse openDuT for automated testing and validation workflows across targets."
+          ],
+          links: [
+            { label: "Open the testing guide section", href: route("/guide#tooling-devops--testing-validation") },
+            { label: "Browse the landscape", href: route("/") }
+          ]
+        },
+        {
+          keywords: ["data", "middleware", "communication", "service", "protocol", "orchestration layer", "vehicle", "diagnostics", "mesh"],
+          intro: "Start in Service Fabric and Communication.",
+          matches: [
+            "Eclipse Kuksa for an in-vehicle data orchestration layer.",
+            "Eclipse Chariott and Eclipse eCAL for middleware and service integration.",
+            "Eclipse Zenoh, Eclipse uProtocol, and Eclipse OpenSOVD for communication and service-oriented scenarios."
+          ],
+          links: [
+            { label: "Open the middleware guide section", href: route("/guide#service-fabric-and-communication--middleware-frameworks") },
+            { label: "Open communication protocols", href: route("/guide#service-fabric-and-communication--communication-protocols") }
+          ]
+        },
+        {
+          keywords: ["orchestration", "deployment", "deploy", "ota", "update", "runtime", "workload", "container", "node", "vm"],
+          intro: "Start in Tooling Devops / Deployment and Runtime and Orchestration.",
+          matches: [
+            "Eclipse Ankaios for workload management across nodes and virtual machines.",
+            "Eclipse Muto for adaptive deployment workflows.",
+            "Eclipse BlueChi™, Eclipse Pullpiri, and Eclipse Symphony for orchestration-oriented runtime control."
+          ],
+          links: [
+            { label: "Open the deployment guide section", href: route("/guide#tooling-devops--deployment") },
+            { label: "Open runtime orchestration", href: route("/guide#runtime-and-orchestration--workload-container-orchestration") }
+          ]
+        },
+        {
+          keywords: ["stack", "blueprint", "reference", "platform", "distribution", "integration", "full", "core"],
+          intro: "Start in Distributions and Frameworks.",
+          matches: [
+            "Eclipse Leda for combining SDV components into a coherent stack.",
+            "Eclipse Safe Open Vehicle Core and Eclipse Automotive API Framework for reusable SDV building blocks.",
+            "Eclipse SDV Blueprints for applied reference examples."
+          ],
+          links: [
+            { label: "Open the distributions guide section", href: route("/guide#distributions-and-frameworks--distributions") },
+            { label: "Browse the landscape", href: route("/") }
+          ]
+        },
+        {
+          keywords: ["ai", "ml", "llm", "language model", "machine learning", "intelligent", "agent"],
+          intro: "Start in AI / AI.",
+          matches: [
+            "Eclipse LMOS is the current AI-focused match in the Eclipse SDV landscape."
+          ],
+          links: [
+            { label: "Open the AI guide section", href: route("/guide#ai--ai") },
+            { label: "Browse the landscape", href: route("/") }
+          ]
+        }
+      ];
+
+      const messages = document.getElementById("messages");
+      const questionForm = document.getElementById("question-form");
+      const questionInput = document.getElementById("question-input");
+      const feedbackInput = document.getElementById("feedback-input");
+      const feedbackButton = document.getElementById("feedback-button");
+      const quickPrompts = document.getElementById("quick-prompts");
+
+      const escapeText = (value) => value.replace(/\s+/g, " ").trim();
+
+      const addBubble = (role, content) => {
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${role}`;
+        if (typeof content === "string") {
+          const paragraph = document.createElement("p");
+          paragraph.textContent = content;
+          bubble.appendChild(paragraph);
+        } else {
+          bubble.appendChild(content);
+        }
+        messages.appendChild(bubble);
+        messages.scrollTop = messages.scrollHeight;
+      };
+
+      const renderAssistantResponse = (question, intent) => {
+        const wrapper = document.createElement("div");
+
+        const summary = document.createElement("p");
+        summary.textContent = intent
+          ? intent.intro
+          : "I could not confidently match that yet, but the guide still gives the best curated entry points.";
+        wrapper.appendChild(summary);
+
+        const list = document.createElement("ul");
+        (intent ? intent.matches : [
+          "Open the guide and start with the chapter that is closest to your task.",
+          "Try rephrasing your question with terms like toolchain, SIL/HIL, middleware, orchestration, blueprint, or AI.",
+          "Use the feedback box to suggest a new prompt or recommendation."
+        ]).forEach((match) => {
+          const item = document.createElement("li");
+          item.textContent = match;
+          list.appendChild(item);
+        });
+        wrapper.appendChild(list);
+
+        const linkList = document.createElement("ul");
+        const links = intent ? intent.links : [
+          { label: "Open the guide", href: route("/guide") },
+          { label: "Browse the landscape", href: route("/") }
+        ];
+
+        links.forEach((link) => {
+          const item = document.createElement("li");
+          const anchor = document.createElement("a");
+          anchor.href = link.href;
+          anchor.textContent = link.label;
+          item.appendChild(anchor);
+          linkList.appendChild(item);
+        });
+        wrapper.appendChild(linkList);
+
+        addBubble("assistant", wrapper);
+      };
+
+      const detectIntent = (question) => {
+        const normalized = question.toLowerCase();
+        const scored = intents
+          .map((intent) => ({
+            intent,
+            score: intent.keywords.reduce((total, keyword) => total + (normalized.includes(keyword) ? keyword.length : 0), 0)
+          }))
+          .sort((a, b) => b.score - a.score);
+
+        return scored[0].score > 0 ? scored[0].intent : null;
+      };
+
+      const ask = (question) => {
+        const cleanQuestion = escapeText(question);
+        if (!cleanQuestion) {
+          return;
+        }
+        addBubble("user", cleanQuestion);
+        renderAssistantResponse(cleanQuestion, detectIntent(cleanQuestion));
+      };
+
+      prompts.forEach(({ label, prompt }) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "chip";
+        button.textContent = label;
+        button.addEventListener("click", () => ask(prompt));
+        quickPrompts.appendChild(button);
+      });
+
+      questionForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        ask(questionInput.value);
+        questionInput.value = "";
+        questionInput.focus();
+      });
+
+      feedbackButton.addEventListener("click", () => {
+        const body = escapeText(feedbackInput.value);
+        const url = new URL("https://github.com/eclipse-sdv-landscape/sdv-landscape/issues/new");
+        url.searchParams.set("title", "Feedback for Ask the SDV Landscape assistant");
+        url.searchParams.set(
+          "body",
+          [
+            "## Feedback",
+            body || "Please describe what the assistant should answer better.",
+            "",
+            "## Context",
+            "- Page: Ask the SDV Landscape assistant",
+            "- Browser-generated feedback from the static site"
+          ].join("\n")
+        );
+        window.open(url.toString(), "_blank", "noopener");
+      });
+
+      addBubble(
+        "assistant",
+        "Tell me what you are trying to solve in the SDV landscape, and I will point you to the best matching category and project starters."
+      );
+    </script>
+  </body>
+</html>

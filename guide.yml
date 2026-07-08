@@ -12,11 +12,12 @@ categories:
       - project discovery
       - use case mapping
       - interactive prompt
+      - chatbot
     content: |
       Use this chapter as a question-driven entry point into the SDV Landscape.
-      Prefer an interactive prompt? Open [Games](./games) for a short
-      multiple-choice solution finder, then use the linked sections below to
-      compare adjacent Eclipse SDV projects in more detail.
+      Prefer a chat-style prompt? Open the [Ask the SDV Landscape assistant](./ask/index.html)
+      for an in-browser Q&A flow, then use the linked sections below to compare
+      adjacent Eclipse SDV projects in more detail.
     subcategories:
       - subcategory: I need a development toolchain for vehicle applications
         keywords:
