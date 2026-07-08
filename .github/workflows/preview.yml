@@ -32,7 +32,8 @@ jobs:
           rm -rf build && mkdir -p build
 
       - name: Update base_path for preview
-        run: sed -i "s|^base_path:.*|base_path: ${PREVIEW_BASE_PATH}|" settings.yml
+        run: |
+          sed -i "s|^base_path:.*|base_path: ${PREVIEW_BASE_PATH}|" settings.yml
 
       - name: Build (to named volume)
         run: docker compose --env-file .env.stable run --rm l2-build
