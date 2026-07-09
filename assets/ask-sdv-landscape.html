@@ -210,8 +210,9 @@
           <h1>Ask the Eclipse SDV Landscape</h1>
           <p>
             Ask a free-form question and get a curated starting point into the Eclipse SDV
-            Landscape. This in-frame assistant now uses Deep Chat so the experience can evolve
-            from the same connect flow used by Deep Chat server examples.
+            Landscape. This in-frame assistant now uses Deep Chat component patterns from the
+            upstream LLM reference so the experience can evolve from the same connect flow used
+            by Deep Chat server examples.
           </p>
           <a class="hero-home-link" id="home-link" href="/">Back to main page</a>
         </section>
@@ -372,6 +373,8 @@
       homeLink.href = route("/");
 
       const normalizeText = (value = "") => value.replace(/\s+/g, " ").trim();
+      const escapeHtml = (value = "") =>
+        value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
       const detectIntent = (question) => {
         const normalized = question.toLowerCase();
@@ -393,6 +396,37 @@
         { label: "Browse the landscape", href: route("/") }
       ];
 
+      const feedbackIssueUrl = (body = "") => {
+        const url = new URL("https://github.com/eclipse-sdv-landscape/sdv-landscape/issues/new");
+        url.searchParams.set("title", "Feedback for Ask the Eclipse SDV Landscape assistant");
+        url.searchParams.set(
+          "body",
+          [
+            "## Feedback",
+            normalizeText(body) || "Please describe what the assistant should answer better.",
+            "",
+            "## Context",
+            "- Page: Ask the Eclipse SDV Landscape assistant",
+            "- Browser-generated feedback from the static site"
+          ].join("\n")
+        );
+        return url.toString();
+      };
+
+      const buildIntroHtml = () => [
+        "<div>",
+        "<p>Tell me what you are trying to solve in the Eclipse SDV landscape and I will point you to the best matching category and project starters.</p>",
+        "<p>Try one of these prompts:</p>",
+        '<div class="intro-suggestions">',
+        ...prompts.map(
+          ({ prompt }) =>
+            `<button class="deep-chat-suggestion-button" type="button">${escapeHtml(prompt)}</button>`
+        ),
+        "</div>",
+        `<p><a class="assistant-feedback-link" href="${feedbackIssueUrl()}" target="_blank" rel="noopener">Open a feedback issue</a> if a recommendation is missing or unclear.</p>`,
+        "</div>"
+      ].join("");
+
       const toResponseText = (intent) => {
         const matches = intent
           ? intent.matches
@@ -411,6 +445,7 @@
           "",
           ...matches.map((match) => `- ${match}`),
           "",
+          "Next steps:",
           ...links.map((link) => `- [${link.label}](${link.href})`)
         ].join("\n");
       };
@@ -431,13 +466,58 @@
 
       customElements.whenDefined("deep-chat").then(() => {
         chatElement.introMessage = {
-          text: "Tell me what you are trying to solve in the Eclipse SDV landscape, and I will point you to the best matching category and project starters."
+          html: buildIntroHtml()
         };
         chatElement.browserStorage = { key: "sdv-landscape-ask" };
+        chatElement.focusMode = true;
+        chatElement.names = {
+          user: { text: "You" },
+          ai: { text: "SDV Landscape" }
+        };
+        chatElement.errorMessages = {
+          overrides: {
+            default: "Something went wrong while generating the landscape recommendation."
+          }
+        };
         chatElement.requestBodyLimits = { maxMessages: 1 };
         chatElement.textInput = {
           placeholder: {
             text: "Ask about toolchains, SIL/HIL, middleware, orchestration, AI, or blueprints"
+          }
+        };
+        chatElement.htmlClassUtilities = {
+          "deep-chat-suggestion-button": {
+            styles: {
+              default: {
+                backgroundColor: "#fff3e8",
+                border: "1px solid rgba(240, 108, 1, 0.22)",
+                borderRadius: "999px",
+                color: "#592c51",
+                cursor: "pointer",
+                fontSize: "0.92rem",
+                fontWeight: "600",
+                margin: "0 10px 10px 0",
+                padding: "10px 14px",
+                textAlign: "left"
+              },
+              hover: {
+                backgroundColor: "#ffe6d1"
+              },
+              click: {
+                backgroundColor: "#ffd4ad"
+              }
+            }
+          },
+          "assistant-feedback-link": {
+            styles: {
+              default: {
+                color: "#592c51",
+                fontWeight: "600"
+              },
+              hover: {
+                color: "#f06c01"
+              }
+            }
           }
         };
         chatElement.messageStyles = {
@@ -475,7 +555,6 @@
           }
         };
         chatElement.connect = {
-          stream: { simulation: 10 },
           handler: async (body, signals) => {
             try {
               const question = latestUserQuestion(body);
@@ -500,21 +579,7 @@
       });
 
       feedbackButton.addEventListener("click", () => {
-        const body = normalizeText(feedbackInput.value);
-        const url = new URL("https://github.com/eclipse-sdv-landscape/sdv-landscape/issues/new");
-        url.searchParams.set("title", "Feedback for Ask the Eclipse SDV Landscape assistant");
-        url.searchParams.set(
-          "body",
-          [
-            "## Feedback",
-            body || "Please describe what the assistant should answer better.",
-            "",
-            "## Context",
-            "- Page: Ask the Eclipse SDV Landscape assistant",
-            "- Browser-generated feedback from the static site"
-          ].join("\n")
-        );
-        window.open(url.toString(), "_blank", "noopener");
+        window.open(feedbackIssueUrl(feedbackInput.value), "_blank", "noopener");
       });
     </script>
   </body>
