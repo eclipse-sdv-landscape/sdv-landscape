@@ -46,22 +46,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-
-      - name: Collect SDV maturity artifacts
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: eclipse-dash/quevee@v1
-        id: quevee_manifest
-        with:
-          release_url: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}
-          artifacts_documentation: README.md
-          artifacts_readme: README.md
-          artifacts_testing: .github/workflows/build.yml
-          artifacts_release_process: .github/workflows/deploy.yml
-
-      - name: Upload SDV maturity manifest to release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ steps.quevee_manifest.outputs.manifest_file }}
-          tag: ${{ github.ref }}
