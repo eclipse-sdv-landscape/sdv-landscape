@@ -17,7 +17,7 @@ services:
         --output-dir /out &&
         mkdir -p /out/ask &&
         cp /work/assets/ask-sdv-landscape.html /out/ask/index.html &&
-        cp /work/assets/sdv-logo-color.svg /work/assets/deep-chat.bundle.js /out/ask/
+        cp /work/assets/sdv-logo-color.svg /out/ask/
 
   l2-serve:
     image: ${LANDSCAPE2_IMAGE:?set via --env-file}

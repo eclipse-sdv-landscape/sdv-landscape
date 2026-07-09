@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ask the Eclipse SDV Landscape</title>
-    <script type="module" src="./deep-chat.bundle.js"></script>
+    <script type="module" src="https://unpkg.com/deep-chat@2.4.2/dist/deepChat.bundle.js" integrity="sha384-ire02ARbuqxh1f0vqLCtjJKh6BVWbziZzoiPht9u+EwKaLagZ6ESBXsXp+A8+x6m" crossorigin="anonymous"></script>
     <style>
       :root {
         color-scheme: light;
@@ -101,7 +101,6 @@
       }
 
       .chat-frame {
-        min-height: 560px;
         border: 1px solid var(--border);
         border-radius: 20px;
         overflow: hidden;
@@ -110,8 +109,8 @@
 
       deep-chat {
         display: block;
-        min-height: 560px;
-        height: 100%;
+        width: 100%;
+        height: 560px;
       }
 
       .sidebar {
@@ -194,6 +193,14 @@
         .sidebar {
           border-left: 0;
           border-top: 1px solid var(--border);
+        }
+
+        .chat-frame {
+          height: auto;
+        }
+
+        deep-chat {
+          height: 500px;
         }
       }
     </style>
@@ -464,12 +471,24 @@
         chatElement.submitUserMessage({ text: cleanPrompt });
       };
 
+      const syncChatElementSize = () => {
+        chatElement.style.width = "100%";
+        chatElement.style.maxWidth = "100%";
+        chatElement.style.height = window.matchMedia("(max-width: 880px)").matches
+          ? "500px"
+          : "560px";
+      };
+
+      const delay = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+
       customElements.whenDefined("deep-chat").then(() => {
+        syncChatElementSize();
         chatElement.introMessage = {
           html: buildIntroHtml()
         };
         chatElement.browserStorage = { key: "sdv-landscape-ask" };
-        chatElement.focusMode = true;
+        chatElement.upwardsMode = true;
+        //chatElement.focusMode = true;
         chatElement.names = {
           user: { text: "You" },
           ai: { text: "SDV Landscape" }
@@ -559,6 +578,7 @@
             try {
               const question = latestUserQuestion(body);
               const intent = detectIntent(question);
+              await delay(450);
               await signals.onResponse({ text: toResponseText(intent) });
             } catch (error) {
               await signals.onResponse({
@@ -568,6 +588,8 @@
           }
         };
       });
+
+      window.addEventListener("resize", syncChatElementSize);
 
       prompts.forEach(({ label, prompt }) => {
         const button = document.createElement("button");
