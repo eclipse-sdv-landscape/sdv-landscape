@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
   packages: read
-  actions: read
+  actions: write
 
 jobs:
   build:
@@ -22,15 +22,18 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Download build artifacts
+        if: github.event_name == 'release'
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
           path: build
 
       - name: Archive build artifacts
+        if: github.event_name == 'release'
         run: tar -czf sdv-landscape-build-${{ github.event.release.tag_name }}.tar.gz -C build .
 
       - name: Upload build archive to release
+        if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +50,16 @@ jobs:
           artifacts_testing: .github/workflows/build.yml
           artifacts_release_process: .github/workflows/deploy.yml
 
+      - name: Display SDV maturity manifest
+        run: |
+          if [ -f "${{ steps.quevee_manifest.outputs.manifest_file }}" ]; then
+            cat "${{ steps.quevee_manifest.outputs.manifest_file }}"
+          else
+            echo "Manifest file not found at: ${{ steps.quevee_manifest.outputs.manifest_file }}"
+          fi
+
       - name: Upload SDV maturity manifest to release
+        if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
