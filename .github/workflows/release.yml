@@ -7,12 +7,35 @@ on:
 permissions:
   contents: write
   packages: read
+  actions: read
 
 jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      env_file: .env.stable
+
   maturity-manifest:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build
+
+      - name: Archive build artifacts
+        run: tar -czf sdv-landscape-build-${{ github.event.release.tag_name }}.tar.gz -C build .
+
+      - name: Upload build archive to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: sdv-landscape-build-${{ github.event.release.tag_name }}.tar.gz
+          tag: ${{ github.event.release.tag_name }}
 
       - name: Collect SDV maturity artifacts
         uses: eclipse-dash/quevee@v1
