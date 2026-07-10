@@ -5,6 +5,110 @@
 # Reference documentation: https://github.com/cncf/landscape2/blob/main/docs/config/guide.yml
 
 categories:
+  - category: Ask the SDV Landscape
+    keywords:
+      - solution finder
+      - question and answer
+      - project discovery
+      - use case mapping
+      - interactive prompt
+      - chatbot
+    content: |
+      Use this chapter as a question-driven entry point into the SDV Landscape.
+      Prefer a chat-style prompt? Open the [Ask the SDV Landscape assistant](./ask/index.html)
+      for an in-browser Q&A flow, then use the linked sections below to compare
+      adjacent Eclipse SDV projects in more detail.
+    subcategories:
+      - subcategory: I need a development toolchain for vehicle applications
+        keywords:
+          - application SDKs
+          - containerized apps
+          - vehicle abstraction
+          - developer workflows
+          - end-to-end toolchain
+        content: |
+          Start with [Tooling Devops / Development](#tooling-devops--development).
+
+          Good first matches include **Eclipse Velocitas** for end-to-end in-vehicle
+          application development, **Eclipse Open Vehicle API** for building a
+          vehicle abstraction interface, and **Eclipse SDV Developer Console** when
+          you need lifecycle support from development to release.
+
+      - subcategory: I need simulation, SIL/HIL, or automated validation
+        keywords:
+          - simulation
+          - SIL
+          - HIL
+          - test automation
+          - validation
+        content: |
+          Start with [Tooling Devops / Testing & Validation](#tooling-devops--testing-validation).
+
+          The main matches are **Eclipse OpenXilEnv** for lightweight SIL/HIL
+          execution on a PC and **Eclipse openDuT** for automated testing and
+          validation workflows.
+
+      - subcategory: I need in-vehicle data access or service-to-service communication
+        keywords:
+          - vehicle data
+          - middleware
+          - communication
+          - service mesh
+          - protocols
+        content: |
+          Start with [Service Fabric and Communication / Middleware & Frameworks](#service-fabric-and-communication--middleware-frameworks),
+          [Communication Protocols](#service-fabric-and-communication--communication-protocols),
+          or [Service Mesh](#service-fabric-and-communication--service-mesh).
+
+          Typical matches are **Eclipse Kuksa** for the data orchestration layer,
+          **Eclipse Chariott** and **Eclipse eCAL** for middleware, **Eclipse Zenoh**
+          and **Eclipse iceoryx** for communication, and **Eclipse uProtocol** or
+          **Eclipse OpenSOVD** for service-oriented integration.
+
+      - subcategory: I need orchestration, deployment, or software updates in the vehicle
+        keywords:
+          - orchestration
+          - deployment
+          - OTA
+          - workload management
+          - runtime operations
+        content: |
+          Start with [Tooling Devops / Deployment](#tooling-devops--deployment) and
+          [Runtime and Orchestration / Workload & Container Orchestration](#runtime-and-orchestration--workload-container-orchestration).
+
+          Relevant projects include **Eclipse Muto** for adaptive deployment,
+          **Eclipse Ankaios** for workload management across nodes and VMs,
+          **Eclipse BlueChi™** for deterministic multi-node service control, and
+          **Eclipse Pullpiri** or **Eclipse Symphony** for orchestration scenarios.
+
+      - subcategory: I need a full SDV stack, reference platform, or blueprint
+        keywords:
+          - reference platform
+          - full stack
+          - distribution
+          - blueprint
+          - integration
+        content: |
+          Start with [Distributions and Frameworks / Distributions](#distributions-and-frameworks--distributions)
+          and [Example Applications](#example-applications--example-applications).
+
+          Good starting points are **Eclipse Leda** for combining SDV components
+          into a coherent whole, **Eclipse Safe Open Vehicle Core** for an open
+          core stack, **Eclipse Automotive API Framework** for reusable building
+          blocks, and **Eclipse SDV Blueprints** for applied reference examples.
+
+      - subcategory: I want to explore AI capabilities for SDV
+        keywords:
+          - AI
+          - machine learning
+          - language models
+          - intelligent systems
+        content: |
+          Start with [AI / AI](#ai--ai).
+
+          The current match is **Eclipse LMOS**, a Language Model Operating System
+          platform for building and running AI systems in the SDV ecosystem.
+
   - category: AI
     content: |
       The AI category includes technologies that enable artificial intelligence
