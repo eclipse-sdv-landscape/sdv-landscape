@@ -34,8 +34,10 @@ present in the input are omitted.
 """
 
 import argparse
+import html
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any, Dict, List
@@ -50,6 +52,13 @@ API_URL = (
 )
 GITHUB_API_URL = "https://api.github.com"
 _WARNED_KEYS: set[str] = set()
+_VERBOSE: bool = False
+
+
+def vlog(message: str) -> None:
+    """Print message only when verbose mode is active."""
+    if _VERBOSE:
+        print(message)
 
 
 def warn_once(key: str, message: str) -> None:
@@ -65,15 +74,21 @@ def fetch_projects_from_api() -> List[Dict[str, Any]]:
 
     Returns a list of project dictionaries.
     """
+    vlog(f"[API] Fetching projects from {API_URL}")
     resp = requests.get(API_URL)
     resp.raise_for_status()
-    return resp.json()
+    projects = resp.json()
+    vlog(f"[API] Received {len(projects)} projects")
+    return projects
 
 
 def load_projects_from_file(path: Path) -> List[Dict[str, Any]]:
     """Load projects from a local JSON file."""
+    vlog(f"[FILE] Loading projects from {path}")
     with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+        projects = json.load(f)
+    vlog(f"[FILE] Loaded {len(projects)} projects")
+    return projects
 
 
 def load_static_categories(path: Path) -> List[Dict[str, Any]]:
@@ -85,9 +100,12 @@ def load_static_categories(path: Path) -> List[Dict[str, Any]]:
 
     Returns the list of categories.
     """
+    vlog(f"[CATEGORIES] Loading static categories from {path}")
     with path.open("r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
-    return data.get("categories", [])
+    categories = data.get("categories", [])
+    vlog(f"[CATEGORIES] Loaded {len(categories)} top-level categories")
+    return categories
 
 
 def download_logo(url: str, dest: Path) -> str:
@@ -98,14 +116,89 @@ def download_logo(url: str, dest: Path) -> str:
     """
     try:
         file_name = url.split("/")[-1].split("?")[0]
+        vlog(f"  [LOGO] Downloading {url} -> {file_name}")
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         file_path = dest / file_name
         with file_path.open("wb") as f:
             f.write(response.content)
         return file_name
-    except Exception:
+    except Exception as exc:
+        vlog(f"  [LOGO] Download failed ({exc}), using placeholder.svg")
         return "placeholder.svg"
+
+
+def is_incubation_logo(logo_url: str | None) -> bool:
+    """Return True when a logo URL points to the generic incubation badge."""
+    if not logo_url:
+        return False
+    candidate = logo_url.lower()
+    return "incubat" in candidate or candidate.endswith("incubating.png")
+
+
+def build_text_logo(project_name: str, dest: Path) -> str:
+    """Create a plain text SVG logo (black text on white background)."""
+    vlog(f"  [LOGO] Generating text SVG logo for \"{project_name}\"")
+    raw_name = (project_name or "Unknown Project").strip()
+    safe_name = re.sub(r"[^a-z0-9]+", "-", raw_name.lower()).strip("-")
+    if not safe_name:
+        safe_name = "unknown-project"
+    file_name = f"{safe_name}-text-logo.svg"
+    file_path = dest / file_name
+
+    words = raw_name.split()
+    lines: List[str] = []
+    current = ""
+    for word in words:
+        candidate = f"{current} {word}".strip()
+        if len(candidate) <= 24 or not current:
+            current = candidate
+        else:
+            lines.append(current)
+            current = word
+    if current:
+        lines.append(current)
+    if not lines:
+        lines = ["Unknown Project"]
+
+    max_lines = 4
+    lines = lines[:max_lines]
+    start_y = 150
+    line_gap = 38
+    text_elements = []
+    for idx, line in enumerate(lines):
+        y = start_y + idx * line_gap
+        text_elements.append(
+            f'<text x="320" y="{y}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#000000">{html.escape(line)}</text>'
+        )
+
+    svg = "\n".join(
+        [
+            '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">',
+            '  <rect width="100%" height="100%" fill="#ffffff"/>',
+            *[f"  {element}" for element in text_elements],
+            "</svg>",
+        ]
+    )
+
+    file_path.write_text(svg, encoding="utf-8")
+    return file_name
+
+
+def resolve_logo(project: Dict[str, Any], logo_dir: Path | None) -> str:
+    """Resolve logo path or URL for a project, with incubation logo override."""
+    logo_url = project.get("logo")
+    project_name = project.get("name") or "Unknown Project"
+    if logo_dir is not None:
+        if is_incubation_logo(logo_url):
+            vlog(f"  [LOGO] Incubation logo detected for \"{project_name}\", generating text logo")
+            return build_text_logo(project_name, logo_dir)
+        if logo_url:
+            return download_logo(logo_url, logo_dir)
+        vlog(f"  [LOGO] No logo URL for \"{project_name}\", using placeholder.svg")
+    if logo_url:
+        return logo_url
+    return "placeholder.svg"
 
 
 def extract_github_slug(repo_url: str) -> str | None:
@@ -151,7 +244,9 @@ def fetch_org_repositories(
     if not owner:
         return []
     if owner in org_repo_cache:
+        vlog(f"  [GITHUB] Repos for {owner} already cached ({len(org_repo_cache[owner])} repos)")
         return org_repo_cache[owner]
+    vlog(f"  [GITHUB] Fetching repositories for org/user: {owner}")
 
     headers = get_github_headers()
     repos: List[str] = []
@@ -198,6 +293,7 @@ def fetch_org_repositories(
     except requests.RequestException:
         repos = []
 
+    vlog(f"  [GITHUB] Found {len(repos)} repositories for {owner}")
     org_repo_cache[owner] = repos
     return repos
 
@@ -222,6 +318,7 @@ def fetch_latest_release(
         return None
     if slug in release_cache:
         return release_cache[slug]
+    vlog(f"  [RELEASE] Fetching latest release for {slug}")
 
     headers = get_github_headers()
 
@@ -245,10 +342,12 @@ def fetch_latest_release(
         releases = response.json()
         if releases:
             release_data = parse_latest_release_payload(releases[0])
+            vlog(f"  [RELEASE] Latest release for {slug}: {release_data.get('tag_name')}")
             release_cache[slug] = release_data
             return release_data
 
         # Fallback for repositories without formal releases: use latest tag.
+        vlog(f"  [RELEASE] No formal release for {slug}, checking tags")
         response = requests.get(
             f"{GITHUB_API_URL}/repos/{slug}/tags?per_page=1",
             headers=headers,
@@ -257,9 +356,11 @@ def fetch_latest_release(
         response.raise_for_status()
         tags = response.json()
         if not tags:
+            vlog(f"  [RELEASE] No releases or tags found for {slug}")
             release_cache[slug] = None
             return None
         tag_name = tags[0].get("name")
+        vlog(f"  [RELEASE] Latest tag for {slug}: {tag_name}")
         release_data = {
             "tag_name": tag_name,
             "name": tag_name,
@@ -348,9 +449,13 @@ def build_landscape_from_static(
     output_categories: List[Dict[str, Any]] = []
     release_cache: Dict[str, Dict[str, Any] | None] = {}
     org_repo_cache: Dict[str, List[str]] = {}
+    total_projects = len(projects_by_name)
+    item_counter = [0]
 
     def build_item(project: Dict[str, Any]) -> Dict[str, Any]:
         """Construct a landscape item record from project data."""
+        item_counter[0] += 1
+        vlog(f"{item_counter[0]}/{total_projects} [ITEM] Building item for \"{project.get('name')}\"")
         item: Dict[str, Any] = {
             "name": project.get("name"),
             "description": project.get("summary"),
@@ -364,17 +469,9 @@ def build_landscape_from_static(
         )
         if repo_urls:
             item["repo_url"] = f"https://github.com/{project.get('github', {}).get('org')}" if project.get("github", {}).get("org") else repo_urls[0]
-            item["repo_urls"] = repo_urls
+            item["additional_repos"] = [{"repo_url": url} for url in repo_urls]
             item["repositories"] = repositories
-        logo_url = project.get("logo")
-        if logo_dir is not None and logo_url:
-            file_name = download_logo(logo_url, logo_dir)
-            item["logo"] = file_name
-        else:
-            if logo_url:
-                item["logo"] = logo_url
-            else:
-                item["logo"] = "placeholder.svg"
+        item["logo"] = resolve_logo(project, logo_dir)
         return item
 
     # Build categories and subcategories according to static mapping
@@ -396,6 +493,7 @@ def build_landscape_from_static(
     unassigned_items: List[Dict[str, Any]] = []
     for proj_name, proj_data in projects_by_name.items():
         if proj_name not in assigned:
+            vlog(f"{item_counter[0] + 1}/{total_projects} [UNMAPPED] Project \"{proj_name}\" not in static categories, adding to Unmapped/Misc")
             unassigned_items.append(build_item(proj_data))
 
     if unassigned_items:
@@ -409,6 +507,15 @@ def build_landscape_from_static(
             ],
         }
         output_categories.append(misc_category)
+
+    if _VERBOSE:
+        unmapped_names = [item.get("name") for item in unassigned_items]
+        if unmapped_names:
+            print(f"\n[UNMAPPED] {len(unmapped_names)} project(s) were not found in static_categories.yml:")
+            for name in unmapped_names:
+                print(f"  - {name}")
+        else:
+            print("\n[UNMAPPED] All projects are mapped in static_categories.yml.")
 
     return {"categories": output_categories}
 
@@ -437,7 +544,9 @@ def build_landscape_from_dynamic(
     if logo_dir is not None:
         logo_dir.mkdir(parents=True, exist_ok=True)
 
-    for proj in projects:
+    total_projects = len(projects)
+    for idx, proj in enumerate(projects, start=1):
+        vlog(f"{idx}/{total_projects} [ITEM] Building item for \"{proj.get('name')}\"")
         # Determine category and subcategory names
         cat_str: str = proj.get("category", "Unknown")
         parts = [part.strip() for part in cat_str.split("/", maxsplit=1)]
@@ -475,21 +584,11 @@ def build_landscape_from_dynamic(
         )
         if repo_urls:
             item["repo_url"] = repo_urls[0]
-            item["repo_urls"] = repo_urls
+            item["additional_repos"] = [{"repo_url": url} for url in repo_urls]
             item["repositories"] = repositories
 
         # Handle logo
-        logo_url = proj.get("logo")
-        if logo_dir is not None and logo_url:
-            # Download logo and use only the file name in YAML
-            file_name = download_logo(logo_url, logo_dir)
-            item["logo"] = file_name
-        else:
-            # Without download, keep full URL or fallback
-            if logo_url:
-                item["logo"] = logo_url
-            else:
-                item["logo"] = "placeholder.svg"
+        item["logo"] = resolve_logo(proj, logo_dir)
 
         # Append item to subcategory
         subcat["items"].append(item)
@@ -533,10 +632,18 @@ def main() -> None:
             " Equivalent to setting GITHUB_TOKEN."
         ),
     )
+    parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Enable verbose progress output.",
+    )
     args = parser.parse_args()
 
     if args.github_token:
         os.environ["GITHUB_TOKEN"] = args.github_token
+
+    global _VERBOSE
+    _VERBOSE = args.verbose
 
     # Load projects
     if args.input:
@@ -546,14 +653,17 @@ def main() -> None:
 
     # Download logos into a local 'logos' directory and reference them in YAML
     logo_dir = Path("logos")
+    vlog(f"[LOGO] Logo directory: {logo_dir.resolve()}")
     # If a categories file exists, load it; otherwise use dynamic grouping
     categories_path = Path(args.categories)
     if categories_path.exists():
+        vlog(f"[MODE] Using static category mapping from {categories_path}")
         static_categories = load_static_categories(categories_path)
         landscape_data = build_landscape_from_static(
             projects, static_categories, logo_dir=logo_dir
         )
     else:
+        vlog("[MODE] No static categories file found, using dynamic grouping by 'category' field")
         # Fall back to dynamic grouping if no categories file is provided
         landscape_data = build_landscape_from_dynamic(
             projects, logo_dir=logo_dir
@@ -561,6 +671,7 @@ def main() -> None:
 
     # Write YAML file
     out_path = Path(args.output)
+    vlog(f"[OUTPUT] Writing YAML to {out_path.resolve()}")
     with out_path.open("w", encoding="utf-8") as f:
         yaml.dump(
             landscape_data,
