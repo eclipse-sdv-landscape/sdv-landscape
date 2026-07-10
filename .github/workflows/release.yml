@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+  packages: read
+  actions: write
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      env_file: .env.stable
+
+  maturity-manifest:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        if: github.event_name == 'release'
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build
+
+      - name: Archive build artifacts
+        if: github.event_name == 'release'
+        run: tar -czf sdv-landscape-build-${{ github.event.release.tag_name }}.tar.gz -C build .
+
+      - name: Upload build archive to release
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: sdv-landscape-build-${{ github.event.release.tag_name }}.tar.gz
+          tag: ${{ github.event.release.tag_name }}
+
+      - name: Collect SDV maturity artifacts
+        uses: eclipse-dash/quevee@v1
+        id: quevee_manifest
+        with:
+          release_url: ${{ github.event.release.html_url }}
+          artifacts_documentation: README.md
+          artifacts_readme: README.md
+          artifacts_testing: .github/workflows/build.yml
+          artifacts_release_process: .github/workflows/deploy.yml
+
+      - name: Display SDV maturity manifest
+        run: |
+          if [ -f "${{ steps.quevee_manifest.outputs.manifest_file }}" ]; then
+            cat "${{ steps.quevee_manifest.outputs.manifest_file }}"
+          else
+            echo "Manifest file not found at: ${{ steps.quevee_manifest.outputs.manifest_file }}"
+          fi
+
+      - name: Upload SDV maturity manifest to release
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.quevee_manifest.outputs.manifest_file }}
+          tag: ${{ github.event.release.tag_name }}
