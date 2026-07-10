@@ -47,6 +47,7 @@ jobs:
           release_url: ${{ github.event.release.html_url }}
           artifacts_documentation: README.md
           artifacts_readme: README.md
+          artifacts_coding_guidelines: CONTRIBUTING.md
           artifacts_testing: .github/workflows/build.yml
           artifacts_release_process: .github/workflows/deploy.yml
 
