@@ -148,10 +148,19 @@ def build_text_logo(project_name: str, dest: Path) -> str:
 
     words = raw_name.split()
     lines: List[str] = []
+    font_size = 120
+    # Heuristic for max characters per line at 640px width and 120px font size.
+    max_chars_per_line = max(6, int((640 - 64) / (font_size * 0.58)))
+
+    # Keep "Eclipse" as a dedicated first line to improve readability.
+    if words and words[0].lower() == "eclipse" and len(words) > 1:
+        lines.append(words[0])
+        words = words[1:]
+
     current = ""
     for word in words:
         candidate = f"{current} {word}".strip()
-        if len(candidate) <= 24 or not current:
+        if len(candidate) <= max_chars_per_line or not current:
             current = candidate
         else:
             lines.append(current)
@@ -162,19 +171,21 @@ def build_text_logo(project_name: str, dest: Path) -> str:
         lines = ["Unknown Project"]
 
     max_lines = 4
-    lines = lines[:max_lines]
-    start_y = 150
-    line_gap = 38
+    if len(lines) > max_lines:
+        lines = lines[: max_lines - 1] + [" ".join(lines[max_lines - 1 :])]
+    line_gap = 130
+    total_height = (len(lines) - 1) * line_gap
+    start_y = (640 - total_height) // 2
     text_elements = []
     for idx, line in enumerate(lines):
         y = start_y + idx * line_gap
         text_elements.append(
-            f'<text x="320" y="{y}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#000000">{html.escape(line)}</text>'
+            f'<text x="320" y="{y}" text-anchor="middle" dominant-baseline="middle" font-family="Arial, Helvetica, sans-serif" font-size="{font_size}" fill="#000000">{html.escape(line)}</text>'
         )
 
     svg = "\n".join(
         [
-            '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">',
+            '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640">',
             '  <rect width="100%" height="100%" fill="#ffffff"/>',
             *[f"  {element}" for element in text_elements],
             "</svg>",
