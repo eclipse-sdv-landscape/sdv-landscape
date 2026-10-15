@@ -14,7 +14,7 @@
 [eclipse ecal (enhanced communication abstraction layer)](https://projects.eclipse.org/projects/automotive.ecal) | Incubating |  |  |  |  |  | 0 |  |
 [eclipse heimlig](https://projects.eclipse.org/projects/automotive.heimlig) | Incubating |  |  |  |  |  | 0 |  |
 [eclipse ibeji](https://projects.eclipse.org/projects/automotive.ibeji) | Incubating |  |  |  |  |  | 0 |  |
-[eclipse iceoryx](https://projects.eclipse.org/projects/technology.iceoryx) | Regular |  |  |  |  |  | 0 |  |
+[eclipse iceoryx™](https://projects.eclipse.org/projects/technology.iceoryx) | Regular |  |  |  |  |  | 0 |  |
 [eclipse kuksa](https://projects.eclipse.org/projects/automotive.kuksa) | Incubating |  |  |  |  |  | 0 |  |
 [eclipse leda](https://projects.eclipse.org/projects/automotive.leda) | Incubating |  |  |  |  |  | 0 |  |
 [eclipse leda incubator](https://projects.eclipse.org/projects/automotive.leda.ledaincubator) | Incubating |  |  |  |  |  | 0 |  |
