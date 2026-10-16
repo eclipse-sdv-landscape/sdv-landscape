@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask the Eclipse SDV Landscape</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --brand: #f06c01;
+        --brand-dark: #592c51;
+        --brand-soft: #fff3e8;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --surface: #ffffff;
+        --surface-alt: #f7f8fb;
+        --border: #e5e7eb;
+        --shadow: 0 24px 60px rgba(31, 41, 55, 0.12);
+        --radius-bubble: 18px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(240, 108, 1, 0.14), transparent 30%),
+          linear-gradient(180deg, #f7f8fb 0%, #f3f4f6 100%);
+        color: var(--text);
+      }
+
+      .shell {
+        min-height: 100vh;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .assistant {
+        width: min(1100px, 100%);
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(229, 231, 235, 0.9);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        /* overflow: hidden; */
+      }
+
+      /* ── hero ── */
+      .hero {
+        padding: 24px 24px 16px;
+        background: linear-gradient(135deg, rgba(89, 44, 81, 0.98), rgba(240, 108, 1, 0.95));
+        color: #fff;
+      }
+      .hero-logo { display: block; width: clamp(180px, 30vw, 280px); height: auto; margin: 0 0 14px; }
+      .hero h1 { margin: 0 0 8px; font-size: clamp(1.75rem, 3vw, 2.4rem); }
+      .hero p  { margin: 0; max-width: 56rem; line-height: 1.55; }
+      .hero-home-link {
+        display: inline-block; margin-top: 14px; padding: 8px 12px;
+        border-radius: 999px; border: 1px solid rgba(255,255,255,.45);
+        background: rgba(255,255,255,.14); color: #fff; text-decoration: none; font-weight: 700;
+      }
+      .hero-home-link:hover { background: rgba(255,255,255,.24); }
+
+      /* ── layout ── */
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+      }
+
+      /* ── chat panel ── */
+      .chat { padding: 20px 24px 24px; background: var(--surface-alt); display: flex; flex-direction: column; gap: 12px; }
+
+      .model-bar {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      }
+      .model-bar label { font-size: .875rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
+      .model-bar select {
+        flex: 1; min-width: 0; padding: 8px 12px; border-radius: 10px;
+        border: 1px solid var(--border); font: inherit; font-size: .875rem;
+        background: #fff; cursor: pointer;
+      }
+
+      #status-bar {
+        font-size: .8rem; color: var(--muted); min-height: 1.2em;
+        padding: 0 2px;
+      }
+
+      .chat-frame {
+        border: 1px solid var(--border); border-radius: 20px;
+        overflow: hidden; background: #fff; display: flex; flex-direction: column;
+        height: 480px; min-height: 0;
+      }
+
+      #chat-messages {
+        flex: 1; overflow-y: auto; overflow-x: hidden; padding: 16px;
+        display: flex; flex-direction: column; gap: 10px; min-height: 0;
+        scroll-behavior: smooth;
+      }
+
+      .msg-bubble {
+        max-width: 82%; padding: 12px 16px;
+        border-radius: var(--radius-bubble);
+        line-height: 1.55; font-size: .925rem;
+        word-break: break-word;
+        white-space: pre-wrap;
+      }
+      .msg-bubble.user {
+        align-self: flex-end;
+        background: var(--brand); color: #fff;
+        border-bottom-right-radius: 4px;
+      }
+      .msg-bubble.assistant {
+        align-self: flex-start;
+        background: #fff; color: var(--text);
+        border: 1px solid var(--border);
+        border-bottom-left-radius: 4px;
+      }
+      .msg-bubble.system-init {
+        align-self: center;
+        background: var(--surface-alt);
+        color: var(--muted);
+        font-size: .8rem;
+        border: 1px solid var(--border);
+        max-width: 100%;
+      }
+      .msg-bubble.error {
+        align-self: center;
+        background: #fef2f2; color: #b91c1c;
+        border: 1px solid #fecaca;
+        font-size: .85rem; max-width: 100%;
+      }
+
+      .chat-input-row {
+        display: flex; gap: 8px; padding: 12px 16px;
+        border-top: 1px solid var(--border); background: #fff;
+      }
+      .chat-input-row input {
+        flex: 1; padding: 10px 14px; border-radius: 12px;
+        border: 1px solid var(--border); font: inherit; font-size: .9rem;
+        outline: none;
+      }
+      .chat-input-row input:focus { border-color: var(--brand); }
+
+      .btn-send, .btn-reset {
+        border: 0; border-radius: 12px; padding: 10px 16px;
+        font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap;
+      }
+      .btn-send  { background: var(--brand); color: #fff; }
+      .btn-send:disabled { opacity: .5; cursor: not-allowed; }
+      .btn-reset { background: var(--surface-alt); color: var(--brand-dark); border: 1px solid var(--border); }
+
+      .caption { font-size: .875rem; color: var(--muted); }
+
+      /* ── sidebar ── */
+      .sidebar { padding: 24px; border-left: 1px solid var(--border); background: #fff; }
+      .sidebar h2, .sidebar h3 { margin: 0 0 12px; }
+      .sidebar p  { margin: 0 0 16px; color: var(--muted); line-height: 1.5; }
+
+      .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+      .chip {
+        padding: 10px 12px; border-radius: 999px;
+        background: var(--brand-soft); color: var(--brand-dark);
+        border: 1px solid rgba(240,108,1,.22); text-align: left;
+        font: inherit; cursor: pointer;
+      }
+      .chip:hover { background: #ffe6d1; }
+
+      textarea {
+        width: 100%; min-height: 120px; resize: vertical;
+        padding: 12px 14px; border-radius: 12px; border: 1px solid #d1d5db;
+        font: inherit; margin-bottom: 12px;
+      }
+      .btn-secondary {
+        border: 1px solid var(--border); border-radius: 12px;
+        padding: 12px 16px; font: inherit; font-weight: 700;
+        background: #fff; color: var(--brand-dark); cursor: pointer;
+      }
+
+      @media (max-width: 880px) {
+        .shell { padding: 12px; }
+        .layout { grid-template-columns: 1fr; }
+        .sidebar { border-left: 0; border-top: 1px solid var(--border); }
+        .chat-frame { height: 420px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <main class="assistant">
+        <section class="hero">
+          <img class="hero-logo" src="./sdv-logo-color.svg" alt="Eclipse SDV Landscape logo" />
+          <h1>Ask the Eclipse SDV Landscape</h1>
+          <p>
+            Ask a free-form question and get a curated starting point into the Eclipse SDV
+            Landscape. This assistant runs a language model entirely in your browser —
+            no server, no API key required.
+          </p>
+          <a class="hero-home-link" id="home-link" href="/">Back to main page</a>
+        </section>
+
+        <div class="layout">
+          <section class="chat">
+            <div class="model-bar">
+              <label for="model-select">Model</label>
+              <select id="model-select">
+                <option value="Llama-3.2-1B-Instruct-q4f16_1-MLC" selected>Llama 3.2 1B (q4f16, ~0.9 GB) — fastest</option>
+                <option value="Llama-3.2-3B-Instruct-q4f16_1-MLC">Llama 3.2 3B (q4f16, ~1.9 GB) - good quality</option>
+                <option value="Phi-3.5-mini-instruct-q4f16_1-MLC">Phi-3.5 Mini (q4f16, ~2.2 GB) — best quality</option>
+                <option value="Llama-3.1-8B-Instruct-q4f16_1-MLC">Llama 3.1 8B (q4f16, ~4.9 GB) — highest quality</option>
+              </select>
+            </div>
+
+            <div id="status-bar"></div>
+
+            <div class="chat-frame">
+              <div id="chat-messages"></div>
+              <div class="chat-input-row">
+                <input
+                  id="chat-input"
+                  type="text"
+                  placeholder="Ask about toolchains, SIL/HIL, middleware, orchestration, AI, or blueprints"
+                  autocomplete="off"
+                />
+                <button class="btn-send" id="btn-send" disabled>Send</button>
+                <button class="btn-reset" id="btn-reset">Reset</button>
+              </div>
+            </div>
+
+            <p class="caption">
+              Model files are cached in your browser after the first download.
+              WebGPU is required — works best in Chrome 113+.
+            </p>
+          </section>
+
+          <aside class="sidebar">
+            <h2>Quick prompts</h2>
+            <div class="chips" id="quick-prompts"></div>
+
+            <h3>Submit feedback</h3>
+            <p>Share gaps, unclear recommendations, or questions that should become first-class prompts.</p>
+            <textarea id="feedback-input" placeholder="What should this assistant answer better?"></textarea>
+            <button class="btn-secondary" id="feedback-button" type="button">Open feedback issue</button>
+            <p class="caption">Feedback opens a prefilled GitHub issue in a new tab.</p>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <script type="module">
+      import * as webllm from "https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm/+esm";
+
+      // ── routing ──────────────────────────────────────────────────────────────
+      const basePath = window.location.pathname.includes("/sdv-landscape/") ? "/sdv-landscape" : "";
+      const route = (p) => `${basePath}${p}`;
+
+      document.getElementById("home-link").href = route("/");
+
+      // ── system prompt ─────────────────────────────────────────────────────────
+      const SYSTEM_PROMPT = [
+        "You are the Eclipse SDV Landscape assistant.",
+        "Recommend only Eclipse SDV landscape projects and categories from this list:",
+        "- Development: Eclipse Velocitas, Eclipse Open Vehicle API, Eclipse SDV Developer Console.",
+        "- Testing & Validation: Eclipse OpenXilEnv, Eclipse openDuT.",
+        "- Middleware and Communication: Eclipse Kuksa, Eclipse Chariott, Eclipse eCAL, Eclipse Zenoh, Eclipse uProtocol, Eclipse OpenSOVD.",
+        "- Deployment and Runtime: Eclipse Ankaios, Eclipse Muto, Eclipse BlueChi, Eclipse Pullpiri, Eclipse Symphony.",
+        "- Distributions and Frameworks: Eclipse Leda, Eclipse Safe Open Vehicle Core, Eclipse Automotive API Framework, Eclipse SDV Blueprints.",
+        "- AI: Eclipse LMOS.",
+        "Provide a short category line, then a bullet list of the best matching projects.",
+        "Keep answers concise and focused on the Eclipse SDV Landscape.",
+        "If the question is unclear, ask one concise clarifying question.",
+      ].join("\n");
+
+      // ── quick prompts ─────────────────────────────────────────────────────────
+      const prompts = [
+        { label: "Which project helps with app development toolchains?",
+          prompt: "I need an end-to-end development toolchain for vehicle applications." },
+        { label: "What should I use for SIL/HIL?",
+          prompt: "I need SIL or HIL simulation and automated validation." },
+        { label: "How do I handle in-vehicle data?",
+          prompt: "I need in-vehicle data access and service-to-service communication." },
+        { label: "What handles orchestration and updates?",
+          prompt: "I need orchestration, deployment, or OTA software updates in the vehicle." },
+        { label: "Which full-stack SDV projects should I explore?",
+          prompt: "I need a full SDV stack, blueprint, or reference platform." },
+        { label: "What is the AI project in Eclipse SDV?",
+          prompt: "I want to explore AI capabilities for SDV." },
+      ];
+
+      const quickPromptsEl = document.getElementById("quick-prompts");
+      prompts.forEach(({ label, prompt }) => {
+        const btn = document.createElement("button");
+        btn.className = "chip";
+        btn.textContent = label;
+        btn.addEventListener("click", () => submitUserMessage(prompt));
+        quickPromptsEl.appendChild(btn);
+      });
+
+      // ── feedback ──────────────────────────────────────────────────────────────
+      const normalizeText = (v = "") => v.replace(/\s+/g, " ").trim();
+
+      const feedbackIssueUrl = (body = "") => {
+        const url = new URL("https://github.com/eclipse-sdv-landscape/sdv-landscape/issues/new");
+        url.searchParams.set("title", "Feedback for Ask the Eclipse SDV Landscape assistant");
+        url.searchParams.set("body", [
+          "## Feedback",
+          normalizeText(body) || "Please describe what the assistant should answer better.",
+          "", "## Context",
+          "- Page: Ask the Eclipse SDV Landscape assistant",
+          "- Browser-generated feedback from the static site",
+        ].join("\n"));
+        return url.toString();
+      };
+
+      document.getElementById("feedback-button").addEventListener("click", () => {
+        window.open(feedbackIssueUrl(document.getElementById("feedback-input").value), "_blank", "noopener");
+      });
+
+      // ── chat state ────────────────────────────────────────────────────────────
+      const messagesEl    = document.getElementById("chat-messages");
+      const inputEl       = document.getElementById("chat-input");
+      const btnSend       = document.getElementById("btn-send");
+      const btnReset      = document.getElementById("btn-reset");
+      const statusBar     = document.getElementById("status-bar");
+      const modelSelect   = document.getElementById("model-select");
+
+      let engine = null;
+      let chatHistory = [];   // OpenAI-style message array (system excluded)
+      let engineBusy = false;
+      let loadedModel = null;
+
+      // ── helpers ───────────────────────────────────────────────────────────────
+      function setStatus(text) { statusBar.textContent = text; }
+
+      function appendBubble(role, text = "") {
+        const div = document.createElement("div");
+        div.className = `msg-bubble ${role}`;
+        div.textContent = text;
+        messagesEl.appendChild(div);
+        requestAnimationFrame(() => {
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        });
+        return div;
+      }
+
+      function setBusy(busy) {
+        engineBusy = busy;
+        btnSend.disabled = busy;
+        inputEl.placeholder = busy
+          ? "Generating…"
+          : "Ask about toolchains, SIL/HIL, middleware, orchestration, AI, or blueprints";
+      }
+
+      // ── engine init ───────────────────────────────────────────────────────────
+      async function ensureEngine(modelId) {
+        if (engine && loadedModel === modelId) return;
+
+        setBusy(true);
+        const initBubble = appendBubble("system-init", `Loading ${modelId}…`);
+
+        try {
+          if (!engine) {
+            engine = new webllm.MLCEngine();
+          }
+          engine.setInitProgressCallback((report) => {
+            initBubble.textContent = report.text;
+            setStatus(report.text);
+          });
+          await engine.reload(modelId);
+          loadedModel = modelId;
+          initBubble.textContent = `✓ ${modelId} ready`;
+          setStatus("");
+        } catch (err) {
+          initBubble.className = "msg-bubble error";
+          initBubble.textContent = `Failed to load model: ${err.message ?? err}`;
+          setStatus("Model failed to load.");
+          engine = null;
+          loadedModel = null;
+          setBusy(false);
+          throw err;
+        }
+
+        setBusy(false);
+      }
+
+      // ── generation ────────────────────────────────────────────────────────────
+      async function generate(userText) {
+        await ensureEngine(modelSelect.value);
+        if (!engine) return;
+
+        setBusy(true);
+        chatHistory.push({ role: "user", content: userText });
+
+        const assistantBubble = appendBubble("assistant", "");
+        let reply = "";
+
+        try {
+          const messages = [
+            { role: "system", content: SYSTEM_PROMPT },
+            ...chatHistory,
+          ];
+
+          const stream = await engine.chat.completions.create({
+            messages,
+            stream: true,
+            stream_options: { include_usage: false },
+          });
+
+          for await (const chunk of stream) {
+            const delta = chunk.choices[0]?.delta?.content ?? "";
+            if (!delta) continue;
+            reply += delta;
+            assistantBubble.textContent = reply;
+            requestAnimationFrame(() => {
+              messagesEl.scrollTop = messagesEl.scrollHeight;
+            });
+          }
+
+          chatHistory.push({ role: "assistant", content: reply });
+        } catch (err) {
+          assistantBubble.className = "msg-bubble error";
+          assistantBubble.textContent = `Error: ${err.message ?? err}`;
+          chatHistory.pop(); // remove the user message that failed
+        } finally {
+          setBusy(false);
+          setStatus("");
+        }
+      }
+
+      function submitUserMessage(text) {
+        const clean = normalizeText(text || inputEl.value);
+        if (!clean || engineBusy) return;
+        inputEl.value = "";
+        appendBubble("user", clean);
+        generate(clean);
+      }
+
+      // ── events ────────────────────────────────────────────────────────────────
+      btnSend.addEventListener("click", () => submitUserMessage());
+      inputEl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submitUserMessage(); }
+      });
+
+      btnReset.addEventListener("click", async () => {
+        if (engineBusy && engine) engine.interruptGenerate();
+        chatHistory = [];
+        messagesEl.innerHTML = "";
+        setStatus("");
+        setBusy(false);
+        if (engine) {
+          try { await engine.resetChat(); } catch (_) {}
+        }
+      });
+
+      modelSelect.addEventListener("change", async () => {
+        if (engineBusy && engine) engine.interruptGenerate();
+        chatHistory = [];
+        messagesEl.innerHTML = "";
+        loadedModel = null;
+        setStatus("Model changed — will load on next message.");
+        setBusy(false);
+      });
+
+      // ── boot: pre-load the default model ─────────────────────────────────────
+      (async () => {
+        try {
+          await ensureEngine(modelSelect.value);
+          btnSend.disabled = false;
+        } catch (_) {
+          // error already shown in chat
+        }
+      })();
+    </script>
+  </body>
+</html>
