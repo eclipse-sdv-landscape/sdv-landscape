@@ -21,6 +21,7 @@ categories:
       - name: Process & Frameworks
         items:
           - Eclipse Trustable Software Framework
+          - Eclipse SDV-LVL 
   - name: Distributions and Frameworks
     subcategories:
       - name: Distributions
@@ -58,7 +59,7 @@ categories:
       - name: Communication Protocols
         items:
           - Eclipse CANought
-          - Eclipse iceoryx
+          - Eclipse iceoryx™
       - name: Service Mesh
         items:
           - Eclipse uProtocol
